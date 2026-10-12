@@ -1,690 +1,669 @@
-<!doctype html>
-<html lang="en">
-<head>
-<meta charset="utf-8">
-<title>Cytron Tutorial Writing Guide</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<!doctype html><html lang="en"><head><meta charset=utf-8><title>Cytron Tutorial Guide</title><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300..700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
+/* Layout: a workbench. Five stations on a rail, one working panel at a time, a command bar for finding any rule. */
 :root{
-  --bg:#f3f2ef; --surface:#ffffff; --surface-2:#faf9f7; --ink:#16171a; --muted:#5b5e66; --line:#dcdad4;
-  --accent:#d6262b; --accent-ink:#ffffff; --accent-soft:#fbe7e6; --chip:#eceae6;
-  --code-bg:#1c1e22; --code-ink:#e9e7e2; --ok:#1d7a4c; --ok-soft:#e3f2ea;
-  --shadow:0 1px 0 rgba(0,0,0,.04), 0 6px 20px -12px rgba(0,0,0,.18);
+  --bg:#F5F6F6; --panel:#FFFFFF; --ink:#121517; --ink-2:#4B5258; --ink-3:#8B9298;
+  --line:#E2E5E7; --line-2:#CDD2D5; --accent:#D3192A; --accent-ink:#FFFFFF; --accent-wash:#FBEBEC;
+  --ok:#14825A; --ok-wash:#E4F3EC; --code-bg:#15191C; --code-ink:#E4E8EB; --shade:rgba(18,21,23,.36);
+  --f-sans:"Geist", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --f-mono:"Geist Mono", ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+  --top:56px;
 }
 @media (prefers-color-scheme: dark){
   :root:not([data-theme="light"]){
-    --bg:#111214; --surface:#1a1b1e; --surface-2:#16171a; --ink:#ebeae6; --muted:#a2a4aa; --line:#2d2f34;
-    --accent:#ff5d58; --accent-ink:#16171a; --accent-soft:#3a1c1c; --chip:#25272b;
-    --code-bg:#0b0c0e; --code-ink:#e9e7e2; --ok:#4cc68a; --ok-soft:#173226;
-    --shadow:0 1px 0 rgba(0,0,0,.3), 0 8px 24px -14px rgba(0,0,0,.6);
+    --bg:#0E1113; --panel:#151A1D; --ink:#ECEFF1; --ink-2:#A8B0B6; --ink-3:#6C757C;
+    --line:#242A2F; --line-2:#323A40; --accent:#FF4B59; --accent-ink:#1A0508; --accent-wash:#2A1417;
+    --ok:#3CCB8C; --ok-wash:#11291F; --code-bg:#0A0D0F; --code-ink:#E4E8EB; --shade:rgba(0,0,0,.6);
+    color-scheme:dark;
   }
 }
 :root[data-theme="dark"]{
-  --bg:#111214; --surface:#1a1b1e; --surface-2:#16171a; --ink:#ebeae6; --muted:#a2a4aa; --line:#2d2f34;
-  --accent:#ff5d58; --accent-ink:#16171a; --accent-soft:#3a1c1c; --chip:#25272b;
-  --code-bg:#0b0c0e; --code-ink:#e9e7e2; --ok:#4cc68a; --ok-soft:#173226;
-  --shadow:0 1px 0 rgba(0,0,0,.3), 0 8px 24px -14px rgba(0,0,0,.6);
+  --bg:#0E1113; --panel:#151A1D; --ink:#ECEFF1; --ink-2:#A8B0B6; --ink-3:#6C757C;
+  --line:#242A2F; --line-2:#323A40; --accent:#FF4B59; --accent-ink:#1A0508; --accent-wash:#2A1417;
+  --ok:#3CCB8C; --ok-wash:#11291F; --code-bg:#0A0D0F; --code-ink:#E4E8EB; --shade:rgba(0,0,0,.6);
+  color-scheme:dark;
 }
 *{box-sizing:border-box}
-html{scroll-behavior:smooth;scroll-padding-top:84px}
-body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 "IBM Plex Sans",system-ui,sans-serif;-webkit-font-smoothing:antialiased}
-a{color:var(--accent);text-underline-offset:2px}
-code,.mono{font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:.88em}
-code{background:var(--chip);padding:.1em .35em;border-radius:4px;word-break:break-word}
-h1,h2,h3,h4{line-height:1.2;margin:0}
-p{margin:0 0 .9em}
-ul,ol{margin:0 0 1em;padding-left:1.25em}
-li{margin:.25em 0}
-button{font:inherit;color:inherit}
+html,body{min-height:100%}
+body{background:var(--bg);color:var(--ink);font:15px/1.6 var(--f-sans);-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration-color:var(--line-2);text-underline-offset:3px}
+a:hover{text-decoration-color:var(--accent)}
+button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:pointer}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:4px}
+code,.mono{font-family:var(--f-mono);font-size:.86em}
+code{background:var(--bg);border:1px solid var(--line);padding:0 .35em;border-radius:4px;word-break:break-word}
+h1,h2,h3,h4{margin:0;line-height:1.15;text-wrap:balance}
+p{margin:0}
+ol,ul{margin:0;padding:0;list-style:none}
 
 /* top bar */
-.topbar{display:flex;align-items:center;gap:10px;padding:14px 24px;border-bottom:1px solid var(--line);background:var(--surface)}
-.mark{width:14px;height:14px;background:var(--accent);border-radius:2px;flex:none}
-.topbar .mono{font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
-.topbar strong{color:var(--ink);font-weight:600}
+.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:30;height:var(--top);display:flex;align-items:center;gap:14px;padding-inline:20px;background:var(--bg);border-bottom:1px solid var(--line)}
+.brand{display:flex;align-items:center;gap:10px;font-weight:600;letter-spacing:-.01em;white-space:nowrap}
+.brand i{width:12px;height:12px;background:var(--accent);display:block}
+.brand span{color:var(--ink-3);font-weight:400}
+.search-btn{margin-left:auto;display:flex;align-items:center;gap:10px;height:34px;padding:0 10px 0 12px;border:1px solid var(--line-2);border-radius:8px;background:var(--panel);color:var(--ink-3);min-width:0}
+.search-btn:hover{border-color:var(--ink-3);color:var(--ink-2)}
+.search-btn .lbl{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+kbd{font-family:var(--f-mono);font-size:11px;border:1px solid var(--line-2);border-radius:4px;padding:1px 5px;color:var(--ink-3);background:var(--bg)}
+.pill{display:flex;align-items:center;gap:8px;height:34px;padding:0 12px;border:1px solid var(--line-2);border-radius:8px;font-family:var(--f-mono);font-size:12.5px;white-space:nowrap}
+.pill:hover{border-color:var(--ink-3)}
+.pill .bar{width:44px;height:4px;background:var(--line);border-radius:2px;overflow:hidden}
+.pill .bar b{display:block;height:100%;width:0;background:var(--ok);transition:width .3s}
+.icon-btn{width:34px;height:34px;display:grid;place-items:center;border:1px solid var(--line-2);border-radius:8px}
+.icon-btn:hover{border-color:var(--ink-3)}
+.icon-btn svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:1.6}
 
-/* hero */
-.hero{padding:56px 24px 40px;border-bottom:1px solid var(--line);background:var(--surface)}
-.hero-in{max-width:1120px;margin:0 auto}
-.eyebrow{font-family:"IBM Plex Mono",monospace;font-size:13px;color:var(--accent);letter-spacing:.04em;margin-bottom:14px}
-.hero h1{font-size:clamp(32px,5vw,52px);font-weight:700;letter-spacing:-.02em;max-width:16ch}
-.hero .lead{font-size:18px;color:var(--muted);max-width:62ch;margin:18px 0 0}
-.journey{display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin-top:36px;border:1px solid var(--line);border-radius:10px;overflow:hidden}
-.journey a{display:block;padding:16px 18px;text-decoration:none;color:var(--ink);border-right:1px solid var(--line);background:var(--surface-2);transition:background .15s}
-.journey a:last-child{border-right:0}
-.journey a:hover{background:var(--accent-soft)}
-.journey .n{font-family:"IBM Plex Mono",monospace;font-size:13px;color:var(--accent);font-weight:600}
-.journey .t{display:block;font-weight:600;margin-top:4px}
-.journey .d{display:block;font-size:14px;color:var(--muted);margin-top:2px}
+/* shell */
+.shell{display:grid;grid-template-columns:248px minmax(0,1fr);max-width:1240px;margin:0 auto}
+.rail{position:sticky;top:calc(var(--top) + env(safe-area-inset-top,0px));align-self:start;height:calc(100vh - var(--top));display:flex;flex-direction:column;padding:28px 18px 24px 20px;border-right:1px solid var(--line)}
+.rail-k{font-family:var(--f-mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3);margin-bottom:14px}
+.stations{display:flex;flex-direction:column;gap:2px}
+.st{display:grid;grid-template-columns:28px minmax(0,1fr);gap:2px 8px;align-items:baseline;width:100%;text-align:left;padding:10px 10px;border-radius:8px;color:var(--ink-2)}
+.st:hover{background:var(--panel)}
+.st .n{font-family:var(--f-mono);font-size:12px;color:var(--ink-3)}
+.st .t{font-weight:500;font-size:14.5px}
+.st .c{grid-column:2;font-size:12.5px;color:var(--ink-3);line-height:1.35}
+.st[aria-current="step"]{background:var(--panel);color:var(--ink);box-shadow:0 0 0 1px var(--line)}
+.st[aria-current="step"] .n{color:var(--accent)}
+.st.alert .t::after{content:"";display:inline-block;width:6px;height:6px;background:var(--accent);margin-left:8px;vertical-align:middle}
+.legend{margin-top:auto;display:grid;gap:8px;font-size:12.5px;color:var(--ink-3);padding:14px 10px 0;border-top:1px solid var(--line)}
+.legend div{display:flex;gap:8px;align-items:baseline}
 
-/* layout */
-.wrap{max-width:1120px;margin:0 auto;display:grid;grid-template-columns:230px minmax(0,1fr);gap:48px;padding:40px 24px 80px}
-nav.toc{position:sticky;top:20px;align-self:start;max-height:calc(100vh - 40px);overflow:auto}
-.toc .label{font-family:"IBM Plex Mono",monospace;font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin-bottom:10px}
-.toc ol{list-style:none;padding:0;margin:0}
-.toc li{margin:0}
-.toc a{display:block;padding:6px 10px;border-left:2px solid var(--line);color:var(--muted);text-decoration:none;font-size:14.5px}
-.toc a .n{font-family:"IBM Plex Mono",monospace;font-size:12px;margin-right:6px}
-.toc a.sub{padding-left:26px;font-size:13.5px}
-.toc a:hover{color:var(--ink)}
-.toc a.active{color:var(--ink);border-left-color:var(--accent);font-weight:500}
-.toc .progress-mini{margin-top:16px;font-size:13px;color:var(--muted)}
+/* panel */
+main{min-width:0;padding:40px clamp(16px,5vw,64px) 96px}
+.step[hidden]{display:none}
+.step{max-width:860px;animation:in .22s ease-out}
+@keyframes in{from{opacity:.4;transform:translateY(6px)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){.step{animation:none}*{transition:none!important}}
+.sh{display:grid;grid-template-columns:auto minmax(0,1fr);gap:4px 24px;align-items:end;margin-bottom:28px}
+.sn{font-family:var(--f-mono);font-weight:400;font-size:clamp(48px,7vw,76px);line-height:.8;letter-spacing:-.04em;color:var(--line-2)}
+.step.alert .sn{color:var(--accent)}
+.sh h1{font-size:clamp(26px,3.4vw,36px);font-weight:600;letter-spacing:-.025em}
+.sh p{grid-column:1/-1;color:var(--ink-2);max-width:62ch;margin-top:14px;font-size:16px}
 
-main{min-width:0}
-section.step{padding-top:8px;margin-bottom:64px}
-.step-head{display:flex;gap:16px;align-items:baseline;border-bottom:2px solid var(--ink);padding-bottom:12px;margin-bottom:22px}
-.step-head .num{font-family:"IBM Plex Mono",monospace;font-weight:600;font-size:15px;color:var(--accent);flex:none}
-.step-head h2{font-size:clamp(24px,3.2vw,32px);letter-spacing:-.01em}
-.intro{font-size:17px;color:var(--muted);max-width:66ch}
-h3.sub{font-size:20px;margin:40px 0 12px;display:flex;gap:10px;align-items:baseline}
-h3.sub .n{font-family:"IBM Plex Mono",monospace;font-size:13px;color:var(--muted);font-weight:500}
-h4{font-size:16px;margin:22px 0 8px}
+/* sub tabs */
+.tabs{display:flex;gap:2px;border-bottom:1px solid var(--line);margin-bottom:26px;overflow-x:auto;scrollbar-width:none}
+.tabs::-webkit-scrollbar{display:none}
+.tabs button{padding:9px 12px 10px;color:var(--ink-3);white-space:nowrap;border-bottom:2px solid transparent;margin-bottom:-1px;font-size:14px}
+.tabs button:hover{color:var(--ink)}
+.tabs button[aria-selected="true"]{color:var(--ink);border-bottom-color:var(--ink);font-weight:500}
+.tp[hidden]{display:none}
+.tp-lead{color:var(--ink-2);max-width:66ch;margin-bottom:20px}
 
-/* badges */
-.b{display:inline-block;font-family:"IBM Plex Mono",monospace;font-size:11px;font-weight:600;letter-spacing:.05em;padding:2px 7px;border-radius:4px;vertical-align:middle;white-space:nowrap}
-.b.must{background:var(--accent);color:var(--accent-ink)}
-.b.should{border:1px solid var(--muted);color:var(--muted)}
-.b.opt{background:var(--chip);color:var(--muted)}
-.legend{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:22px 0 0}
-.legend div{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:14px 16px;font-size:15px}
-.legend .b{margin-bottom:6px}
+/* levels */
+.lv{display:inline-flex;align-items:center;gap:6px;font-family:var(--f-mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3);white-space:nowrap}
+.lv::before{content:"";width:7px;height:7px;flex:none}
+.lv.must{color:var(--accent)}
+.lv.must::before{background:var(--accent)}
+.lv.should::before{border:1.5px solid var(--ink-3);border-radius:50%}
+.lv.opt::before{border:1.5px dashed var(--ink-3)}
 
-/* steps list */
-ol.do{counter-reset:s;list-style:none;padding:0;margin:0}
-ol.do>li{counter-increment:s;position:relative;padding:14px 16px 14px 56px;background:var(--surface);border:1px solid var(--line);border-radius:8px;margin:0 0 8px}
-ol.do>li::before{content:counter(s,decimal-leading-zero);position:absolute;left:16px;top:14px;font-family:"IBM Plex Mono",monospace;font-size:13px;font-weight:600;color:var(--accent)}
-ol.do>li strong{font-weight:600}
+/* rule rows */
+.rules{border-top:1px solid var(--line)}
+.rl{display:grid;grid-template-columns:76px minmax(0,1fr);gap:4px 16px;padding:14px 2px;border-bottom:1px solid var(--line)}
+.rl .lv{padding-top:4px}
+.rl .tx{max-width:68ch}
+.rl .ex{grid-column:2;font-size:13.5px;color:var(--ink-3);max-width:68ch}
+.rl strong{font-weight:600}
 
-/* callouts */
-.callout{border-left:3px solid var(--accent);background:var(--accent-soft);padding:12px 16px;border-radius:0 8px 8px 0;margin:16px 0;font-size:15px}
-.callout p:last-child{margin:0}
-.note{border-left:3px solid var(--line);padding:2px 0 2px 14px;color:var(--muted);font-size:15px;margin:14px 0}
+/* run sheet (step 1) */
+.run{counter-reset:r;border-top:1px solid var(--line)}
+.run li{border-bottom:1px solid var(--line)}
+.run label{display:grid;grid-template-columns:30px minmax(0,1fr) 22px;gap:14px;align-items:start;padding:16px 4px;cursor:pointer}
+.run .rn{font-family:var(--f-mono);font-size:12px;color:var(--ink-3);padding-top:3px}
+.run .rt{font-weight:500}
+.run .rd{display:block;color:var(--ink-2);font-size:14px;margin-top:3px;font-weight:400}
+.run input{appearance:none;-webkit-appearance:none;width:20px;height:20px;border:1.5px solid var(--line-2);border-radius:50%;margin:2px 0 0;display:grid;place-items:center;cursor:pointer;background:var(--panel)}
+.run input:checked{background:var(--ok);border-color:var(--ok)}
+.run input:checked::after{content:"";width:5px;height:9px;border:solid var(--panel);border-width:0 2px 2px 0;transform:rotate(45deg) translate(-1px,-1px)}
+.run li:has(input:checked) .rt{color:var(--ink-3);text-decoration:line-through;text-decoration-color:var(--line-2)}
+.note{font-size:13.5px;color:var(--ink-3);margin-top:16px;max-width:68ch}
 
-/* field tabs */
-.tabs{display:flex;gap:4px;border-bottom:1px solid var(--line);margin:8px 0 0;overflow-x:auto}
-.tabs button{background:none;border:0;padding:10px 14px;cursor:pointer;color:var(--muted);border-bottom:2px solid transparent;margin-bottom:-1px;font-weight:500;white-space:nowrap}
-.tabs button[aria-selected="true"]{color:var(--ink);border-bottom-color:var(--accent)}
-.tabs .c{font-family:"IBM Plex Mono",monospace;font-size:12px;margin-left:6px;color:var(--muted)}
-.panel{display:none;padding-top:14px}
-.panel.on{display:block}
-.field{display:grid;grid-template-columns:170px minmax(0,1fr);gap:4px 20px;padding:14px 0;border-bottom:1px solid var(--line)}
-.field:last-child{border-bottom:0}
-.field .fn{font-weight:600}
-.field .fn small{display:block;font-weight:400;color:var(--muted);font-size:13px}
-.field .ex{grid-column:2;font-size:14px;color:var(--muted);margin-top:4px}
-.field .ex span{font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.06em;text-transform:uppercase;margin-right:6px;color:var(--muted)}
-.field .ex q,.field .ex code{color:var(--ink)}
-.levels{display:grid;grid-template-columns:auto 1fr;gap:4px 12px;margin:6px 0 0;font-size:15px}
-.levels dt{font-weight:600}
-.levels dd{margin:0;color:var(--muted)}
+/* practice form (step 2) */
+.form-k{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:12px;font-size:13px;color:var(--ink-3)}
+.linkbtn{font-size:13px;color:var(--ink-2);text-decoration:underline;text-decoration-color:var(--line-2);text-underline-offset:3px}
+.linkbtn:hover{color:var(--ink);text-decoration-color:var(--accent)}
+.sheet{background:var(--panel);border:1px solid var(--line);border-radius:12px}
+.fr{display:grid;grid-template-columns:180px minmax(0,1fr);gap:6px 24px;padding:18px 20px;border-bottom:1px solid var(--line)}
+.fr:last-child{border-bottom:0}
+.fr>.fl{font-weight:500;font-size:14px;padding-top:7px}
+.fr>.fl small{display:block;font-weight:400;color:var(--ink-3);font-size:12.5px}
+.fr .rule{font-size:14px;color:var(--ink-2);max-width:62ch}
+.fr .rule+.rule{margin-top:6px}
+.fr .ctl+.rule,.fr .meter+.rule{margin-top:8px}
+.ctl{width:100%;font:inherit;font-size:14.5px;color:var(--ink);background:var(--bg);border:1px solid var(--line-2);border-radius:8px;padding:8px 11px}
+textarea.ctl{min-height:74px;resize:vertical;line-height:1.5}
+.ctl:focus{outline:none;border-color:var(--ink-2)}
+.ctl[readonly]{color:var(--ink-3);background:transparent;border-style:dashed}
+.meter{display:flex;justify-content:space-between;gap:12px;font-size:12.5px;color:var(--ink-3);margin-top:6px}
+.meter .cnt{font-family:var(--f-mono)}
+.bad{color:var(--accent)!important}
+.good{color:var(--ok)!important}
+.seg{display:inline-flex;border:1px solid var(--line-2);border-radius:8px;padding:2px;gap:2px;flex-wrap:wrap}
+.seg button{padding:5px 12px;border-radius:6px;font-size:13.5px;color:var(--ink-2)}
+.seg button[aria-pressed="true"]{background:var(--ink);color:var(--bg)}
+select.ctl{appearance:auto}
+.desc{font-size:13.5px;color:var(--ink-2);margin-top:8px;min-height:1.5em}
 
-/* tool */
-.tool{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:18px;margin:22px 0;box-shadow:var(--shadow)}
-.tool h4{margin:0 0 4px}
-.tool .sub-t{font-size:14px;color:var(--muted);margin-bottom:14px}
-.tool label{display:block;font-size:14px;font-weight:600;margin:14px 0 6px}
-.tool input,.tool textarea{width:100%;font:inherit;font-size:15px;color:var(--ink);background:var(--surface-2);border:1px solid var(--line);border-radius:6px;padding:9px 11px}
-.tool textarea{min-height:76px;resize:vertical}
-.tool input:focus,.tool textarea:focus{outline:2px solid var(--accent);outline-offset:-1px}
-.meter{display:flex;justify-content:space-between;gap:10px;font-size:13px;color:var(--muted);margin-top:5px}
-.meter .cnt{font-family:"IBM Plex Mono",monospace}
-.meter .over{color:var(--accent);font-weight:600}
-.meter .good{color:var(--ok);font-weight:600}
-.slugrow{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-top:6px;font-size:14px}
-.slugrow code{font-size:14px}
+/* image checker */
+.drop{display:grid;place-items:center;text-align:center;gap:6px;border:1.5px dashed var(--line-2);border-radius:10px;padding:22px;color:var(--ink-3);font-size:14px;cursor:pointer}
+.drop:hover,.drop.on{border-color:var(--ink-2);color:var(--ink-2)}
+.drop input{position:absolute;opacity:0;width:1px;height:1px}
+.checks{display:grid;gap:6px;margin-top:12px;font-size:14px}
+.checks div{display:flex;gap:10px;align-items:baseline}
+.checks b{font-family:var(--f-mono);font-weight:500;font-size:12px;width:28px;flex:none}
+.frame169{aspect-ratio:16/9;max-width:100%;border:1px solid var(--line-2);border-radius:8px;display:grid;place-items:center;color:var(--ink-3);font-family:var(--f-mono);font-size:12px;background:repeating-linear-gradient(135deg,transparent 0 10px,var(--bg) 10px 20px);overflow:hidden}
+.frame169 img{width:100%;height:100%;object-fit:contain}
+
+/* anatomy (structure) */
+.anat{display:grid;grid-template-columns:minmax(220px,300px) minmax(0,1fr);gap:28px;align-items:start}
+.page{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:14px;display:flex;flex-direction:column;gap:5px}
+.page .ph{font-family:var(--f-mono);font-size:10.5px;color:var(--ink-3);letter-spacing:.06em;text-transform:uppercase;padding:2px 4px 8px;display:flex;justify-content:space-between}
+.blk{display:flex;align-items:center;gap:10px;width:100%;text-align:left;padding:7px 9px;border-radius:6px;border:1px solid var(--line);font-size:13px;background:var(--bg);color:var(--ink-2)}
+.blk.h3{margin-left:18px;width:calc(100% - 18px);font-size:12.5px}
+.blk .bn{font-family:var(--f-mono);font-size:11px;color:var(--ink-3);width:22px;flex:none}
+.blk .bt{flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.blk .bd{width:7px;height:7px;flex:none}
+.blk .bd.must{background:var(--accent)}
+.blk .bd.opt{border:1.5px dashed var(--ink-3)}
+.blk:hover{border-color:var(--line-2);color:var(--ink)}
+.blk[aria-pressed="true"]{border-color:var(--ink);color:var(--ink);background:var(--panel)}
+.blk.tg{justify-content:center;border-style:dashed}
+.detail{position:sticky;top:calc(var(--top) + 24px)}
+.detail .dk{font-family:var(--f-mono);font-size:12px;color:var(--ink-3)}
+.detail h3{font-size:24px;font-weight:600;letter-spacing:-.02em;margin:6px 0 12px}
+.detail .meta{display:flex;gap:16px;flex-wrap:wrap;margin-bottom:14px}
+.detail .tag{font-family:var(--f-mono);font-size:11px;border:1px solid var(--line-2);border-radius:4px;padding:1px 6px;color:var(--ink-2)}
+.detail .body{color:var(--ink-2);max-width:56ch}
+.detail .nav{display:flex;gap:8px;margin-top:20px}
+.btn{display:inline-flex;align-items:center;gap:8px;height:34px;padding:0 14px;border-radius:8px;border:1px solid var(--line-2);font-size:13.5px;background:var(--panel)}
+.btn:hover{border-color:var(--ink-3)}
+.btn.primary{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.btn.primary:hover{opacity:.9}
+.skel{margin-top:32px}
+.skel-h{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:10px}
+.skel-h h4{font-size:15px;font-weight:600}
+pre.code{margin:0;background:var(--code-bg);color:var(--code-ink);border-radius:10px;padding:16px 18px;overflow:auto;max-height:340px;font:12.5px/1.6 var(--f-mono)}
+
+/* formatting mock */
+.fmt{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:28px;align-items:start}
+.mock{background:var(--panel);border:1px solid var(--line);border-radius:12px;overflow:hidden}
+.mock-bar{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:9px 14px;border-bottom:1px solid var(--line);font-family:var(--f-mono);font-size:11px;color:var(--ink-3)}
+.mock-body{padding:22px 22px 26px 46px;display:flex;flex-direction:column;gap:14px;font-size:13px;line-height:1.55;color:var(--ink-2)}
+.mi{position:relative}
+.pin{position:absolute;left:-32px;top:0;width:20px;height:20px;border-radius:50%;background:var(--accent);color:var(--accent-ink);font:600 11px/20px var(--f-mono);text-align:center}
+.m-hr{height:1px;background:var(--ink-3)}
+.m-h{font-size:17px;font-weight:600;color:var(--ink)}
+.m-p{text-align:justify}
+.m-img{height:110px;border-radius:6px;background:linear-gradient(160deg,#1d3b2f,#2c5a46);display:grid;place-items:center;overflow:hidden}
+.m-img i{width:74px;height:44px;border-radius:4px;background:#0f1f19;box-shadow:inset 0 0 0 2px #c58b4a, 0 0 0 6px rgba(255,255,255,.06)}
+.m-ban{height:54px;border-radius:6px;background:#27B5E6;display:flex;align-items:center;justify-content:center;gap:10px;color:#05293A;font-weight:600;font-size:13px}
+.m-ban s{text-decoration:none;font-family:var(--f-mono);font-size:10px;background:#05293A;color:#E8F7FD;padding:2px 6px;border-radius:3px}
+.mock[data-mode="fixed"] .pin,.mock[data-mode="fixed"] .hrw{display:none}
+.hrw{padding-block:9px}
+.hrw .pin{top:50%;transform:translateY(-50%)}
+.mock[data-mode="mistakes"] .m-h{font-weight:800;text-transform:uppercase;font-size:13px;letter-spacing:.02em}
+.mock[data-mode="mistakes"] .m-p{text-align:left;font-family:Georgia,"Times New Roman",serif;font-size:15px}
+.mock[data-mode="mistakes"] .mock-body{gap:2px}
+.mock[data-mode="mistakes"] .m-img{transform:scaleX(1.25);transform-origin:left;filter:blur(1.4px);width:80%}
+.mock[data-mode="mistakes"] .m-ban{width:58%;height:40px}
+.mock[data-mode="mistakes"] .m-ban s{display:none}
+.mistakes{display:grid;gap:12px;counter-reset:m}
+.mistakes li{display:grid;grid-template-columns:22px minmax(0,1fr);gap:10px;font-size:14px;color:var(--ink-2)}
+.mistakes li b{width:20px;height:20px;border-radius:50%;background:var(--accent);color:var(--accent-ink);font:600 11px/20px var(--f-mono);text-align:center}
+.fixed-note{font-size:14px;color:var(--ok)}
+
+/* safety builder */
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px}
+.chip{padding:6px 12px;border:1px solid var(--line-2);border-radius:999px;font-size:13.5px;color:var(--ink-2);background:var(--panel)}
+.chip:hover{border-color:var(--ink-3)}
+.chip[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.out{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:18px 20px}
+.out-h{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:10px;font-family:var(--f-mono);font-size:11px;color:var(--ink-3);letter-spacing:.06em;text-transform:uppercase}
+.out .h2{font-weight:600;color:var(--ink);font-size:16px;margin-bottom:6px}
+.out p{text-align:justify;color:var(--ink-2);max-width:70ch}
 
 /* tables */
-.tablewrap{overflow-x:auto;border:1px solid var(--line);border-radius:8px;background:var(--surface);margin:14px 0}
-table{border-collapse:collapse;width:100%;font-size:15px}
-th,td{text-align:left;vertical-align:top;padding:10px 12px;border-bottom:1px solid var(--line)}
-th{font-size:12.5px;font-family:"IBM Plex Mono",monospace;font-weight:500;letter-spacing:.04em;text-transform:uppercase;color:var(--muted);background:var(--surface-2)}
+.tw{overflow-x:auto;border:1px solid var(--line);border-radius:10px;background:var(--panel)}
+table{border-collapse:collapse;width:100%;font-size:14px}
+th,td{text-align:left;vertical-align:top;padding:11px 14px;border-bottom:1px solid var(--line)}
+th{font:500 11px var(--f-mono);letter-spacing:.06em;text-transform:uppercase;color:var(--ink-3)}
 tr:last-child td{border-bottom:0}
-td.h{font-weight:600;white-space:nowrap}
-td.lv{font-family:"IBM Plex Mono",monospace;font-size:13px;color:var(--muted)}
-tr.h3 td.h{padding-left:28px;font-weight:500}
-tr.h3 td.h::before{content:"↳ ";color:var(--muted)}
-
-/* structure ladder */
-.ladder{list-style:none;padding:0;margin:14px 0;border:1px solid var(--line);border-radius:10px;background:var(--surface);overflow:hidden}
-.ladder li{display:grid;grid-template-columns:44px minmax(0,1fr) auto;gap:4px 12px;padding:12px 16px;border-bottom:1px solid var(--line);margin:0}
-.ladder li:last-child{border-bottom:0}
-.ladder .k{font-family:"IBM Plex Mono",monospace;font-size:13px;color:var(--muted);padding-top:2px}
-.ladder .hd{font-weight:600}
-.ladder .hd .lvl{font-family:"IBM Plex Mono",monospace;font-size:11px;color:var(--muted);font-weight:500;margin-left:6px}
-.ladder .what{grid-column:2 / 4;font-size:14.5px;color:var(--muted)}
-.ladder .b{align-self:start;justify-self:end;margin-top:2px}
-.ladder li.h3{background:var(--surface-2)}
-.ladder li.h3 .hd{padding-left:14px;font-weight:500}
-.ladder li.end{background:var(--accent-soft)}
-
-/* code */
-.codebox{position:relative;margin:14px 0}
-.codebox pre{margin:0;background:var(--code-bg);color:var(--code-ink);border-radius:10px;padding:18px;overflow:auto;max-height:420px;font:13px/1.55 "IBM Plex Mono",monospace;white-space:pre}
-.copy{position:absolute;top:10px;right:10px;background:var(--accent);color:#fff;border:0;border-radius:6px;padding:6px 12px;font-size:13px;font-weight:600;cursor:pointer}
-.copy.ghost{position:static;background:var(--chip);color:var(--ink);padding:4px 10px;font-size:12.5px}
-
-/* rule list */
-.rules{list-style:none;padding:0;margin:14px 0}
-.rules li{display:grid;grid-template-columns:70px minmax(0,1fr);gap:12px;padding:12px 0;border-bottom:1px solid var(--line);margin:0}
-.rules li:last-child{border-bottom:0}
-.rules .why{display:block;font-size:14px;color:var(--muted);margin-top:3px}
-
-/* how-to cards */
-.howto{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:14px 0}
-.howto details{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:0}
-.howto summary{cursor:pointer;padding:13px 16px;font-weight:600;list-style:none;display:flex;justify-content:space-between;gap:10px}
-.howto summary::-webkit-details-marker{display:none}
-.howto summary::after{content:"+";font-family:"IBM Plex Mono",monospace;color:var(--accent)}
-.howto details[open] summary::after{content:"–"}
-.howto details>div{padding:0 16px 14px;font-size:15px}
-.howto ol{margin:0;padding-left:1.2em}
+td.k{font-weight:500;white-space:nowrap}
 
 /* telegram */
-.tg-search{width:100%;font:inherit;font-size:15px;color:var(--ink);background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:10px 12px;margin:12px 0 4px}
-.tg-search:focus{outline:2px solid var(--accent);outline-offset:-1px}
-.tg{list-style:none;padding:0;margin:8px 0;border:1px solid var(--line);border-radius:10px;overflow:hidden;background:var(--surface)}
-.tg li{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:2px 16px;padding:12px 16px;border-bottom:1px solid var(--line);margin:0}
-.tg li:last-child{border-bottom:0}
-.tg .use{font-weight:600}
-.tg .com{font-size:14.5px}
-.tg .file{grid-column:1 / 3;font-size:13px;color:var(--muted);font-family:"IBM Plex Mono",monospace}
-.tg .file.none{color:var(--accent)}
-.tg-empty{display:none;color:var(--muted);font-size:15px;padding:10px 0}
+.find{width:100%;font:inherit;font-size:15px;color:var(--ink);background:var(--panel);border:1px solid var(--line-2);border-radius:10px;padding:11px 14px;margin:6px 0 12px}
+.find:focus{outline:none;border-color:var(--ink-2)}
+.tg{border-top:1px solid var(--line)}
+.tg li{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr) auto;gap:4px 16px;align-items:baseline;padding:12px 2px;border-bottom:1px solid var(--line);font-size:14px}
+.tg .u{font-weight:500}
+.tg .f{grid-column:1/-1;font-family:var(--f-mono);font-size:11.5px;color:var(--ink-3)}
+.tg .f.none{color:var(--accent)}
+.copy-s{font-size:12.5px;color:var(--ink-3);border:1px solid var(--line-2);border-radius:6px;padding:2px 8px}
+.copy-s:hover{color:var(--ink);border-color:var(--ink-3)}
+
+/* how-tos */
+.acc{border-top:1px solid var(--line)}
+.acc details{border-bottom:1px solid var(--line)}
+.acc summary{list-style:none;display:flex;justify-content:space-between;align-items:center;gap:12px;padding:15px 2px;cursor:pointer;font-weight:500}
+.acc summary::-webkit-details-marker{display:none}
+.acc summary::after{content:"+";font-family:var(--f-mono);color:var(--ink-3);font-size:16px}
+.acc details[open] summary::after{content:"−"}
+.acc .in{padding:0 2px 20px;display:grid;gap:16px}
+.steps{counter-reset:s;display:grid;gap:8px;max-width:68ch}
+.steps li{counter-increment:s;display:grid;grid-template-columns:24px minmax(0,1fr);gap:10px;font-size:14.5px;color:var(--ink-2)}
+.steps li::before{content:counter(s);font-family:var(--f-mono);font-size:12px;color:var(--ink-3);padding-top:2px}
+figure{margin:0}
+video{display:block;width:100%;max-width:100%;height:auto;border-radius:8px;border:1px solid var(--line);background:#000}
+figcaption{font-size:13px;color:var(--ink-3);margin-top:8px}
+figcaption b{color:var(--ink-2);font-weight:500}
+figure.badvid figcaption b{color:var(--accent)}
 
 /* checklist */
-.check-head{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;position:sticky;top:0;background:var(--bg);padding:12px 0;z-index:2;border-bottom:1px solid var(--line)}
-.bar{flex:1;min-width:160px;height:8px;background:var(--chip);border-radius:99px;overflow:hidden}
-.bar i{display:block;height:100%;width:0;background:var(--accent);transition:width .25s}
-.bar.done i{background:var(--ok)}
-.check-count{font-family:"IBM Plex Mono",monospace;font-size:14px}
-.reset{background:none;border:1px solid var(--line);border-radius:6px;padding:6px 12px;cursor:pointer;font-size:14px}
-.reset:hover{border-color:var(--ink)}
-.group{margin-top:22px}
-.group h4{display:flex;justify-content:space-between;margin:0 0 6px;font-size:15px}
-.group h4 .gc{font-family:"IBM Plex Mono",monospace;font-weight:500;color:var(--muted);font-size:13px}
-.group h4 .gc.ok{color:var(--ok)}
-.ck{display:flex;gap:12px;align-items:flex-start;padding:10px 12px;background:var(--surface);border:1px solid var(--line);border-radius:8px;margin:0 0 6px;cursor:pointer;font-size:15px}
-.ck input{appearance:none;-webkit-appearance:none;flex:none;width:20px;height:20px;border:2px solid var(--muted);border-radius:5px;margin:1px 0 0;display:grid;place-items:center;cursor:pointer;background:var(--surface)}
-.ck input:checked{background:var(--ok);border-color:var(--ok)}
-.ck input:checked::after{content:"";width:5px;height:10px;border:solid #fff;border-width:0 2px 2px 0;transform:rotate(45deg) translate(-1px,-1px)}
-.ck input:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
-.ck:has(input:checked){background:var(--ok-soft);border-color:transparent}
-.ck:has(input:checked) span{color:var(--muted)}
-.flow{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin:16px 0;font-size:14px}
-.flow span{background:var(--surface);border:1px solid var(--line);border-radius:99px;padding:5px 12px}
-.flow span.opt{border-style:dashed;color:var(--muted)}
-.flow i{font-style:normal;color:var(--muted)}
+.ck-top{display:grid;grid-template-columns:auto minmax(0,1fr);gap:22px;align-items:center;margin-bottom:24px}
+.ring{width:96px;height:96px;position:relative}
+.ring svg{width:100%;height:100%;transform:rotate(-90deg)}
+.ring circle{fill:none;stroke-width:6}
+.ring .tr{stroke:var(--line)}
+.ring .pr{stroke:var(--ok);stroke-linecap:round;transition:stroke-dashoffset .35s}
+.ring .lbl{position:absolute;inset:0;display:grid;place-items:center;font-family:var(--f-mono);font-size:15px}
+.flow{display:flex;flex-wrap:wrap;gap:6px 8px;align-items:center;font-size:13px;color:var(--ink-2)}
+.flow span{border:1px solid var(--line-2);border-radius:999px;padding:3px 10px;background:var(--panel)}
+.flow span.o{border-style:dashed;color:var(--ink-3)}
+.flow i{font-style:normal;color:var(--ink-3)}
+.ck-actions{display:flex;gap:8px;margin-top:12px;flex-wrap:wrap}
+.grp{border-top:1px solid var(--line)}
+.grp summary{list-style:none;display:flex;justify-content:space-between;gap:12px;align-items:center;padding:14px 2px;cursor:pointer;font-weight:600}
+.grp summary::-webkit-details-marker{display:none}
+.grp .gc{font:500 12px var(--f-mono);color:var(--ink-3)}
+.grp .gc.done{color:var(--ok)}
+.grp.alert summary span:first-child::after{content:"";display:inline-block;width:6px;height:6px;background:var(--accent);margin-left:8px;vertical-align:middle}
+.ci{display:grid;grid-template-columns:22px minmax(0,1fr);gap:12px;padding:8px 2px;font-size:14.5px;color:var(--ink-2);cursor:pointer}
+.ci input{appearance:none;-webkit-appearance:none;width:18px;height:18px;border:1.5px solid var(--line-2);border-radius:5px;margin:2px 0 0;display:grid;place-items:center;background:var(--panel);cursor:pointer}
+.ci input:checked{background:var(--ok);border-color:var(--ok)}
+.ci input:checked::after{content:"";width:4px;height:8px;border:solid var(--panel);border-width:0 2px 2px 0;transform:rotate(45deg) translate(-1px,-1px)}
+.ci:has(input:checked) span{color:var(--ink-3)}
+.grp .items{padding-bottom:12px}
 
 /* credentials */
-.toc a.alert{color:var(--accent);font-weight:600}
-.step-head.alert{border-bottom-color:var(--accent)}
-.hero-alert{display:flex;gap:12px;align-items:center;margin-top:12px;padding:14px 18px;border-radius:8px;background:var(--accent);color:var(--accent-ink);text-decoration:none;font-size:15.5px}
-.hero-alert strong{font-weight:700}
-.hero-alert .go{margin-left:auto;font-family:"IBM Plex Mono",monospace;font-size:13px;white-space:nowrap}
-.secret-hero{display:grid;grid-template-columns:190px minmax(0,1fr);gap:22px;align-items:center;background:var(--accent-soft);border:1px solid var(--accent);border-radius:10px;padding:20px 22px}
-.stat .big{display:block;font:700 60px/1 "IBM Plex Mono",monospace;color:var(--accent)}
-.stat .cap{display:block;font-size:13.5px;margin-top:6px}
-.secret-lead{font-size:17px;margin:0}
-.ph{font-family:"IBM Plex Mono",monospace;font-size:12.5px;background:var(--chip);border:1px solid var(--line);border-radius:4px;padding:2px 6px;cursor:pointer;margin:2px 4px 2px 0;color:var(--ink);white-space:nowrap}
-.ph:hover{border-color:var(--accent)}
-.ph.ok{background:var(--ok-soft);border-color:var(--ok)}
-.leaks{list-style:none;padding:0;display:flex;flex-wrap:wrap;gap:6px;margin:10px 0 0}
-.leaks li{margin:0;background:var(--surface);border:1px solid var(--line);border-radius:99px;padding:5px 12px;font-size:14px}
-ol.do.red>li{border-color:var(--accent)}
-.tool textarea.code{font:13px/1.5 "IBM Plex Mono",monospace;min-height:150px}
-.scan-btn{background:var(--accent);color:#fff;border:0;border-radius:6px;padding:8px 16px;font-weight:600;cursor:pointer;margin-top:10px}
-#scan-out{margin-top:14px;font-size:14.5px}
-.finding{display:grid;grid-template-columns:64px minmax(0,1fr);gap:2px 10px;padding:8px 12px;border-left:3px solid var(--accent);background:var(--accent-soft);border-radius:0 6px 6px 0;margin-bottom:6px}
-.finding.warn{border-left-color:var(--muted);background:var(--surface-2)}
-.finding .ln{font-family:"IBM Plex Mono",monospace;font-size:12px;color:var(--muted);padding-top:2px}
-.finding code{font-size:12.5px}
-.scan-ok{color:var(--ok);font-weight:600}
-@media (max-width:720px){.secret-hero{grid-template-columns:1fr}.hero-alert{flex-wrap:wrap}.hero-alert .go{margin-left:0}}
+.zt{display:grid;grid-template-columns:minmax(0,1fr);gap:8px;padding:20px 22px;border-radius:12px;background:var(--accent-wash);margin-bottom:28px}
+.zt strong{font-size:19px;letter-spacing:-.01em;color:var(--ink);font-weight:600}
+.zt p{color:var(--ink-2);max-width:66ch}
+.phs{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:10px}
+.phc{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:14px 16px;display:grid;gap:8px;align-content:start}
+.phc .pt{font-weight:600;font-size:14px}
+.phc .pe{font-size:13px;color:var(--ink-3)}
+.phc .pb{display:flex;flex-wrap:wrap;gap:6px}
+.ph{font-family:var(--f-mono);font-size:11.5px;border:1px solid var(--line-2);border-radius:5px;padding:2px 7px;background:var(--bg);color:var(--ink)}
+.ph:hover{border-color:var(--ink-3)}
+.ph.ok{border-color:var(--ok);color:var(--ok)}
+.leaks{display:flex;flex-wrap:wrap;gap:6px}
+.leaks li{font-size:13.5px;border:1px solid var(--line-2);border-radius:999px;padding:4px 11px;color:var(--ink-2);background:var(--panel)}
+.sub{font-size:17px;font-weight:600;letter-spacing:-.01em;margin:34px 0 12px}
+.scan{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:18px 20px}
+.scan textarea{font:12.5px/1.55 var(--f-mono);min-height:140px}
+.fd{display:grid;grid-template-columns:62px minmax(0,1fr);gap:10px;padding:8px 0;border-top:1px solid var(--line);font-size:14px}
+.fd .ln{font-family:var(--f-mono);font-size:12px;color:var(--ink-3);padding-top:2px}
+.fd.hard .k{color:var(--accent)}
+#scan-out{margin-top:14px;font-size:14px}
 
-/* videos */
-.videos{display:grid;gap:22px;margin:22px 0 0}
-.videos figure{margin:0}
-.videos video{display:block;width:100%;height:auto;border-radius:8px;border:1px solid var(--line);background:#000}
-.videos figcaption{font-size:14px;color:var(--muted);margin-top:8px}
-.videos figcaption strong{color:var(--ink)}
-.videos .bad figcaption strong{color:var(--accent)}
+/* footer nav */
+.pager{display:flex;justify-content:space-between;gap:12px;margin-top:56px;padding-top:20px;border-top:1px solid var(--line)}
+.pager a{display:grid;gap:2px;text-decoration:none;max-width:48%}
+.pager a.nx{text-align:right;margin-left:auto}
+.pager small{font-family:var(--f-mono);font-size:11px;color:var(--ink-3);letter-spacing:.06em;text-transform:uppercase}
+.pager span{font-weight:500}
+.pager a:hover span{text-decoration:underline;text-decoration-color:var(--accent);text-underline-offset:3px}
+.hint{font-size:12.5px;color:var(--ink-3);margin-top:10px}
 
-footer{border-top:1px solid var(--line);padding:24px;color:var(--muted);font-size:14px;text-align:left}
-footer .in{max-width:1120px;margin:0 auto}
+/* search palette */
+.pal{position:fixed;inset:0;z-index:50;background:var(--shade);display:flex;justify-content:center;align-items:flex-start;padding:12vh 16px 16px}
+.pal[hidden]{display:none}
+.pal-box{width:min(640px,100%);background:var(--panel);border:1px solid var(--line-2);border-radius:14px;box-shadow:0 24px 60px -20px rgba(0,0,0,.45);overflow:hidden}
+.pal-in{display:flex;align-items:center;gap:10px;padding:0 16px;border-bottom:1px solid var(--line)}
+.pal-in svg{width:16px;height:16px;stroke:var(--ink-3);fill:none;stroke-width:1.8;flex:none}
+.pal-in input{flex:1;min-width:0;font:inherit;font-size:16px;color:var(--ink);background:transparent;border:0;padding:15px 0;outline:none}
+.pal-res{max-height:52vh;overflow:auto;padding:6px}
+.pal-res button{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:2px 12px;width:100%;text-align:left;padding:9px 10px;border-radius:8px}
+.pal-res button[aria-selected="true"]{background:var(--bg)}
+.pal-res .rt{font-size:14px;color:var(--ink);overflow:hidden;text-overflow:ellipsis;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}
+.pal-res .rw{font-family:var(--f-mono);font-size:11px;color:var(--ink-3);white-space:nowrap}
+.pal-res mark{background:var(--accent-wash);color:inherit;border-radius:2px}
+.pal-empty{padding:18px;color:var(--ink-3);font-size:14px}
+.flash{animation:flash 1.6s ease-out}
+@keyframes flash{0%,30%{background:var(--accent-wash)}100%{background:transparent}}
 
-@media (max-width: 900px){
-  .wrap{grid-template-columns:minmax(0,1fr);gap:0;padding:0 16px 64px}
-  nav.toc{position:sticky;top:0;z-index:5;max-height:none;overflow:visible;background:var(--bg);margin:0 -16px 24px;padding:0;border-bottom:1px solid var(--line)}
-  .toc .label,.toc .progress-mini{display:none}
-  .toc ol{display:flex;overflow-x:auto;scrollbar-width:none;padding:0 8px}
-  .toc ol::-webkit-scrollbar{display:none}
-  .toc a{border-left:0;border-bottom:2px solid transparent;white-space:nowrap;padding:12px 10px}
-  .toc a.sub{display:none}
-  .toc a.active{border-bottom-color:var(--accent)}
-  html{scroll-padding-top:60px}
-  .check-head{top:46px}
+/* toast */
+.toast{position:fixed;left:50%;bottom:calc(24px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--ink);color:var(--bg);font-size:13.5px;padding:8px 14px;border-radius:8px;z-index:60;opacity:0;pointer-events:none;transition:opacity .2s}
+.toast.on{opacity:1}
+
+/* responsive */
+@media (max-width:980px){
+  .shell{grid-template-columns:minmax(0,1fr)}
+  .rail{position:sticky;top:calc(var(--top) + env(safe-area-inset-top,0px));z-index:20;height:auto;padding:8px 12px;border-right:0;border-bottom:1px solid var(--line);background:var(--bg)}
+  .rail-k,.legend,.st .c{display:none}
+  .stations{flex-direction:row;overflow-x:auto;scrollbar-width:none;gap:4px}
+  .stations::-webkit-scrollbar{display:none}
+  .st{display:flex;gap:6px;width:auto;white-space:nowrap;padding:7px 10px}
+  .anat,.fmt{grid-template-columns:minmax(0,1fr)}
+  .detail{position:static}
 }
-@media (max-width: 720px){
-  .topbar{padding:12px 16px}
-  .hero{padding:36px 16px 28px}
-  .journey{grid-template-columns:1fr 1fr}
-  .journey a:nth-child(2){border-right:0}
-  .journey a:nth-child(-n+2){border-bottom:1px solid var(--line)}
-  .legend{grid-template-columns:1fr}
-  .field{grid-template-columns:minmax(0,1fr)}
-  .field .ex{grid-column:1}
-  .howto{grid-template-columns:1fr}
-  .tg li{grid-template-columns:minmax(0,1fr)}
-  .tg .file{grid-column:1}
-  .ladder li{grid-template-columns:34px minmax(0,1fr) auto}
-  .rules li{grid-template-columns:minmax(0,1fr)}
+@media (max-width:640px){
+  .top{padding-inline:16px;gap:8px}
+  .brand span,.search-btn kbd,.pill .bar{display:none}
+  .search-btn .lbl{display:none}
+  .search-btn{margin-left:auto}
+  .fr{grid-template-columns:minmax(0,1fr);padding:16px}
+  .fr>.fl{padding-top:0}
+  .rl{grid-template-columns:minmax(0,1fr)}
+  .rl .ex{grid-column:1}
+  .tg li{grid-template-columns:minmax(0,1fr) auto}
+  .tg li .c{grid-column:1}
+  .ck-top{grid-template-columns:minmax(0,1fr)}
+  .sh{grid-template-columns:minmax(0,1fr)}
 }
 </style>
-</head>
-<body>
-<header class="topbar">
-  <span class="mark"></span>
-  <span class="mono"><strong>Cytron</strong> · Tutorial writing guide</span>
+
+<header class="top">
+  <div class="brand"><i></i>Cytron <span>Tutorial Guide</span></div>
+  <button class="search-btn" id="open-search" type="button" aria-label="Search the rules">
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+    <span class="lbl">Search any rule</span><kbd>/</kbd>
+  </button>
+  <button class="pill" id="pill" type="button" title="Open the pre-publish checklist"><span class="bar"><b id="pill-bar"></b></span><span id="pill-n">0/0</span></button>
+  <button class="icon-btn" id="theme" type="button" aria-label="Switch light or dark">
+    <svg viewBox="0 0 24 24"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+  </button>
 </header>
 
-<section class="hero">
-  <div class="hero-in">
-    <div class="eyebrow">For staff and interns · my.cytron.io/tutorial</div>
-    <h1>Write a Cytron tutorial, from login to publish.</h1>
-    <p class="lead">A tutorial page shows how a product works before a customer orders, and it is where customers and customer support staff come back to when something goes wrong. Write every step for a complete beginner who knows nothing about digital making. This page is the only reference you need.</p>
-    <div class="journey">
-      <a href="#access"><span class="n">01</span><span class="t">Get access</span><span class="d">Username, login, new post</span></a>
-      <a href="#fields"><span class="n">02</span><span class="t">Fill the fields</span><span class="d">General, Data, Links, Image</span></a>
-      <a href="#write"><span class="n">03</span><span class="t">Write the tutorial</span><span class="d">Structure, links, code, safety</span></a>
-      <a href="#check"><span class="n">04</span><span class="t">Check and publish</span><span class="d">Tick every box</span></a>
+<div class="shell">
+  <nav class="rail" aria-label="Steps">
+    <div class="rail-k">Writer's route</div>
+    <div class="stations" id="stations">
+      <button class="st" data-go="1" type="button"><span class="n">01</span><span class="t">Get access</span><span class="c">Username, login, new post</span></button>
+      <button class="st" data-go="2" type="button"><span class="n">02</span><span class="t">Fill the fields</span><span class="c">General, Data, Links, Image</span></button>
+      <button class="st" data-go="3" type="button"><span class="n">03</span><span class="t">Write</span><span class="c">Structure, layout, links, code</span></button>
+      <button class="st" data-go="4" type="button"><span class="n">04</span><span class="t">Check &amp; publish</span><span class="c">Tick every box</span></button>
+      <button class="st alert" data-go="5" type="button"><span class="n">05</span><span class="t">Credentials</span><span class="c">Zero tolerance</span></button>
     </div>
     <div class="legend">
-      <div><span class="b must">MUST</span><br>Compulsory for every tutorial.</div>
-      <div><span class="b should">SHOULD</span><br>Follow it where it applies; skip it if it doesn't fit the tutorial.</div>
+      <div><span class="lv must">Must</span>compulsory</div>
+      <div><span class="lv should">Should</span>where it applies</div>
+      <div>Questions? Ask your supervisor.</div>
     </div>
-    <a class="hero-alert" href="#secrets"><span><strong>Zero tolerance:</strong> never publish a real password, token or key, anywhere on a tutorial page.</span><span class="go">Read this first →</span></a>
-  </div>
-</section>
-
-<div class="wrap">
-  <nav class="toc" aria-label="Guide sections">
-    <div class="label">On this page</div>
-    <ol>
-      <li><a class="alert" href="#secrets"><span class="n">00</span>Credentials</a></li>
-      <li><a href="#access"><span class="n">01</span>Get access</a></li>
-      <li><a href="#fields"><span class="n">02</span>Fill the fields</a></li>
-      <li><a href="#write"><span class="n">03</span>Write the tutorial</a></li>
-      <li><a class="sub" href="#structure">Structure</a></li>
-      <li><a class="sub" href="#format">Formatting &amp; layout</a></li>
-      <li><a class="sub" href="#intro">Introduction &amp; cover</a></li>
-      <li><a class="sub" href="#components">Components &amp; links</a></li>
-      <li><a class="sub" href="#code">Code &amp; versions</a></li>
-      <li><a class="sub" href="#media">Links, images, media</a></li>
-      <li><a class="sub" href="#safety">Safety notes</a></li>
-      <li><a class="sub" href="#telegram">Telegram banner</a></li>
-      <li><a class="sub" href="#editor">Editor how-tos</a></li>
-      <li><a href="#check"><span class="n">04</span>Check &amp; publish</a></li>
-    </ol>
-    <div class="progress-mini">Checklist: <span class="mono" id="mini-count">0 / 0</span></div>
   </nav>
 
-  <main>
-    <!-- 00 -->
-    <section class="step" id="secrets">
-      <div class="step-head alert"><span class="num">00</span><h2>Credentials and secrets: zero tolerance</h2></div>
-      <div class="secret-hero">
-        <div class="stat"><span class="big">11</span><span class="cap">published tutorials found with a real Blynk token, Telegram bot token or Wi-Fi password (Q4 2026 quick scan, so far)</span></div>
-        <p class="secret-lead"><strong>Never publish a real password, token or key, anywhere on a tutorial page.</strong> This is the most serious rule in this guide. Anyone who copies one can take over that device, bot or account. Every rule in this section is <span class="b must">MUST</span>.</p>
-      </div>
-
-      <h3 class="sub">What counts, and the placeholder to use</h3>
-      <p>Write each credential as its placeholder in code, Gists, downloads and repos. Click a placeholder to copy it.</p>
-      <div class="tablewrap"><table>
-        <thead><tr><th>Type</th><th>Examples</th><th>Placeholder</th></tr></thead>
-        <tbody>
-          <tr><td class="h">Wi-Fi</td><td>Network name (SSID) and password</td><td><button class="ph" type="button">YOUR_WIFI_SSID</button><button class="ph" type="button">YOUR_WIFI_PASSWORD</button></td></tr>
-          <tr><td class="h">IoT platform</td><td>Blynk auth token, template ID and name; ThingSpeak write key; Adafruit IO key</td><td><button class="ph" type="button">YOUR_BLYNK_AUTH_TOKEN</button><button class="ph" type="button">YOUR_TEMPLATE_ID</button><button class="ph" type="button">YOUR_API_KEY</button></td></tr>
-          <tr><td class="h">Bots</td><td>Telegram bot token and chat ID</td><td><button class="ph" type="button">YOUR_TELEGRAM_BOT_TOKEN</button><button class="ph" type="button">YOUR_CHAT_ID</button></td></tr>
-          <tr><td class="h">Cloud and AI services</td><td>Firebase API key and database secret; OpenAI, Gemini or Google API keys</td><td><button class="ph" type="button">YOUR_API_KEY</button></td></tr>
-          <tr><td class="h">Logins</td><td>MQTT broker user and password, email or SMTP password, any account password</td><td><button class="ph" type="button">YOUR_MQTT_USER</button><button class="ph" type="button">YOUR_MQTT_PASSWORD</button></td></tr>
-          <tr><td class="h">Device keys</td><td>LoRaWAN AppKey, device certificates and private keys</td><td><button class="ph" type="button">YOUR_APP_KEY</button></td></tr>
-          <tr><td class="h">Personal details</td><td>Phone number, personal email, home address</td><td>Leave out, or blur in images</td></tr>
-        </tbody>
-      </table></div>
-
-      <h3 class="sub">Where they leak</h3>
-      <ul class="leaks">
-        <li>Gists (every old revision stays public)</li><li>Code typed into the page body</li><li>Serial Monitor screenshots</li><li>Blynk Console screenshots</li><li>BotFather chat screenshots</li><li>Browser address bar</li><li>Videos</li><li>ZIP and Google Drive downloads</li><li>GitHub repos</li>
-      </ul>
-
-      <h3 class="sub">Rules</h3>
-      <ol class="do red">
-        <li>Test with your own values on your own computer, then <strong>swap in placeholders before you copy the code anywhere</strong>. Never type a real value into the WebAdmin editor, a Gist or a repo, not even in a draft.</li>
-        <li>Put a comment beside each placeholder, for example <code>// Replace with your own Wi-Fi name</code>, and tell the reader to replace it in a Testing &amp; Validation step.</li>
-        <li>Use a bot, Blynk device or account made only for the tutorial, never a personal or Cytron office one.</li>
-        <li>Hide every credential before you save a screenshot or record a video: crop or blur the Serial Monitor, consoles, BotFather chat and the address bar (a Telegram API link contains the bot token).</li>
-        <li>Before submitting, search the body, every Gist and every download for <em>password, ssid, token, auth, key, secret, api</em> and <em>bot</em>. Check any long random string that is not a placeholder.</li>
-        <li>When the screenshots and video are done, <strong>revoke or regenerate the tokens you used</strong>.</li>
-        <li>If a real value was ever saved in a Gist or repo, deleting it is not enough: the old revision stays public. Revoke the credential and create a new Gist.</li>
-      </ol>
-
-      <div class="tool" id="scanner">
-        <h4>Credential check</h4>
-        <div class="sub-t">Paste your sketch or Gist code to look for real-looking passwords, tokens and keys. It runs in your browser only; nothing is sent or saved. It catches common patterns, so still read the code yourself.</div>
-        <label for="scan-in">Code</label>
-        <textarea id="scan-in" class="code" spellcheck="false" placeholder='const char* ssid = "YOUR_WIFI_SSID";&#10;const char* password = "YOUR_WIFI_PASSWORD";'></textarea>
-        <button class="scan-btn" id="scan-go" type="button">Check code</button>
-        <div id="scan-out" aria-live="polite"></div>
-      </div>
-
-      <h3 class="sub">If a real credential is already published</h3>
-      <ol class="do red">
-        <li><strong>Revoke or regenerate it the same day:</strong> /revoke in BotFather for a Telegram bot, Blynk Console for an auth token, the provider's console for an API key, or change the Wi-Fi password.</li>
-        <li><strong>Replace it with a placeholder everywhere it appears:</strong> WebAdmin body, Gist (a new one), repo, Drive file, screenshots and video.</li>
-        <li><strong>Tell your supervisor the same day.</strong> Name the page and where the credential sits, but never paste the value itself into chat, email, a report or a comment.</li>
-      </ol>
-      <div class="callout"><p>Removing the value without revoking it does not fix the leak: Gist revisions, Git history, search caches and readers who already copied it still hold it. <strong>Only revoking makes it useless.</strong></p></div>
-    </section>
+  <main id="main">
 
     <!-- 01 -->
-    <section class="step" id="access">
-      <div class="step-head"><span class="num">01</span><h2>Get access and create the post</h2></div>
-      <p class="intro">Every tutorial is written and published in WebAdmin. Set up the post before you write a word.</p>
-      <ol class="do">
-        <li><strong>Ask your supervisor to set up your WebAdmin username.</strong> Every supervisor can do this. Choose a short username, not your full name as it appears on your IC.</li>
-        <li>Open <a href="https://www.cytron.io/admin" target="_blank" rel="noopener">cytron.io/admin</a> and log in with your username. The first time, use <strong>Forgot Password</strong> to set your password.</li>
-        <li>Expand the <strong>Tutorial</strong> tab on the left and select <strong>Tutorials</strong>, then click <strong>+</strong> to create a new post.</li>
-        <li>In the <strong>Data</strong> tab, set the <strong>SEO URL first</strong>. It also names the folder your images upload into.</li>
-        <li>Fill every field in the General, Data, Links and Image tabs (step 02).</li>
-        <li>Write the body in the <strong>Description</strong> field, following the structure in step 03.</li>
-        <li>Click <strong>Save</strong> every time you make a change.</li>
-      </ol>
+    <section class="step" data-step="1">
+      <div class="sh"><span class="sn">01</span><h1>Get access and create the post</h1>
+        <p>Every Cytron tutorial is written and published in WebAdmin. A tutorial page shows how a product works before a customer orders, and it is where customers and customer support staff come back to. Write every step for a complete beginner.</p></div>
+      <ol class="run" id="run"></ol>
+      <p class="note">Tick the steps as you go. Your ticks stay in this browser only.</p>
     </section>
 
     <!-- 02 -->
-    <section class="step" id="fields">
-      <div class="step-head"><span class="num">02</span><h2>Fill every WebAdmin field</h2></div>
-      <p class="intro">Fill every field before writing the body. Every field below is <span class="b must">MUST</span>.</p>
-      <div class="callout"><p><strong>All SEO fields are compulsory.</strong> A tutorial with an empty or incomplete SEO field is not ready to publish.</p></div>
-
-      <div class="tabs" role="tablist" aria-label="WebAdmin tabs">
-        <button role="tab" aria-selected="true" data-tab="general">General<span class="c">6</span></button>
-        <button role="tab" aria-selected="false" data-tab="data">Data<span class="c">8</span></button>
-        <button role="tab" aria-selected="false" data-tab="links">Links<span class="c">6</span></button>
-        <button role="tab" aria-selected="false" data-tab="image">Image<span class="c">1</span></button>
+    <section class="step" data-step="2" hidden>
+      <div class="sh"><span class="sn">02</span><h1>Fill every WebAdmin field</h1>
+        <p>Every field is compulsory, and a tutorial with an empty or incomplete SEO field is not ready to publish. Practise here, then copy the values into WebAdmin. Nothing you type is saved or sent.</p></div>
+      <div class="tabs" role="tablist" data-tabs="2">
+        <button role="tab" data-tab="s2-general">General</button>
+        <button role="tab" data-tab="s2-data">Data</button>
+        <button role="tab" data-tab="s2-links">Links</button>
+        <button role="tab" data-tab="s2-image">Image</button>
+        <button role="tab" data-tab="s2-after">After publishing</button>
       </div>
 
-      <div class="panel on" id="p-general" role="tabpanel">
-        <div class="field"><div class="fn">Post Name</div><div>Short, clear tutorial title, <strong>60 characters at most</strong>. Avoid numbers (such as version numbers) unless required. Don't repeat the title in the body.</div><div class="ex"><span>e.g.</span><q>ESP32 High Temperature Alert System</q></div></div>
-        <div class="field"><div class="fn">Pitch<small>Meta Tag Description</small></div><div>Meta description, not shown on the page. One complete sentence, <strong>160 characters at most</strong>, unique to this tutorial:<br><code>Build a/an [project] using Maker ESP32 and [main part] to [outcome].</code></div><div class="ex"><span>e.g.</span><q>Build an IoT water tank monitor using a Maker ESP32 and an ultrasonic sensor to track water levels in real time from any browser.</q> (129)</div></div>
-        <div class="field"><div class="fn">Description</div><div>The tutorial body. Follow <a href="#write">step 03</a>.</div></div>
-        <div class="field"><div class="fn">Post Tags</div><div>Keywords or phrases for the topic: ESP32, Maker ESP32, then the main modules, protocols and topic.</div><div class="ex"><span>e.g.</span>ESP32 · Maker ESP32 · IoT · Ultrasonic Sensor · WebServer · Arduino</div></div>
-        <div class="field"><div class="fn">Meta Tag Keywords</div><div><strong>3 to 8</strong> searchable keywords, comma-separated. Never paste the Pitch into it.</div><div class="ex"><span>e.g.</span><code>ESP32, Maker ESP32, DHT11, Temperature Alert, Buzzer</code></div></div>
-        <div class="field"><div class="fn">Meta Tag Title</div><div>The title shown in search results and browser tabs: the Post Name, optionally plus the key technology. <strong>60 characters at most</strong>.</div><div class="ex"><span>e.g.</span><q>ESP32 Water Tank Monitoring with Web Dashboard</q></div></div>
+      <div class="tp" data-tab="s2-general">
+        <div class="form-k"><span>Example values filled in.</span><button class="linkbtn" id="clear-ex" type="button">Clear the example</button></div>
+        <div class="sheet">
+          <div class="fr" data-find="Post Name title 60 characters numbers"><div class="fl">Post Name</div><div>
+            <input class="ctl" id="f-name" type="text" value="ESP32 High Temperature Alert System">
+            <div class="meter"><span>Short and clear. No numbers unless required. Not repeated in the body.</span><span class="cnt" data-max="60" data-for="f-name"></span></div></div></div>
+          <div class="fr" data-find="Pitch Meta Tag Description 160 characters Build a"><div class="fl">Pitch<small>Meta Tag Description</small></div><div>
+            <textarea class="ctl" id="f-pitch">Build a high temperature alert system using Maker ESP32 and a DHT11 sensor to sound a buzzer when a room gets too hot.</textarea>
+            <div class="meter"><span id="pitch-hint"></span><span class="cnt" data-max="160" data-for="f-pitch"></span></div>
+            <p class="rule">Not shown on the page. One complete, unique sentence: <code>Build a/an [project] using Maker ESP32 and [main part] to [outcome].</code></p></div></div>
+          <div class="fr" data-find="Description body"><div class="fl">Description</div><div><p class="rule">The tutorial body. Write it by following <a href="#s3-structure">step 03</a>.</p></div></div>
+          <div class="fr" data-find="Post Tags"><div class="fl">Post Tags</div><div>
+            <input class="ctl" id="f-tags" type="text" value="ESP32, Maker ESP32, DHT11, Buzzer, Temperature">
+            <p class="rule">ESP32 and Maker ESP32 first, then the main modules, protocols and topic.</p></div></div>
+          <div class="fr" data-find="Meta Tag Keywords 3 to 8"><div class="fl">Meta Tag Keywords</div><div>
+            <input class="ctl" id="f-kw" type="text" value="ESP32, Maker ESP32, DHT11, Temperature Alert, Buzzer">
+            <div class="meter"><span>3 to 8 keywords, comma-separated. Never paste the Pitch here.</span><span class="cnt" id="kw-n"></span></div></div></div>
+          <div class="fr" data-find="Meta Tag Title search results browser tab 60"><div class="fl">Meta Tag Title</div><div>
+            <input class="ctl" id="f-title" type="text" value="ESP32 High Temperature Alert System with DHT11">
+            <div class="meter"><span>Shown in search results and browser tabs: Post Name plus the key technology. <button class="linkbtn" id="use-name" type="button">Use Post Name</button></span><span class="cnt" data-max="60" data-for="f-title"></span></div></div></div>
+        </div>
       </div>
 
-      <div class="panel" id="p-data" role="tabpanel">
-        <div class="field"><div class="fn">Context Menu</div><div>Target audience: choose one, <strong>Education</strong> or <strong>Industry</strong>.</div></div>
-        <div class="field"><div class="fn">SEO URL</div><div>The tutorial title in lowercase, hyphens for spaces, no special characters. <strong>Set it first:</strong> it also names the image folder.</div><div class="ex"><span>e.g.</span><code>esp32-digital-clock</code></div></div>
-        <div class="field"><div class="fn">Image Folder Name</div><div>Filled in by WebAdmin and locked. All images for this post upload into this folder. It does not follow later SEO URL changes, so get the SEO URL right before you first save.</div><div class="ex"><span>e.g.</span><code>esp32-digital-clock</code></div></div>
-        <div class="field"><div class="fn">Publish Date</div><div>The date it becomes visible to the public. Always set it to the <strong>actual publish date</strong>, not the date you wrote the tutorial.</div></div>
-        <div class="field"><div class="fn">Post Type</div><div>Tutorial, Project, Protip, News or Uncategorised.</div><div class="ex"><span>e.g.</span>Tutorial</div></div>
-        <div class="field"><div class="fn">Project Level</div><div>
-          <dl class="levels">
-            <dt>Beginner</dt><dd>A microcontroller with 1 or 2 sensors, or basic Raspberry Pi functions</dd>
-            <dt>Intermediate</dt><dd>2 or more sensors, or Raspberry Pi software projects</dd>
-            <dt>Advanced</dt><dd>AI or Industry projects</dd>
-          </dl></div></div>
-        <div class="field"><div class="fn">Status</div><div><strong>Enabled</strong> (public), <strong>Disabled</strong> (hidden), or <strong>Enabled but hide in catalog</strong> (unlisted, reachable by its SEO URL).</div></div>
-        <div class="field"><div class="fn">Sort Order</div><div>Set it to <strong>1</strong>. In a series, number the parts in order: 1, 2, 3 and so on. Use another number only when your supervisor asks.</div></div>
+      <div class="tp" data-tab="s2-data" hidden>
+        <div class="sheet">
+          <div class="fr" data-find="Context Menu Education Industry"><div class="fl">Context Menu</div><div>
+            <div class="seg" id="seg-ctx" role="group" aria-label="Context Menu"><button type="button" aria-pressed="true">Education</button><button type="button" aria-pressed="false">Industry</button></div>
+            <p class="desc">Target audience. Choose one only.</p></div></div>
+          <div class="fr" data-find="SEO URL slug lowercase hyphens"><div class="fl">SEO URL</div><div>
+            <input class="ctl mono" id="f-seo" type="text">
+            <div class="meter"><span id="seo-hint">Filled from Post Name. Lowercase, hyphens for spaces, no special characters.</span></div>
+            <p class="rule"><strong>Set it first.</strong> It names the image folder, and it must never change after publishing.</p></div></div>
+          <div class="fr" data-find="Image Folder Name locked"><div class="fl">Image Folder Name</div><div>
+            <input class="ctl mono" id="f-folder" type="text" readonly>
+            <p class="rule">Filled in by WebAdmin and locked. It does not follow later SEO URL changes, so get the SEO URL right before you first save.</p></div></div>
+          <div class="fr" data-find="Publish Date actual date"><div class="fl">Publish Date</div><div>
+            <input class="ctl" id="f-date" type="date" style="max-width:220px">
+            <p class="rule">The actual publish date, not the date you started writing.</p></div></div>
+          <div class="fr" data-find="Post Type Tutorial Project Protip News"><div class="fl">Post Type</div><div>
+            <select class="ctl" id="f-type" style="max-width:220px"><option>Tutorial</option><option>Project</option><option>Protip</option><option>News</option><option>Uncategorised</option></select>
+            <p class="desc" id="type-d"></p></div></div>
+          <div class="fr" data-find="Project Level Beginner Intermediate Advanced"><div class="fl">Project Level</div><div>
+            <div class="seg" id="seg-lvl" role="group" aria-label="Project Level"><button type="button" aria-pressed="true">Beginner</button><button type="button" aria-pressed="false">Intermediate</button><button type="button" aria-pressed="false">Advanced</button></div>
+            <p class="desc" id="lvl-d"></p></div></div>
+          <div class="fr" data-find="Status Enabled Disabled hide in catalog"><div class="fl">Status</div><div>
+            <select class="ctl" id="f-status" style="max-width:280px"><option>Enabled</option><option>Disabled</option><option>Enabled but hide in catalog</option></select>
+            <p class="desc" id="status-d"></p></div></div>
+          <div class="fr" data-find="Sort Order 1 series"><div class="fl">Sort Order</div><div>
+            <input class="ctl mono" id="f-sort" type="number" value="1" min="1" style="max-width:110px">
+            <p class="rule">1 for a standalone tutorial. In a series, number the parts in order: 1, 2, 3. Use another number only when your supervisor asks.</p></div></div>
+        </div>
       </div>
 
-      <div class="panel" id="p-links" role="tabpanel">
-        <div class="field"><div class="fn">Author</div><div>Your name from the dropdown.</div></div>
-        <div class="field"><div class="fn">Categories</div><div>The categories that match the content.</div><div class="ex"><span>e.g.</span>Wireless &amp; IoT &gt; Maker ESP32</div></div>
-        <div class="field"><div class="fn">Store Name</div><div><strong>Tick every store first.</strong> Then untick a store only if a Related Product is not available there (for example, untick TH if a product isn't sold in the TH store).</div></div>
-        <div class="field"><div class="fn">Parent</div><div>Only for a series: the main post (for example the series hub) that this part belongs to. Leave empty for a standalone tutorial.</div></div>
-        <div class="field"><div class="fn">Related Post</div><div>Existing posts on the same topic.</div><div class="ex"><span>e.g.</span>Getting Started with Maker ESP32</div></div>
-        <div class="field"><div class="fn">Related Product</div><div>Exactly the items in List of Components, no more and no less (a kit tutorial attaches the kit, not its parts). Use the <strong>variation product code</strong> (the parent product with options) rather than a single product code where one exists. This fills the Hardware Components block below the body.</div></div>
+      <div class="tp" data-tab="s2-links" hidden>
+        <div class="sheet">
+          <div class="fr" data-find="Author dropdown"><div class="fl">Author</div><div><p class="rule">Your name from the dropdown.</p></div></div>
+          <div class="fr" data-find="Categories"><div class="fl">Categories</div><div><p class="rule">The categories that match the content, e.g. Wireless &amp; IoT &gt; Maker ESP32.</p></div></div>
+          <div class="fr" data-find="Store Name tick every store TH VN"><div class="fl">Store Name</div><div><p class="rule"><strong>Tick every store first.</strong> Untick a store only when a Related Product isn't sold there.</p></div></div>
+          <div class="fr" data-find="Parent series hub"><div class="fl">Parent</div><div><p class="rule">Series only: the main post (for example the series hub) this part belongs to. Empty for a standalone tutorial.</p></div></div>
+          <div class="fr" data-find="Related Post"><div class="fl">Related Post</div><div><p class="rule">Existing posts on the same topic, e.g. Getting Started with Maker ESP32.</p></div></div>
+          <div class="fr" data-find="Related Product variation product code kit"><div class="fl">Related Product</div><div><p class="rule"><strong>Exactly the items in List of Components</strong>, no more and no less. A kit tutorial attaches the kit. Use the variation product code (the parent product with options) where one exists.</p><p class="rule">This fills the Hardware Components block below the body.</p></div></div>
+        </div>
       </div>
 
-      <div class="panel" id="p-image" role="tabpanel">
-        <div class="field"><div class="fn">Image<small>thumbnail</small></div><div><strong>16:9</strong>, preferably 1280 × 720, about 300 KB (1 MB at most), title in the image, a clear hardware photo and/or output. <span class="b should">SHOULD</span> minimalist colours, the Cytron logo, real and clear photos of the parts used (nothing cut off by background removal); a kit tutorial shows the kit. Every part of a series has its own thumbnail.</div></div>
+      <div class="tp" data-tab="s2-image" hidden>
+        <p class="tp-lead">The thumbnail is 16:9, preferably 1280 × 720, about 300 KB (1 MB at most), with the title in the image and a clear photo of the hardware or the output. Drop a picture here to check it before you upload.</p>
+        <div class="sheet" style="padding:20px">
+          <div class="seg" id="seg-img" role="group" aria-label="Picture type" style="margin-bottom:14px"><button type="button" aria-pressed="true">Thumbnail</button><button type="button" aria-pressed="false">Picture in the body</button></div>
+          <div class="fmt" style="grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:20px">
+            <div>
+              <label class="drop" id="drop" for="img-in"><input id="img-in" type="file" accept="image/png,image/jpeg,image/webp"><span>Drop a PNG or JPEG here</span><span class="mono" style="font-size:12px">or click to choose</span></label>
+              <div class="checks" id="img-checks"></div>
+            </div>
+            <div class="frame169" id="img-frame">1280 × 720</div>
+          </div>
+        </div>
+        <div class="rules" style="margin-top:22px">
+          <div class="rl" data-find="thumbnail design minimalist Cytron logo"><span class="lv should">Should</span><div class="tx">Minimalist colours, the Cytron logo, and real, clear photos of the parts used. Check nothing got cut off by background removal. A kit tutorial shows the kit.</div></div>
+          <div class="rl" data-find="series thumbnail every part"><span class="lv must">Must</span><div class="tx">Every part of a series has its own thumbnail.</div></div>
+        </div>
       </div>
 
-      <div class="tool" id="checker">
-        <h4>Field checker</h4>
-        <div class="sub-t">Type your fields here to check their length before you paste them into WebAdmin. Nothing is saved or sent.</div>
-        <label for="t-name">Post Name</label>
-        <input id="t-name" type="text" placeholder="ESP32 High Temperature Alert System">
-        <div class="meter"><span>60 characters at most</span><span class="cnt" data-for="t-name" data-max="60">0 / 60</span></div>
-        <div class="slugrow">SEO URL from this title: <code id="t-slug">—</code> <button class="copy ghost" data-copy="t-slug" type="button">Copy</button></div>
-        <label for="t-pitch">Pitch (Meta Tag Description)</label>
-        <textarea id="t-pitch" placeholder="Build a/an [project] using Maker ESP32 and [main part] to [outcome]."></textarea>
-        <div class="meter"><span id="pitch-hint">One sentence, starting "Build a" or "Build an"</span><span class="cnt" data-for="t-pitch" data-max="160">0 / 160</span></div>
-        <label for="t-title">Meta Tag Title</label>
-        <input id="t-title" type="text" placeholder="ESP32 Water Tank Monitoring with Web Dashboard">
-        <div class="meter"><span>60 characters at most</span><span class="cnt" data-for="t-title" data-max="60">0 / 60</span></div>
-        <label for="t-kw">Meta Tag Keywords</label>
-        <input id="t-kw" type="text" placeholder="ESP32, Maker ESP32, DHT11, Temperature Alert, Buzzer">
-        <div class="meter"><span>3 to 8 keywords, comma-separated</span><span class="cnt" id="kw-count">0 keywords</span></div>
+      <div class="tp" data-tab="s2-after" hidden>
+        <div class="rules" id="r-after"></div>
       </div>
-
-      <h3 class="sub">SEO rules that apply after publishing</h3>
-      <ul class="rules">
-        <li><span><span class="b must">MUST</span></span><div><strong>Never change the SEO URL after publishing.</strong> If you must, redirect the old URL to the new one, keeping <code>/tutorial/</code> in the path.<span class="why">A redirect without <code>/tutorial/</code> sends readers to a 404.</span></div></li>
-        <li><span><span class="b must">MUST</span></span><div><strong>Series hub Pitch</strong> describes the whole series, not Part 1.<span class="why">The hub and Part 1 must not compete for the same search.</span></div></li>
-        <li><span><span class="b must">MUST</span></span><div><strong>Series navigation:</strong> the hub lists and links every part, and each part's prev/next bar works in both directions.</div></li>
-      </ul>
     </section>
 
     <!-- 03 -->
-    <section class="step" id="write">
-      <div class="step-head"><span class="num">03</span><h2>Write the tutorial</h2></div>
-      <p class="intro">Write the body in the Description field. Write for complete beginners, in clear, simple language, with active voice and short sentences. <span class="b must">MUST</span></p>
-
-      <h3 class="sub" id="structure"><span class="n">3.1</span>Required structure</h3>
-      <p>Every tutorial uses these headings, in this order, worded exactly as shown. The page title is set in Post Name and never repeated in the body, so the body starts at H2. No H1 in the body, no empty headings.</p>
-      <ol class="ladder">
-        <li><span class="k">01</span><span class="hd">Introduction<span class="lvl">H2</span></span><span class="b must">MUST</span><span class="what">2 to 4 sentences: what the reader builds and why it matters for Education or Industry use. Open with the reader's problem. Right after the paragraph, put the video tutorial if there is one, or an optional hero image.</span></li>
-        <li><span class="k">02</span><span class="hd">Disclaimer / Safety Notes<span class="lvl">H2</span></span><span class="b opt">IF APPLICABLE</span><span class="what">Electrical, battery or heat cautions, warranty notes, classroom supervision. See <a href="#safety">Safety notes</a>.</span></li>
-        <li><span class="k">03</span><span class="hd">Prerequisites<span class="lvl">H2</span></span><span class="b must">MUST</span><span class="what">Link the Getting Started guides or basics to finish first. Name the software, accounts, firmware or SDKs to install.</span></li>
-        <li><span class="k">04</span><span class="hd">Objectives<span class="lvl">H2</span></span><span class="b must">MUST</span><span class="what">One paragraph only.</span></li>
-        <li><span class="k">05</span><span class="hd">List of Components<span class="lvl">H2</span></span><span class="b must">MUST</span><span class="what">Numbered list, <code>[Product name] x1</code>, name linked, opens in a new window. Name and link only, no product pictures. See <a href="#components">Components &amp; links</a>.</span></li>
-        <li><span class="k">06</span><span class="hd">System Diagram &amp; Wiring<span class="lvl">H2</span></span><span class="b must">MUST</span><span class="what">A block or circuit diagram (Canva, Fritzing) at its native aspect ratio, plus a pin-to-pin wiring table: [Board], [Module], Function. Add a <strong>Note:</strong> for mounting tips or other ways to connect.</span></li>
-        <li><span class="k">07</span><span class="hd">Software Setup<span class="lvl">H2</span></span><span class="b must">MUST</span><span class="what">IDE or toolchain version, library names with install steps, board and port selection. Link the official download or documentation page of every software. Screenshots encouraged.</span></li>
-        <li class="h3"><span class="k">07a</span><span class="hd">Install [Library name] Library<span class="lvl">H3</span></span><span class="b opt">IF A LIBRARY</span><span class="what">Numbered Library Manager steps, including the "Install All" dependency prompt.</span></li>
-        <li><span class="k">08</span><span class="hd">Sample Code<span class="lvl">H2</span></span><span class="b must">MUST</span><span class="what">"Upload the following sketch to your Maker ESP32:" then a public GitHub Gist embed.</span></li>
-        <li class="h3"><span class="k">08a</span><span class="hd">Key Code Explanation<span class="lvl">H3</span></span><span class="b must">MUST</span><span class="what">Brief explanation of the key blocks: one bullet per line, <code>code</code>: what it does.</span></li>
-        <li><span class="k">09</span><span class="hd">Testing &amp; Validation<span class="lvl">H2</span></span><span class="b must">MUST</span><span class="what">Numbered steps to run and verify. Put a short troubleshooting note inline where a step often fails.</span></li>
-        <li class="h3"><span class="k">09a</span><span class="hd">Expected Results<span class="lvl">H3</span></span><span class="b must">MUST</span><span class="what">Expected outputs: Serial Monitor lines, LEDs, sounds, browser view.</span></li>
-        <li><span class="k">10</span><span class="hd">Demo / Results<span class="lvl">H2</span></span><span class="b must">MUST</span><span class="what">Photos or a YouTube embed of the working project, and screenshots of dashboards or the Serial Monitor.</span></li>
-        <li><span class="k">11</span><span class="hd">Troubleshooting &amp; Extra Tips<span class="lvl">H2</span></span><span class="b must">MUST</span><span class="what">3 to 4 H3s, each a symptom as the reader sees it, with bullet fixes: power, baud rate, library conflicts, sensor orientation, calibration.</span></li>
-        <li><span class="k">12</span><span class="hd">Conclusion<span class="lvl">H2</span></span><span class="b must">MUST</span><span class="what">2 to 3 sentences: what the reader built and learned, the final result, and what to try next (link a related tutorial).</span></li>
-        <li><span class="k">13</span><span class="hd">Downloads &amp; Assets<span class="lvl">H2</span></span><span class="b opt">IF APPLICABLE</span><span class="what">ZIP of diagrams or configs, repo links, datasets, example flows, STL or 3D files.</span></li>
-        <li class="end"><span class="k">14</span><span class="hd">Telegram community banner<span class="lvl">no heading</span></span><span class="b must">MUST</span><span class="what">One banner at the very end, centred, 900 px wide, linked to the matching community. See <a href="#telegram">Telegram banner</a>.</span></li>
-      </ol>
-      <p class="note">The Hardware Components block and Related Posts below the body come from the Related Product, Parent and Related Post fields in the Links tab, not from the body.</p>
-
-      <h4>Copy-ready skeleton</h4>
-      <p>Paste this into the editor's <strong>Source</strong> view, then replace every <code>[bracket]</code> and comment. Delete Disclaimer / Safety Notes or Downloads &amp; Assets only if they don't apply.</p>
-      <div class="codebox">
-        <button class="copy" type="button" data-copy="skeleton">Copy HTML</button>
-        <pre id="skeleton"></pre>
+    <section class="step" data-step="3" hidden>
+      <div class="sh"><span class="sn">03</span><h1>Write the tutorial</h1>
+        <p>The body goes in the Description field. Write for complete beginners: clear, simple words, active voice, short sentences.</p></div>
+      <div class="tabs" role="tablist" data-tabs="3">
+        <button role="tab" data-tab="s3-structure">Structure</button>
+        <button role="tab" data-tab="s3-format">Formatting</button>
+        <button role="tab" data-tab="s3-intro">Intro</button>
+        <button role="tab" data-tab="s3-parts">Components</button>
+        <button role="tab" data-tab="s3-code">Code</button>
+        <button role="tab" data-tab="s3-media">Links &amp; media</button>
+        <button role="tab" data-tab="s3-safety">Safety</button>
+        <button role="tab" data-tab="s3-telegram">Telegram</button>
+        <button role="tab" data-tab="s3-howto">How-tos</button>
       </div>
 
-      <h3 class="sub" id="format"><span class="n">3.2</span>Formatting and layout</h3>
-      <p>Most review comments are about how the page looks, not what it says. Every rule here is <span class="b must">MUST</span>: check each one in the editor, then again on the live page after publishing.</p>
-      <div class="tablewrap"><table>
-        <thead><tr><th>Area</th><th>Rule</th></tr></thead>
-        <tbody>
-          <tr><td class="h">Alignment</td><td><strong>Justify</strong> every paragraph, the Introduction included.</td></tr>
-          <tr><td class="h">Font</td><td>The editor's default font and size only. Never set another font or sizes such as 16 or 20. Copying from Word, Google Docs, ChatGPT or a website? Use <strong>Paste as plain text</strong> so the old formatting doesn't come along.</td></tr>
-          <tr><td class="h">Headings</td><td>Every section title is a <strong>Heading 2</strong>; sub-titles inside it are Heading 3. Never use bold text as a heading, and don't bold a heading (it is already bold), Troubleshooting H3s included. Title case, not capitals: "Introduction", not "INTRODUCTION".</td></tr>
-          <tr><td class="h">Start of the body</td><td>Start straight with the Introduction heading: no page title, horizontal line or picture before it. Prerequisites gets its own Heading 2, separate from the Introduction.</td></tr>
-          <tr><td class="h">Spacing</td><td><strong>One empty line</strong> between paragraphs, between text and a picture, between two pictures, and between code and a picture. Nothing touches or overlaps.</td></tr>
-          <tr><td class="h">Pictures</td><td>Insert through <strong>Browse Server</strong> only, saved as PNG or JPEG. Never paste a picture copied from Google Docs, Word or a website: it keeps an outside link (such as googleusercontent.com) and breaks into a red X. <strong>800 px wide at most</strong>: resize wider pictures with the ratio lock on, and never enlarge narrower ones. No stretched or blurred pictures. No picture of code that is already on the page as text.</td></tr>
-          <tr><td class="h">Links</td><td>Every link opens in <strong>New Window (_blank)</strong>.</td></tr>
-          <tr><td class="h">Banner</td><td>One Telegram banner at the very end: <strong>centred, 900 px wide</strong>, linked to its community in a New Window (_blank). Steps in <a href="#editor">Editor how-tos</a>.</td></tr>
-          <tr><td class="h">Length</td><td>If the tutorial is too long, split it into a series: set Parent in the Links tab and number the parts in Sort Order.</td></tr>
-        </tbody>
-      </table></div>
-
-      <h3 class="sub" id="intro"><span class="n">3.3</span>Introduction and cover image</h3>
-      <p>A reader decides from the first paragraph whether this tutorial solves their problem, so the introduction names the problem and the Cytron board.</p>
-      <ul class="rules">
-        <li><span><span class="b must">MUST</span></span><div>2 to 4 sentences: what the reader builds and why it matters.</div></li>
-        <li><span><span class="b should">SHOULD</span></span><div>Open with the reader's problem, not "In this tutorial…".<span class="why">e.g. "Overheating equipment in server cabinets… can lead to permanent hardware damage."</span></div></li>
-        <li><span><span class="b must">MUST</span></span><div>Name the Maker ESP32 and the main part, and link the Maker ESP32 at its first mention.</div></li>
-        <li><span><span class="b must">MUST</span></span><div>Link anything the reader may want to learn more about, such as MediaPipe or ROS 2, to its official page.</div></li>
-        <li><span><span class="b must">MUST</span></span><div>Put the <strong>video tutorial</strong>, if there is one, directly after the paragraph, before the next section. Otherwise an optional hero image can go there.</div></li>
-        <li><span><span class="b must">MUST</span></span><div><strong>Cover image:</strong> a real photo of the finished build with the Cytron board clearly visible. No stock photos. Landscape, named after the SEO URL (e.g. <code>esp32-digital-clock.png</code>). It shows above the page title and as the listing thumbnail.</div></li>
-        <li><span><span class="b must">MUST</span></span><div>Blur any tokens, passwords or personal details that appear on screen.</div></li>
-        <li><span><span class="b must">MUST</span></span><div>Use full product names: "Raspberry Pi 5", not "Pi 5". Check grammar and spelling across the whole tutorial (for example with Grammarly) before submitting.</div></li>
-        <li><span><span class="b must">MUST</span></span><div>Read the whole tutorial back as a beginner would. If it is hard to read, simplify it. If it is too long, split it into a series.</div></li>
-      </ul>
-
-      <h3 class="sub" id="components"><span class="n">3.4</span>List of Components and product links</h3>
-      <p>Every item Cytron sells links to its live product page, so the reader can buy the exact parts the tutorial was tested with.</p>
-      <ul class="rules">
-        <li><span><span class="b must">MUST</span></span><div>One numbered list, one line per item: <code>[Product name] x1</code>.<span class="why">e.g. "Grove to JST-SH (Qwiic) Cable - 20cm x1"</span></div></li>
-        <li><span><span class="b must">MUST</span></span><div>Put the link inside the component name, and use the product name exactly as written on its product page.<span class="why">e.g. write "Crowtail - Temperature and Humidity Sensor 2.0", not "DHT 11".</span></div></li>
-        <li><span><span class="b must">MUST</span></span><div>cytron.io links use the <strong>SEO URL only, no domain</strong>: set the protocol to <code>&lt;other&gt;</code> and paste the path.<span class="why"><code>/p-maker-esp32</code>, not <code>https://my.cytron.io/p-maker-esp32</code>, so a reader on another Cytron store stays in their own store.</span></div></li>
-        <li><span><span class="b must">MUST</span></span><div>Every link's target is <strong>New Window (_blank)</strong>.<span class="why">Keeps the tutorial open for the reader.</span></div></li>
-        <li><span><span class="b must">MUST</span></span><div>Link the Maker ESP32 at its first mention in the Introduction. Linking later mentions is allowed.</div></li>
-        <li><span><span class="b should">SHOULD</span></span><div>A product family with several versions may link to a store search.<span class="why">e.g. SPG30-XX* links to a search for spg30.</span></div></li>
-        <li><span><span class="b must">MUST</span></span><div>Note regional alternatives when a product differs between the stores ticked in Store Name.</div></li>
-        <li><span><span class="b must">MUST</span></span><div>No prices, discounts or stock levels in the body text.<span class="why">The Hardware Components block shows live prices and stock.</span></div></li>
-        <li><span><span class="b must">MUST</span></span><div>Attach every listed item in Related Product.<span class="why">This fills the Hardware Components block with Add to Cart.</span></div></li>
-        <li><span><span class="b must">MUST</span></span><div><strong>Name and link only:</strong> no product pictures in the list.<span class="why">The Hardware Components block below the body already shows the pictures.</span></div></li>
-        <li><span><span class="b must">MUST</span></span><div>A tutorial built on a <strong>training kit</strong> lists the kit, not each part in it.<span class="why">Related Product and the thumbnail show the kit too.</span></div></li>
-        <li><span><span class="b must">MUST</span></span><div>List every item the build uses, cameras and cables included, and nothing it doesn't use.<span class="why">List of Components and Related Product must match exactly.</span></div></li>
-        <li><span><span class="b must">MUST</span></span><div>Link a product even when the Malaysia store doesn't sell it.<span class="why">Readers on other Cytron stores, such as SG, can still buy it.</span></div></li>
-        <li><span><span class="b must">MUST</span></span><div>Link a product wherever it is named, in the Introduction and other sections too.</div></li>
-        <li><span><span class="b must">MUST</span></span><div>Items Cytron does not sell get a generic name and no link to another store.<span class="why">e.g. "Female-to-female jumper wires"</span></div></li>
-        <li><span><span class="b must">MUST</span></span><div>No new tutorials on discontinued products. In a revamp, name the product that replaces it.<span class="why">e.g. NodeMCU-32S replaced by Maker ESP32.</span></div></li>
-        <li><span><span class="b must">MUST</span></span><div>Open every product link, on each ticked store, before submitting.<span class="why">A dead product link is a lost sale.</span></div></li>
-        <li><span><span class="b must">MUST</span></span><div>3D files, PCB files and downloads live on Cytron-owned storage, linked under Downloads &amp; Assets. Never a personal Google Drive or GitHub account.</div></li>
-      </ul>
-
-      <h3 class="sub" id="code"><span class="n">3.5</span>Code, versions and setup</h3>
-      <p>A reader must be able to rebuild the project months later, so tested versions are named and every file lives where Cytron controls it.</p>
-      <ul class="rules">
-        <li><span><span class="b must">MUST</span></span><div><strong>Long code: a public GitHub Gist.</strong> Staff use their own GitHub account. Interns use the intern GitHub account; ask your supervisor for access, and Mat Liven for the authentication code. Never use the account of someone outside Cytron.</div></li>
-        <li><span><span class="b must">MUST</span></span><div><strong>Short command lines:</strong> the editor's Computer Code style. Use Shift+Enter for a new line, or each line lands in its own box.</div></li>
-        <li><span><span class="b must">MUST</span></span><div><strong>State the IDE or toolchain version</strong> and the board package, e.g. "esp32 by Espressif Systems 3.3.12". Library versions <span class="b should">SHOULD</span> be named too.<span class="why">An unpinned core caused <code>ledcAttach</code> compile errors for readers on core 2.x.</span></div></li>
-        <li><span><span class="b should">SHOULD</span></span><div>Open the sketch with a header comment: project, board (Cytron Maker ESP32) and main module.</div></li>
-        <li><span><span class="b must">MUST</span></span><div><strong>Placeholders, never real credentials:</strong> <code>YOUR_WIFI_SSID</code>, <code>YOUR_WIFI_PASSWORD</code>. Tell the reader to replace them in a Testing &amp; Validation step. Full rules in <a href="#secrets">Credentials</a>.</div></li>
-        <li><span><span class="b must">MUST</span></span><div><strong>Code is text, never a screenshot.</strong> Terminal and Serial Monitor output can be a screen capture under Demo / Results.</div></li>
-        <li><span><span class="b should">SHOULD</span></span><div>Name built-in libraries: when <code>WiFi.h</code> or <code>WebServer.h</code> need no install, say so in Software Setup.</div></li>
-        <li><span><span class="b must">MUST</span></span><div><strong>Quote error messages literally</strong> as the Troubleshooting H3.<span class="why">e.g. Serial Monitor shows "Failed to read from DHT sensor!"</span></div></li>
-        <li><span><span class="b must">MUST</span></span><div><strong>Proofread and test it yourself:</strong> follow your own tutorial on a clean setup before submitting. Peer review is recommended.</div></li>
-      </ul>
-
-      <h3 class="sub" id="media"><span class="n">3.6</span>Links, images and media</h3>
-      <ul class="rules">
-        <li><span><span class="b must">MUST</span></span><div><strong>Internal links:</strong> SEO URL only, never <code>index.php?route=eblog/epost…</code> URLs. Always link the Getting Started prerequisite.</div></li>
-        <li><span><span class="b must">MUST</span></span><div><strong>External links:</strong> official docs only, New Window (_blank). Datasheets as a PDF on <code>static.cytron.io</code> or a Google Docs <code>/preview</code> link, never <code>/edit</code>.</div></li>
-        <li><span><span class="b must">MUST</span></span><div><strong>A graphic per step:</strong> a screen capture, schematic or hardware assembly photo wherever a step needs one.<span class="why">A beginner follows a picture more easily than a paragraph.</span></div></li>
-        <li><span><span class="b must">MUST</span></span><div><strong>Inline images:</strong> 800 px wide at most, about 300 KB (1 MB at most), clear. A wider picture: set the width to 800 px with the ratio lock on. A narrower picture: leave it at its original size, never enlarge it. Never stretch a picture; replace blurred ones.<span class="why">Edit in the team Canva; download as PNG limited to 300 KB.</span></div></li>
-        <li><span><span class="b must">MUST</span></span><div><strong>Diagrams and assembly photos:</strong> every connection clearly visible, labelled where needed.</div></li>
-        <li><span><span class="b must">MUST</span></span><div><strong>Uploading:</strong> every picture through Browse Server only. Save it as PNG or JPEG, upload it into the folder named after the SEO URL and insert it from there. Never link or paste a picture from another website, Google Docs or Word.<span class="why">A picture linked from elsewhere is a common reason pictures disappear. <a href="#videos">Watch what happens</a>.</span></div></li>
-        <li><span><span class="b must">MUST</span></span><div><strong>Image file names:</strong> lowercase, hyphenated, starting with the project name.<span class="why"><code>esp32-water-tank-dashboard.png</code>, not <code>screenshot-2025-06-04-164317.png</code></span></div></li>
-        <li><span><span class="b must">MUST</span></span><div><strong>Alt text</strong> on every image, screenshots included: 5 to 15 words saying what it shows.<span class="why">e.g. "Water tank web dashboard showing 75% level on a phone"</span></div></li>
-        <li><span><span class="b must">MUST</span></span><div><strong>YouTube:</strong> Share &gt; Embed, tick Start at if needed, paste with the editor's Embedded YouTube Video button.</div></li>
-      </ul>
-
-      <h3 class="sub" id="safety"><span class="n">3.7</span>Safety notes and disclaimers</h3>
-      <p>Add the <strong>Disclaimer / Safety Notes</strong> section directly after the Introduction when any trigger below applies. Including it even for low-risk builds is good practice. Open with <em>"This project is an educational prototype designed for learning…"</em>, then name the concrete risk and the precaution. A generic "be careful" does not count.</p>
-      <div class="tablewrap"><table>
-        <thead><tr><th>Trigger</th><th>What the note must say</th></tr></thead>
-        <tbody>
-          <tr><td class="h">Mains AC</td><td>Only qualified people wire mains (relays switching 230 V, power supplies); use an enclosed, rated relay module; unplug before touching.</td></tr>
-          <tr><td class="h">LiPo or Li-ion batteries</td><td>Correct polarity, no short circuits, never charge unattended.</td></tr>
-          <tr><td class="h">Motors, servos, robots</td><td>Keep fingers clear of moving parts; the code includes a stop-on-disconnect failsafe.</td></tr>
-          <tr><td class="h">Soldering or heat</td><td>Ventilation and eye protection.</td></tr>
-          <tr><td class="h">Food, pets or people</td><td>Food-grade materials for food contact; someone checks in person if the device fails.</td></tr>
-          <tr><td class="h">Alarms, gas, fire, temperature, medical</td><td>"Educational prototype, not a certified safety device."</td></tr>
-          <tr><td class="h">5 V sensors on 3.3 V pins</td><td>Use a level shifter or divider; state the pin voltage.</td></tr>
-          <tr><td class="h">Passwords, bot tokens, API keys</td><td>Keep them private; never publish code containing real credentials (see <a href="#secrets">Credentials</a>).</td></tr>
-        </tbody>
-      </table></div>
-      <p class="note">Also add warranty notes where a build could void one (modifying a board, overdriving a motor), and state that adult supervision is required when the tutorial is meant for classroom use.</p>
-
-      <h3 class="sub" id="telegram"><span class="n">3.8</span>Telegram community banner</h3>
-      <p>Download the banner from the <a href="https://drive.google.com/drive/folders/186p2woTflBfHwUBpQwDWdBDOdYqAaUaE" target="_blank" rel="noopener">Community Banner folder</a>, place it at the very end of the body, and link the image to its community in a New Window (_blank). All channels are also listed on <a href="https://my.cytron.io/cytrons-telegram-channel" target="_blank" rel="noopener">Cytron's Telegram Channel page</a>.</p>
-      <div class="callout"><p><strong>Pick by the main board, not the sensor.</strong> A Maker ESP32 tutorial gets ESP Makers Malaysia even if it uses an Arduino library. Use Maker Gathering only when no product community fits. If a community has no banner yet, ask for one before publishing.</p></div>
-      <label class="mono" for="tg-q" style="font-size:13px;color:var(--muted)">Find your community</label>
-      <input id="tg-q" class="tg-search" type="search" placeholder="Type a board or topic, e.g. micro:bit, Jetson, 3D" autocomplete="off">
-      <ul class="tg" id="tg-list"></ul>
-      <div class="tg-empty" id="tg-empty">No match. Use <strong>Maker Gathering</strong> for general maker projects.</div>
-
-      <h3 class="sub" id="editor"><span class="n">3.9</span>Editor how-tos</h3>
-      <p>The WebAdmin editor steps for everything above.</p>
-      <div class="howto">
-        <details open><summary>Add a link</summary><div><ol>
-          <li>Copy the URL of the page you want to link to.</li>
-          <li>Highlight the words to link and click the Link button (Ctrl + L).</li>
-          <li>For a cytron.io page, set the protocol to <code>&lt;other&gt;</code> and paste only the SEO URL, without the domain (e.g. <code>/p-maker-esp32</code>). For any other site, paste the full URL.</li>
-          <li>In the Target tab, choose New Window (_blank), then click OK.</li>
-        </ol></div></details>
-        <details open><summary>Add an image</summary><div><ol>
-          <li>Save the picture on your computer as PNG or JPEG first.</li>
-          <li>Click the Image button. In Image Properties, click Browse Server.</li>
-          <li>The S3 Image Manager opens on your folder, <code>tutorial/your-seo-url</code>. Click the blue Upload button, choose your file and wait for "Success: Your file has been uploaded!".</li>
-          <li>Click the picture in the folder to insert it.</li>
-          <li>In Image Properties, keep the ratio lock on and set the width to 800 px if the picture is wider than that. Leave a narrower picture at its original size. Click OK.</li>
-          <li>Edit images and thumbnails in the team Canva account (ask Ms. Hamimah, Mr. Solehin or Ms. Iffah for the login code). Save designs in Projects &gt; 2025 Trainees &gt; your own folder, and download as PNG limited to 300 KB.</li>
-        </ol></div></details>
-        <details><summary>Add code</summary><div><ol>
-          <li>A few command lines: use the editor's Computer Code format style. Press Shift+Enter for a new line.</li>
-          <li>Longer code: log in to GitHub (staff: your own account; interns: the intern account, ask your supervisor for access), create a Public Gist with a title and file name, and copy the embed code.</li>
-          <li>Click Source in the editor and paste the embed code where the code belongs.</li>
-        </ol></div></details>
-        <details><summary>Embed a YouTube video</summary><div><ol>
-          <li>On YouTube, click Share &gt; Embed. Tick Start at if the video should start part-way. Copy the code.</li>
-          <li>In the editor, click the Embedded YouTube Video button, paste the code and click OK.</li>
-        </ol></div></details>
-        <details open><summary>Add the Telegram banner</summary><div><ol>
-          <li>Download the right banner from the Community Banner folder (see <a href="#telegram">3.8</a>).</li>
-          <li>Put the cursor on an empty line at the very end of the body and click Align Center.</li>
-          <li>Click the Image button, then Browse Server. Upload the banner into your SEO URL folder and click it to insert it.</li>
-          <li>In Image Properties, set the width to 900 px with the ratio lock on.</li>
-          <li>In the Link tab, paste the community's Telegram link.</li>
-          <li>In the Target tab, choose New Window (_blank), then click OK.</li>
-          <li>Save, open the page and click the banner to check it opens the right group.</li>
-        </ol></div></details>
+      <div class="tp" data-tab="s3-structure">
+        <p class="tp-lead">Every tutorial uses these headings, in this order, worded exactly as shown. The body starts at H2 with the Introduction. Click a block to see what it needs.</p>
+        <div class="anat">
+          <div class="page" id="anat-page"><div class="ph"><span>Description</span><span>H2 / H3</span></div></div>
+          <div class="detail" id="anat-detail" aria-live="polite"></div>
+        </div>
+        <div class="skel">
+          <div class="skel-h"><h4>Copy-ready skeleton for Source view</h4><button class="btn primary" id="copy-skel" type="button">Copy HTML</button></div>
+          <pre class="code" id="skeleton"></pre>
+        </div>
       </div>
 
-      <h4 id="videos">Watch how it's done</h4>
-      <div class="videos">
-        <figure><video controls playsinline preload="none" poster="videos/upload-image-browse-server.jpg"><source src="videos/upload-image-browse-server.webm" type="video/webm"><source src="videos/upload-image-browse-server.mp4" type="video/mp4"></video><figcaption><strong>Upload a picture through Browse Server</strong> (30 s): Image button, Browse Server, Upload into the tutorial folder, then insert.</figcaption></figure>
-        <figure><video controls playsinline preload="none" poster="videos/insert-telegram-banner.jpg"><source src="videos/insert-telegram-banner.webm" type="video/webm"><source src="videos/insert-telegram-banner.mp4" type="video/mp4"></video><figcaption><strong>Insert the Telegram banner</strong> (28 s): centre, Browse Server, width 900 px, Link tab, New Window (_blank).</figcaption></figure>
-        <figure class="bad"><video controls playsinline preload="none" poster="videos/broken-outside-image.jpg"><source src="videos/broken-outside-image.webm" type="video/webm"><source src="videos/broken-outside-image.mp4" type="video/mp4"></video><figcaption><strong>What goes wrong:</strong> a picture pasted from Google Docs keeps a googleusercontent.com link and breaks into a red X (15 s).</figcaption></figure>
+      <div class="tp" data-tab="s3-format" hidden>
+        <p class="tp-lead">Most review comments are about how the page looks. Switch between the common mistakes and the fixed version.</p>
+        <div class="fmt">
+          <div class="mock" id="mock" data-mode="mistakes">
+            <div class="mock-bar"><span>Description · editor view</span>
+              <span class="seg" id="seg-mock" role="group" aria-label="Preview"><button type="button" aria-pressed="true">Mistakes</button><button type="button" aria-pressed="false">Fixed</button></span></div>
+            <div class="mock-body">
+              <div class="mi hrw"><span class="pin">1</span><div class="m-hr"></div></div>
+              <div class="mi"><span class="pin">2</span><div class="m-h">Introduction</div></div>
+              <div class="mi"><span class="pin">3</span><p class="m-p">Overheating equipment in a server cabinet can cause permanent damage. In this project, you build a high temperature alert using the Maker ESP32 and a DHT11 sensor that sounds a buzzer before things get too hot.</p></div>
+              <div class="mi"><span class="pin">4</span><div class="m-img"><i></i></div></div>
+              <div class="mi"><p class="m-p">Prerequisites, Objectives and the rest of the sections follow, each as a Heading 2 with one empty line around every block.</p></div>
+              <div class="mi"><span class="pin">5</span><div class="m-ban">Join our Telegram channel<s>link · new window</s></div></div>
+            </div>
+          </div>
+          <div>
+            <ol class="mistakes" id="mistake-list">
+              <li><b>1</b><span>A horizontal line before the Introduction. Start straight with the heading.</span></li>
+              <li><b>2</b><span>Heading typed as bold capitals. Use Heading 2, title case, no bold.</span></li>
+              <li><b>3</b><span>Text pasted with another font and size, left-aligned, no space between blocks. Paste as plain text, then justify.</span></li>
+              <li><b>4</b><span>Picture stretched and blurred. Keep the ratio lock on, 800 px wide at most, and replace blurred pictures.</span></li>
+              <li><b>5</b><span>Banner small, not centred, no link. Centre it at 900 px and link it in a New Window.</span></li>
+            </ol>
+            <p class="fixed-note" id="fixed-note" hidden>Heading 2, justified text in the default font, one empty line between blocks, the picture at its own ratio, and a centred, linked 900 px banner.</p>
+          </div>
+        </div>
+        <div class="tw" style="margin-top:26px"><table><thead><tr><th>Area</th><th>Rule (all Must)</th></tr></thead><tbody id="fmt-rows"></tbody></table></div>
+      </div>
+
+      <div class="tp" data-tab="s3-intro" hidden><p class="tp-lead">A reader decides from the first paragraph whether this tutorial solves their problem.</p><div class="rules" id="r-intro"></div></div>
+      <div class="tp" data-tab="s3-parts" hidden><p class="tp-lead">Every item Cytron sells links to its live product page, so the reader can buy the exact parts the tutorial was tested with.</p><div class="rules" id="r-parts"></div></div>
+      <div class="tp" data-tab="s3-code" hidden><p class="tp-lead">A reader must be able to rebuild the project months later, so tested versions are named and every file lives where Cytron controls it.</p><div class="rules" id="r-code"></div></div>
+      <div class="tp" data-tab="s3-media" hidden><div class="rules" id="r-media"></div></div>
+
+      <div class="tp" data-tab="s3-safety" hidden>
+        <p class="tp-lead">Add <strong>Disclaimer / Safety Notes</strong> right after the Introduction when anything below applies. Pick what your build involves and copy the note.</p>
+        <div class="chips" id="chips"></div>
+        <div class="out">
+          <div class="out-h"><span>Your safety note</span><button class="copy-s" id="copy-safety" type="button">Copy text</button></div>
+          <div class="h2">Disclaimer / Safety Notes</div>
+          <p id="safety-out"></p>
+        </div>
+        <p class="note">Name the concrete risk and the precaution. A generic "be careful" does not count.</p>
+      </div>
+
+      <div class="tp" data-tab="s3-telegram" hidden>
+        <p class="tp-lead">One banner at the very end of the body, linked to the community of the tutorial's <strong>main board</strong>, not its sensor. Banners are in the <a href="https://drive.google.com/drive/folders/186p2woTflBfHwUBpQwDWdBDOdYqAaUaE" target="_blank" rel="noopener">Community Banner folder</a>; all channels are on <a href="https://my.cytron.io/cytrons-telegram-channel" target="_blank" rel="noopener">Cytron's Telegram page</a>.</p>
+        <input class="find" id="tg-q" type="search" placeholder="Find a board or topic: micro:bit, Jetson, 3D…" autocomplete="off" aria-label="Find a community">
+        <ul class="tg" id="tg-list"></ul>
+        <p class="note" id="tg-empty" hidden>No match. Use Maker Gathering for general maker projects.</p>
+      </div>
+
+      <div class="tp" data-tab="s3-howto" hidden>
+        <div class="acc" id="howtos">
+          <details open data-find="Add a picture image Browse Server upload S3 Image Manager video"><summary>Add a picture</summary><div class="in">
+            <ol class="steps"><li>Save the picture as PNG or JPEG on your computer.</li><li>Click the Image button. In Image Properties, click Browse Server.</li><li>The S3 Image Manager opens on your folder, <code>tutorial/your-seo-url</code>. Click the blue Upload button, choose the file, wait for "Success: Your file has been uploaded!".</li><li>Click the picture to insert it.</li><li>Keep the ratio lock on. Set the width to 800 px only if the picture is wider. Click OK.</li></ol>
+            <figure><video controls playsinline preload="none" poster="videos/upload-image-browse-server.jpg"><source src="videos/upload-image-browse-server.webm" type="video/webm"><source src="videos/upload-image-browse-server.mp4" type="video/mp4"></video><figcaption><b>Upload through Browse Server</b> · 30 s</figcaption></figure>
+            <figure class="badvid"><video controls playsinline preload="none" poster="videos/broken-outside-image.jpg"><source src="videos/broken-outside-image.webm" type="video/webm"><source src="videos/broken-outside-image.mp4" type="video/mp4"></video><figcaption><b>What goes wrong:</b> a picture pasted from Google Docs keeps a googleusercontent.com link and breaks into a red X · 15 s</figcaption></figure>
+          </div></details>
+          <details data-find="Telegram banner insert 900 centre link new window video"><summary>Add the Telegram banner</summary><div class="in">
+            <ol class="steps"><li>Download the banner from the Community Banner folder and upload it into your SEO URL folder.</li><li>Put the cursor on an empty line at the very end and click Align Center.</li><li>Image button, Browse Server, click the banner.</li><li>Set the width to 900 px with the ratio lock on.</li><li>In the Link tab, paste the community's Telegram link.</li><li>Target: New Window (_blank). Click OK, save, and click the banner on the page to check it.</li></ol>
+            <figure><video controls playsinline preload="none" poster="videos/insert-telegram-banner.jpg"><source src="videos/insert-telegram-banner.webm" type="video/webm"><source src="videos/insert-telegram-banner.mp4" type="video/mp4"></video><figcaption><b>Insert the banner</b> · 28 s</figcaption></figure>
+          </div></details>
+          <details data-find="Add a link Ctrl L other protocol New Window"><summary>Add a link</summary><div class="in">
+            <ol class="steps"><li>Copy the URL of the page.</li><li>Highlight the words and click the Link button (Ctrl + L).</li><li>For a cytron.io page, set the protocol to <code>&lt;other&gt;</code> and paste only the SEO URL, e.g. <code>/p-maker-esp32</code>. For other sites, paste the full URL.</li><li>Target tab: New Window (_blank). Click OK.</li></ol>
+          </div></details>
+          <details data-find="Add code Gist Computer Code Source"><summary>Add code</summary><div class="in">
+            <ol class="steps"><li>A few command lines: the editor's Computer Code style. Shift+Enter for a new line.</li><li>Longer code: log in to GitHub (staff: your own account; interns: the intern account, ask your supervisor for access and Mat Liven for the authentication code). Create a Public Gist with a title and file name and copy the embed code.</li><li>Click Source in the editor and paste the embed code where the code belongs.</li></ol>
+          </div></details>
+          <details data-find="YouTube embed video"><summary>Embed a YouTube video</summary><div class="in">
+            <ol class="steps"><li>On YouTube: Share &gt; Embed. Tick Start at if needed. Copy the code.</li><li>In the editor, click Embedded YouTube Video, paste and click OK.</li></ol>
+          </div></details>
+          <details data-find="Canva thumbnail edit login"><summary>Edit pictures in Canva</summary><div class="in">
+            <p style="font-size:14.5px;color:var(--ink-2);max-width:68ch">Use the team Canva account (ask Ms. Hamimah, Mr. Solehin or Ms. Iffah for the login code). Save designs in Projects &gt; 2025 Trainees &gt; your own folder, and download as PNG limited to 300 KB.</p>
+          </div></details>
+        </div>
       </div>
     </section>
 
     <!-- 04 -->
-    <section class="step" id="check">
-      <div class="step-head"><span class="num">04</span><h2>Check before you publish</h2></div>
-      <p class="intro">Tick every box and test the build before submitting. A peer reviewer, when one is available, re-checks the same boxes. Any miss sends the draft back to the writer. Your ticks stay in this browser only.</p>
-      <div class="flow" aria-label="Review flow">
-        <span>Writer drafts</span><i>→</i><span>Self-check and test</span><i>→</i><span class="opt">Peer review (recommended)</span><i>→</i><span>SEO and link check</span><i>→</i><span>Publish</span><i>→</i><span>Live-page check within 7 days</span>
-      </div>
-      <div class="check-head">
-        <div class="bar" id="bar"><i></i></div>
-        <span class="check-count" id="count">0 / 0</span>
-        <button class="reset" id="reset" type="button">Clear all ticks</button>
+    <section class="step" data-step="4" hidden>
+      <div class="sh"><span class="sn">04</span><h1>Check before you publish</h1>
+        <p>Tick every box and test the build by following your own steps. Any miss sends the draft back. After publishing, open the live page within 7 days to check every link, embed and the browser-tab title.</p></div>
+      <div class="ck-top">
+        <div class="ring"><svg viewBox="0 0 100 100"><circle class="tr" cx="50" cy="50" r="44"/><circle class="pr" id="ring" cx="50" cy="50" r="44"/></svg><div class="lbl" id="ring-n">0%</div></div>
+        <div>
+          <div class="flow" aria-label="Review flow"><span>Draft</span><i>→</i><span>Self-check &amp; test</span><i>→</i><span class="o">Peer review</span><i>→</i><span>SEO &amp; links</span><i>→</i><span>Publish</span><i>→</i><span>Live check · 7 days</span></div>
+          <div class="ck-actions"><button class="btn" id="open-all" type="button">Open all groups</button><button class="btn" id="reset" type="button">Clear ticks</button></div>
+        </div>
       </div>
       <div id="checklist"></div>
+      <p class="note">Ticks stay in this browser only.</p>
     </section>
+
+    <!-- 05 -->
+    <section class="step alert" data-step="5" hidden>
+      <div class="sh"><span class="sn">05</span><h1>Credentials: zero tolerance</h1>
+        <p>Never publish a real password, token or key, anywhere on a tutorial page. Every rule here is Must.</p></div>
+      <div class="zt"><strong>This is the most serious rule in the guide.</strong>
+        <p>The Q4 2026 quick scan keeps finding real Blynk tokens, Telegram bot tokens and Wi-Fi passwords in published Cytron tutorials: in Gists, in code typed into the page and in a public GitHub repo. Anyone who copies one can take over that device, bot or account.</p></div>
+      <h3 class="sub" style="margin-top:0">Use these placeholders</h3>
+      <div class="phs" id="phs"></div>
+      <h3 class="sub">Where they leak</h3>
+      <ul class="leaks"><li>Gists, old revisions included</li><li>Code typed into the page body</li><li>Serial Monitor screenshots</li><li>Blynk Console screenshots</li><li>BotFather chat screenshots</li><li>Browser address bar</li><li>Videos</li><li>ZIP and Drive downloads</li><li>GitHub repos</li></ul>
+      <h3 class="sub">Rules</h3>
+      <div class="rules" id="r-cred"></div>
+      <h3 class="sub">Check your code</h3>
+      <div class="scan">
+        <p style="font-size:14px;color:var(--ink-2);margin-bottom:10px">Paste a sketch or Gist. It looks for real-looking passwords, tokens and keys, runs in your browser only, and sends nothing. It catches common patterns, so still read the code yourself.</p>
+        <textarea class="ctl" id="scan-in" spellcheck="false" aria-label="Code to check">const char* ssid = "MyHomeWiFi";
+const char* password = "YOUR_WIFI_PASSWORD";
+#define BLYNK_AUTH_TOKEN "YOUR_BLYNK_AUTH_TOKEN"</textarea>
+        <div style="display:flex;gap:8px;margin-top:10px;flex-wrap:wrap"><button class="btn primary" id="scan-go" type="button">Check code</button><button class="btn" id="scan-clear" type="button">Clear</button></div>
+        <div id="scan-out" aria-live="polite"></div>
+      </div>
+      <h3 class="sub">If a real credential is already published</h3>
+      <div class="rules" id="r-leak"></div>
+      <p class="note">Removing the value without revoking it does not fix the leak: Gist revisions, Git history, search caches and readers who copied it still hold it.</p>
+    </section>
+
+    <div class="pager" id="pager"></div>
   </main>
 </div>
 
-<footer><div class="in">Cytron tutorial writing guide · for staff and interns. Questions about a rule? Ask your supervisor.</div></footer>
+<div class="pal" id="pal" hidden role="dialog" aria-modal="true" aria-label="Search the rules">
+  <div class="pal-box">
+    <div class="pal-in"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><input id="pal-q" type="text" placeholder="Search rules, fields, sections…" autocomplete="off"><kbd>Esc</kbd></div>
+    <div class="pal-res" id="pal-res"></div>
+  </div>
+</div>
+<div class="toast" id="toast"></div>
 
 <script type="text/plain" id="skeleton-src"><h2>Introduction</h2>
 <p style="text-align: justify;">[The reader's problem.] In this project, you will build [project] using the <a href="/p-maker-esp32" target="_blank">Maker ESP32</a> and [main part]. [Why it matters.]</p>
@@ -762,306 +741,351 @@ footer .in{max-width:1120px;margin:0 auto}
 
 <script>
 (function(){
-  // Skeleton
-  var src = document.getElementById('skeleton-src');
-  document.getElementById('skeleton').textContent = src.textContent;
+var $=function(s,r){return (r||document).querySelector(s)}, $$=function(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s))};
+function esc(s){return String(s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
+function store(k,v){try{if(v===undefined){return JSON.parse(localStorage.getItem(k)||'null')}localStorage.setItem(k,JSON.stringify(v))}catch(e){return null}}
+var toastT; function toast(m){var t=$('#toast');t.textContent=m;t.classList.add('on');clearTimeout(toastT);toastT=setTimeout(function(){t.classList.remove('on')},1500)}
+function fallbackCopy(t){var a=document.createElement('textarea');a.value=t;a.style.position='fixed';a.style.opacity='0';document.body.appendChild(a);a.select();try{document.execCommand('copy')}catch(e){}document.body.removeChild(a)}
+function copy(t,msg){try{if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(t).then(function(){toast(msg||'Copied')},function(){fallbackCopy(t);toast(msg||'Copied')});return}}catch(e){}fallbackCopy(t);toast(msg||'Copied')}
+var LV={M:['must','Must'],S:['should','Should'],O:['opt','If needed']};
+function rules(el,list){el.innerHTML=list.map(function(r){var l=LV[r[0]];return '<div class="rl" data-find="'+esc(r[1].replace(/<[^>]+>/g,''))+'"><span class="lv '+l[0]+'">'+l[1]+'</span><div class="tx">'+r[1]+'</div>'+(r[2]?'<div class="ex">'+r[2]+'</div>':'')+'</div>'}).join('')}
 
-  // Copy buttons
-  function copyText(text, btn){
-    var done = function(){ var o = btn.textContent; btn.textContent = 'Copied'; setTimeout(function(){ btn.textContent = o; }, 1400); };
-    try {
-      if (navigator.clipboard && navigator.clipboard.writeText) {
-        navigator.clipboard.writeText(text).then(done, function(){ fallback(text); done(); });
-        return;
-      }
-    } catch(e){}
-    fallback(text); done();
-  }
-  function fallback(text){
-    var ta = document.createElement('textarea'); ta.value = text; ta.style.position='fixed'; ta.style.opacity='0';
-    document.body.appendChild(ta); ta.select(); try{ document.execCommand('copy'); }catch(e){} document.body.removeChild(ta);
-  }
-  document.querySelectorAll('[data-copy]').forEach(function(btn){
-    btn.addEventListener('click', function(){
-      var el = document.getElementById(btn.getAttribute('data-copy'));
-      var t = el.textContent; if (!t || t === '—') return;
-      copyText(t, btn);
-    });
-  });
+/* ---------- content ---------- */
+var RUN=[
+ ['Ask your supervisor for a WebAdmin username','Any supervisor can set it up. Choose a short username, not your full name as it appears on your IC.'],
+ ['Log in at cytron.io/admin','The first time, use Forgot Password to set your password. <a href="https://www.cytron.io/admin" target="_blank" rel="noopener">Open WebAdmin</a>'],
+ ['Create the post','Expand Tutorial on the left, choose Tutorials, then click +.'],
+ ['Set the SEO URL first','In the Data tab. It also names the folder your pictures upload into.'],
+ ['Fill every field','General, Data, Links and Image. See step 02.'],
+ ['Write the body in Description','Follow the structure in step 03.'],
+ ['Save after every change','Click Save each time you change something.']
+];
+var AFTER=[
+ ['M','<strong>Never change the SEO URL after publishing.</strong> If you must, redirect the old URL to the new one, keeping <code>/tutorial/</code>.','A redirect without /tutorial/ sends readers to a 404.'],
+ ['M','<strong>Series hub Pitch</strong> describes the whole series, not Part 1.','The hub and Part 1 must not compete for the same search.'],
+ ['M','<strong>Series navigation:</strong> the hub lists and links every part; each part\'s prev/next works both ways.'],
+ ['M','Within 7 days, open the live page and check every link, embed and the browser-tab title.']
+];
+var STRUCT=[
+ ['1','Introduction','H2','M','2 to 4 sentences: what the reader builds and why it matters for Education or Industry. Open with the reader\'s problem. Right after the paragraph, put the video tutorial if there is one, or an optional hero image.'],
+ ['2','Disclaimer / Safety Notes','H2','O','When a safety trigger applies. Use the Safety tab to build it.'],
+ ['3','Prerequisites','H2','M','Link the Getting Started guides or basics to finish first. Name the software, accounts, firmware or SDKs to install. Its own heading, separate from the Introduction.'],
+ ['4','Objectives','H2','M','One paragraph only.'],
+ ['5','List of Components','H2','M','Numbered list, <code>[Product name] x1</code>, the name linked, New Window. Name and link only, no product pictures.'],
+ ['6','System Diagram & Wiring','H2','M','A labelled block or circuit diagram (Canva, Fritzing) at its native ratio, plus a pin-to-pin wiring table: [Board], [Module], Function. A <strong>Note:</strong> for mounting tips.'],
+ ['7','Software Setup','H2','M','IDE or toolchain version, libraries with install steps, board and port selection. Link the official download page. Screenshots encouraged.'],
+ ['7a','Install [Library name] Library','H3','O','When a library is installed: numbered Library Manager steps, including the "Install All" prompt.'],
+ ['8','Sample Code','H2','M','"Upload the following sketch to your Maker ESP32:" then a public GitHub Gist embed.'],
+ ['8a','Key Code Explanation','H3','M','One bullet per key line: <code>code</code>: what it does.'],
+ ['9','Testing & Validation','H2','M','Numbered steps to run and verify, with a short troubleshooting note where a step often fails.'],
+ ['9a','Expected Results','H3','M','Serial Monitor lines, LEDs, sounds, browser view.'],
+ ['10','Demo / Results','H2','M','Photos or a YouTube embed of the working project, and screenshots of dashboards or the Serial Monitor.'],
+ ['11','Troubleshooting & Extra Tips','H2','M','3 to 4 H3s, each a symptom as the reader sees it, with bullet fixes. H3s are not bold.'],
+ ['12','Conclusion','H2','M','2 to 3 sentences: what the reader built and learned, the final result, and what to try next.'],
+ ['13','Downloads & Assets','H2','O','ZIP of diagrams or configs, repo links, datasets, STL or 3D files, on Cytron-owned storage.'],
+ ['14','Telegram banner','none','M','One banner at the very end, centred, 900 px wide, linked to the matching community in a New Window. No heading.']
+];
+var FMT=[
+ ['Alignment','Justify every paragraph, the Introduction included.'],
+ ['Font','The editor\'s default font and size only. Never set another font or sizes such as 16 or 20. Copying from Word, Google Docs, ChatGPT or a website? Use Paste as plain text.'],
+ ['Headings','Section titles are Heading 2, sub-titles Heading 3. Never bold text as a heading, never bold a heading. "Introduction", not "INTRODUCTION".'],
+ ['Start','Start with the Introduction heading. No page title, line or picture before it.'],
+ ['Spacing','One empty line between paragraphs, text and a picture, two pictures, and code and a picture.'],
+ ['Pictures','Browse Server only, PNG or JPEG. 800 px wide at most with the ratio lock on; never enlarge a smaller picture. No stretched or blurred pictures, no picture of code already shown as text.'],
+ ['Links','Every link opens in New Window (_blank).'],
+ ['Banner','Centred, 900 px wide, linked to its community, New Window.'],
+ ['Length','Too long? Split it into a series with Parent and Sort Order.']
+];
+var INTRO=[
+ ['M','2 to 4 sentences: what the reader builds and why it matters.'],
+ ['S','Open with the reader\'s problem, not "In this tutorial…".','"Overheating equipment in server cabinets… can lead to permanent hardware damage."'],
+ ['M','Name the Maker ESP32 and the main part, and link the Maker ESP32 at its first mention.'],
+ ['M','Link anything the reader may want to learn more about, such as MediaPipe or ROS 2, to its official page.'],
+ ['M','Put the video tutorial, if there is one, right after the paragraph.'],
+ ['M','<strong>Cover image:</strong> a real photo of the finished build with the Cytron board visible. No stock photos. Landscape, named after the SEO URL.','e.g. <code>esp32-digital-clock.png</code>'],
+ ['M','Blur any tokens, passwords or personal details on screen.'],
+ ['M','Full product names: "Raspberry Pi 5", not "Pi 5". Check grammar and spelling across the whole tutorial (Grammarly).'],
+ ['M','Read it back as a beginner. Hard to read? Simplify. Too long? Split it into a series.']
+];
+var PARTS=[
+ ['M','One numbered list, one line per item: <code>[Product name] x1</code>.','"Grove to JST-SH (Qwiic) Cable - 20cm x1"'],
+ ['M','<strong>Name and link only</strong>, no product pictures.','The Hardware Components block already shows them.'],
+ ['M','The link sits inside the name, and the name is written exactly as on its product page.','Write "Crowtail - Temperature and Humidity Sensor 2.0", not "DHT 11".'],
+ ['M','cytron.io links use the <strong>SEO URL only</strong>: protocol <code>&lt;other&gt;</code>, path such as <code>/p-maker-esp32</code>.','So a reader on another Cytron store stays in their own store.'],
+ ['M','Every link opens in New Window (_blank).'],
+ ['M','A training-kit tutorial lists the kit, not each part.'],
+ ['M','List every item the build uses, cameras and cables included, and nothing else. It must match Related Product exactly.'],
+ ['M','Link a product even when the Malaysia store doesn\'t sell it, and link it wherever it is named.','Readers on other stores, such as SG, can still buy it.'],
+ ['S','A product family with several versions may link to a store search.','SPG30-XX* links to a search for spg30.'],
+ ['M','Note regional alternatives when a product differs between the ticked stores.'],
+ ['M','No prices, discounts or stock levels in the body.','The Hardware Components block shows live prices.'],
+ ['M','Items Cytron does not sell get a generic name and no link to another store.','"Female-to-female jumper wires"'],
+ ['M','No new tutorials on discontinued products. A revamp names the replacement.'],
+ ['M','Open every product link, on each ticked store, before submitting.'],
+ ['M','3D files, PCB files and downloads live on Cytron-owned storage, linked under Downloads & Assets.']
+];
+var CODE=[
+ ['M','<strong>Long code: a public GitHub Gist.</strong> Staff use their own GitHub account; interns use the intern account (ask your supervisor for access, and Mat Liven for the authentication code). Never an account outside Cytron.'],
+ ['M','<strong>Short command lines:</strong> the Computer Code style, Shift+Enter for a new line.'],
+ ['M','State the IDE or toolchain version and the board package, e.g. "esp32 by Espressif Systems 3.3.12". Library versions should be named too.','An unpinned core caused ledcAttach compile errors for readers on core 2.x.'],
+ ['S','Open the sketch with a header comment: project, board (Cytron Maker ESP32) and main module.'],
+ ['M','Placeholders, never real credentials. See <a href="#s5">05 Credentials</a>.'],
+ ['M','Code is text, never a screenshot. Serial Monitor output can be a screen capture.'],
+ ['S','Name built-in libraries such as <code>WiFi.h</code> when they need no install.'],
+ ['M','Quote error messages literally as the Troubleshooting H3.','Serial Monitor shows "Failed to read from DHT sensor!"'],
+ ['M','Follow your own tutorial on a clean setup before submitting. Peer review is recommended.']
+];
+var MEDIA=[
+ ['M','<strong>Internal links:</strong> SEO URL only, never <code>index.php?route=eblog/epost…</code>. Always link the Getting Started prerequisite.'],
+ ['M','<strong>External links:</strong> official docs only, New Window. Datasheets as a <code>static.cytron.io</code> PDF or a Google Docs <code>/preview</code> link, never <code>/edit</code>.'],
+ ['M','<strong>A graphic per step</strong> wherever a step needs one: screen capture, schematic or assembly photo.'],
+ ['M','<strong>Pictures through Browse Server only</strong>, as PNG or JPEG, uploaded into the SEO URL folder. Never paste a picture from Google Docs, Word or a website.','It keeps an outside link and breaks into a red X. See How-tos for the video.'],
+ ['M','<strong>800 px wide at most</strong> with the ratio lock on; leave a narrower picture at its own size. About 300 KB, 1 MB at most.'],
+ ['M','Diagrams and assembly photos show every connection, labelled where needed.'],
+ ['M','File names lowercase, hyphenated, starting with the project name.','<code>esp32-water-tank-dashboard.png</code>, not <code>screenshot-2025-06-04-164317.png</code>'],
+ ['M','Alt text on every picture, 5 to 15 words saying what it shows.','"Water tank web dashboard showing 75% level on a phone"'],
+ ['M','YouTube: Share > Embed, paste with the Embedded YouTube Video button.']
+];
+var SAFETY=[
+ ['Mains AC','Only qualified people should wire mains (230 V) voltage. Use an enclosed, rated relay module and unplug the power before touching any wiring.'],
+ ['LiPo or Li-ion','Check battery polarity, avoid short circuits, and never charge LiPo or Li-ion batteries unattended.'],
+ ['Motors, servos, robots','Keep fingers clear of moving parts, and make sure the motors stop when the connection is lost.'],
+ ['Soldering or heat','Solder in a ventilated area and wear eye protection.'],
+ ['Food, pets or people','Use food-grade materials for anything that touches food, and have someone check in person if the device fails.'],
+ ['Alarms, gas, fire, temperature, medical','This is an educational prototype, not a certified safety device. Do not rely on it to protect people or property.'],
+ ['5 V sensors on 3.3 V pins','The ESP32 pins work at 3.3 V. Use a level shifter or voltage divider when you connect a 5 V sensor.'],
+ ['Passwords, tokens, API keys','Keep your Wi-Fi password, tokens and API keys private, and never publish code that contains them.'],
+ ['Board modification','Modifying the board or overdriving components may void the warranty.'],
+ ['Classroom use','Adult supervision is required when this project is used in a classroom.']
+];
+var TG=[
+ ['Maker ESP32, ESP32 projects','ESP Makers Malaysia (Official)','https://t.me/ESPmakersMY','Maker ESP32 Telegram Banner.png'],
+ ['Maker UNO, Maker Drive, other Cytron Maker boards','Cytron Maker Board MY','http://qr.codes/0P3Lai','Cytron Maker Board Telegram.png'],
+ ['Arduino boards','Arduino','http://qr.codes/0P3Lai','Arduino Telegram.png'],
+ ['Raspberry Pi','Raspberry Pi','http://qr.link/aX8uQ7','Raspberry Pi Telegram.png'],
+ ['Raspberry Pi in industry and professional use','Raspberry Pi Professional','http://qr.link/BXAybc','Raspberry Pi for Professional-footer.png'],
+ ['NVIDIA Jetson','NVIDIA Jetson','http://qr.codes/b2TBX5','NVIDIA Jetson Telegram.png'],
+ ['RDK boards (RDK X5 and others)','RDK Series Community','http://qr.codes/0H84mK','RDK-telegram-footer.png'],
+ ['micro:bit','micro:bit','https://qr.link/owmYeg','microbit Telegram.png'],
+ ['EDU:BIT','EDU:BIT Support Group','https://t.me/edubit_trainers',''],
+ ['ZOOM:BIT','ZOOM:BIT Support Group','https://t.me/zoombit_support','Zoombit Support.png'],
+ ['SUMO:BIT','SUMO:BIT Support Group','https://t.me/sumobit_support','Sumobit Banner.png'],
+ ['SUMO Drone, school robotics and STEM','STEM Robotik','http://qr.codes/YO63x0','SUMO_Drone_STEM Robotik.png'],
+ ['CircuitPython projects','CircuitPython Malaysia','https://t.me/CircuitPythonMY',''],
+ ['3D printing','3D Printing','http://qr.io/r/pgVcQB','3D Printing Telegram.png'],
+ ['Robomania competition tutorials','Robomania 2025','https://t.me/robomania_my','Robomania_Telegram_Banner.png'],
+ ['Only tutorials related to RAC, a Cytron event','RAC Helpdesk','https://t.me/RAC_helpdesk',''],
+ ['Cytron Learning Hub content','Cytron Learning Hub','http://qr.link/G7fcUA','Cytron Learning Hub.png'],
+ ['General maker projects, none of the above','Maker Gathering','http://qr.io/r/n7EwBk','']
+];
+var CHECK=[
+ ['Structure',['Every Must heading present, in the order and wording of the structure','Disclaimer / Safety Notes and Downloads & Assets included where they apply','H3s named exactly: Install [Library] Library, Key Code Explanation, Expected Results','Objectives is one paragraph','Labelled system diagram at native ratio, plus a pin-to-pin wiring table','A graphic wherever a step needs one','Demo / Results has photos, a YouTube embed or screen captures','Troubleshooting & Extra Tips has 3 to 4 symptom H3s','Conclusion at the end','One Telegram banner at the end, linked to the matching community','No empty headings or leftover placeholders']],
+ ['Formatting and layout',['Every paragraph justified; default font and size; copied text pasted as plain text','Section titles Heading 2, sub-titles Heading 3; no bold on headings; no headings in capitals','Body starts with the Introduction heading: no title, line or picture before it','One empty line between paragraphs, pictures and code; nothing overlaps','Every picture inserted through Browse Server, 800 px wide at most, not enlarged, stretched or blurred','No picture of code that is already on the page as text','Telegram banner centred, 900 px wide, New Window','Video tutorial (if any) right after the Introduction','Read back as a beginner; split into parts if too long']],
+ ['Title and intro',['Post Name short and clear, 60 characters or fewer, no numbers unless required','Introduction is 2 to 4 sentences: what and why','Thumbnail 16:9, about 300 KB, title in the image, real build, credentials blurred','Proofread for grammar and spelling']],
+ ['Products',['Every item [Product name] x1, link inside the name, no product pictures','cytron.io links use the SEO URL only, protocol <other>','Every link opens in a New Window','Product links work on every ticked store; regional alternatives noted','Maker ESP32 linked at its first mention; every product linked where it is named','No prices or discounts in the body','Related Product holds exactly the items in List of Components','No discontinued products']],
+ ['Admin, SEO and media',['Every WebAdmin field filled: General, Data, Links and Image','Project Level matches Beginner, Intermediate or Advanced','Pitch is one "Build a…" sentence, 160 characters or fewer','Meta Tag Keywords holds 3 to 8 keywords','No index.php URLs; every link opened and working','Pictures in the SEO URL folder, with alt text and hyphenated names','Gist and YouTube embeds render correctly']],
+ ['Code and safety',['Long code in a public Gist (staff: own account; interns: intern account)','IDE or toolchain version stated','Safety notes cover every trigger that applies','Tested by following the published steps','Peer review completed (recommended)']],
+ ['Credentials',['Every credential in the body, Gists, downloads and repos is a placeholder','Body, Gists and downloads searched for password, ssid, token, auth, key, secret, api, bot','No credential visible in any screenshot, GIF or video','No Gist or repo revision ever held a real value, or it has been revoked','Tokens used for screenshots and video revoked or regenerated']],
+ ['After publishing',['Within 7 days: every link, embed and the browser-tab title checked on the live page']]
+];
+var PH=[
+ ['Wi-Fi','Network name and password',['YOUR_WIFI_SSID','YOUR_WIFI_PASSWORD']],
+ ['IoT platform','Blynk token, template ID, ThingSpeak or Adafruit IO key',['YOUR_BLYNK_AUTH_TOKEN','YOUR_TEMPLATE_ID','YOUR_API_KEY']],
+ ['Bots','Telegram bot token and chat ID',['YOUR_TELEGRAM_BOT_TOKEN','YOUR_CHAT_ID']],
+ ['Cloud and AI','Firebase, OpenAI, Gemini or Google keys',['YOUR_API_KEY']],
+ ['Logins','MQTT, email or any account password',['YOUR_MQTT_USER','YOUR_MQTT_PASSWORD']],
+ ['Device keys','LoRaWAN AppKey, certificates, private keys',['YOUR_APP_KEY']]
+];
+var CRED=[
+ ['M','Test with your own values on your own computer, then <strong>swap in placeholders before the code goes anywhere</strong>. No real value in WebAdmin, a Gist or a repo, not even in a draft.'],
+ ['M','Put a comment beside each placeholder, e.g. <code>// Replace with your own Wi-Fi name</code>, and tell the reader to replace it in a Testing & Validation step.'],
+ ['M','Use a bot, Blynk device or account made only for the tutorial, never a personal or Cytron office one.'],
+ ['M','Crop or blur every credential before saving a screenshot or recording a video.','A Telegram API link in the address bar contains the bot token.'],
+ ['M','Before submitting, search the body, every Gist and every download for password, ssid, token, auth, key, secret, api and bot.'],
+ ['M','<strong>Revoke or regenerate the tokens you used</strong> once the screenshots and video are done.'],
+ ['M','A real value ever saved in a Gist or repo stays in its history. Revoke it and create a new Gist.']
+];
+var LEAK=[
+ ['M','<strong>Revoke or regenerate it the same day:</strong> /revoke in BotFather, Blynk Console for an auth token, the provider\'s console for an API key, or change the Wi-Fi password.'],
+ ['M','<strong>Replace it with a placeholder everywhere:</strong> WebAdmin body, a new Gist, repo, Drive file, screenshots and video.'],
+ ['M','<strong>Tell your supervisor the same day.</strong> Name the page and where the credential sits, never the value itself.']
+];
 
-  // Tabs
-  var tabs = document.querySelectorAll('.tabs button');
-  tabs.forEach(function(b){
-    b.addEventListener('click', function(){
-      tabs.forEach(function(x){ x.setAttribute('aria-selected', x === b ? 'true' : 'false'); });
-      document.querySelectorAll('.panel').forEach(function(p){ p.classList.toggle('on', p.id === 'p-' + b.dataset.tab); });
-    });
-  });
+/* ---------- step 1 ---------- */
+var runDone=store('ctg-run')||{};
+$('#run').innerHTML=RUN.map(function(r,i){return '<li data-find="'+esc(r[0]+' '+r[1].replace(/<[^>]+>/g,''))+'"><label><span class="rn">'+String(i+1).padStart(2,'0')+'</span><span><span class="rt">'+r[0]+'</span><span class="rd">'+r[1]+'</span></span><input type="checkbox" data-r="'+i+'"'+(runDone[i]?' checked':'')+' aria-label="Done"></label></li>'}).join('');
+$$('#run input').forEach(function(b){b.addEventListener('change',function(){if(b.checked)runDone[b.dataset.r]=1;else delete runDone[b.dataset.r];store('ctg-run',runDone)})});
+$$('#run a').forEach(function(a){a.addEventListener('click',function(e){e.stopPropagation()})});
 
-  // Field checker
-  function meter(id){
-    var el = document.getElementById(id), out = document.querySelector('.cnt[data-for="'+id+'"]'), max = +out.dataset.max;
-    var upd = function(){
-      var n = el.value.trim().length;
-      out.textContent = n + ' / ' + max;
-      out.classList.toggle('over', n > max);
-      out.classList.toggle('good', n > 0 && n <= max);
-    };
-    el.addEventListener('input', upd); upd();
-    return el;
-  }
-  var nameEl = meter('t-name'); meter('t-title');
-  var pitchEl = meter('t-pitch');
-  var slugEl = document.getElementById('t-slug');
-  nameEl.addEventListener('input', function(){
-    var s = nameEl.value.normalize('NFKD').replace(/[̀-ͯ]/g,'').toLowerCase()
-      .replace(/&/g,' and ').replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,'');
-    slugEl.textContent = s || '—';
-  });
-  var hint = document.getElementById('pitch-hint');
-  pitchEl.addEventListener('input', function(){
-    var v = pitchEl.value.trim();
-    if (!v) { hint.textContent = 'One sentence, starting "Build a" or "Build an"'; hint.className=''; return; }
-    var okStart = /^Build an?\s/.test(v);
-    var sentences = (v.match(/[.!?](\s|$)/g) || []).length;
-    if (!okStart) { hint.textContent = 'Start with "Build a" or "Build an"'; hint.className='over'; }
-    else if (sentences > 1) { hint.textContent = 'Keep it to one sentence'; hint.className='over'; }
-    else if (!/[.!?]$/.test(v)) { hint.textContent = 'Finish the sentence with a full stop'; hint.className=''; }
-    else { hint.textContent = 'Looks right'; hint.className='good'; }
-  });
-  var kw = document.getElementById('t-kw'), kwc = document.getElementById('kw-count');
-  kw.addEventListener('input', function(){
-    var n = kw.value.split(',').map(function(s){return s.trim();}).filter(Boolean).length;
-    kwc.textContent = n + (n === 1 ? ' keyword' : ' keywords');
-    kwc.classList.toggle('over', n > 8 || (n > 0 && n < 3));
-    kwc.classList.toggle('good', n >= 3 && n <= 8);
-  });
+/* ---------- step 2: practice form ---------- */
+rules($('#r-after'),AFTER);
+function slug(s){return s.normalize('NFKD').replace(/[̀-ͯ]/g,'').toLowerCase().replace(/&/g,' and ').replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,'')}
+var seoEdited=false, nameEl=$('#f-name'), seoEl=$('#f-seo'), folderEl=$('#f-folder');
+function meters(){
+  $$('.cnt[data-for]').forEach(function(c){var n=$('#'+c.dataset.for).value.trim().length,m=+c.dataset.max;c.textContent=n+' / '+m;c.classList.toggle('bad',n>m);c.classList.toggle('good',n>0&&n<=m)});
+  var v=$('#f-pitch').value.trim(),h=$('#pitch-hint'),s=(v.match(/[.!?](\s|$)/g)||[]).length;
+  if(!v){h.textContent='One sentence starting "Build a" or "Build an".';h.className=''}
+  else if(!/^Build an?\s/.test(v)){h.textContent='Start with "Build a" or "Build an".';h.className='bad'}
+  else if(s>1){h.textContent='Keep it to one sentence.';h.className='bad'}
+  else if(!/[.!?]$/.test(v)){h.textContent='End the sentence with a full stop.';h.className=''}
+  else{h.textContent='One complete sentence.';h.className='good'}
+  var k=$('#f-kw').value.split(',').map(function(x){return x.trim()}).filter(Boolean).length,kn=$('#kw-n');kn.textContent=k+' keyword'+(k===1?'':'s');kn.classList.toggle('bad',k>8||(k>0&&k<3));kn.classList.toggle('good',k>=3&&k<=8);
+  if(!seoEdited)seoEl.value=slug(nameEl.value);
+  var ok=/^[a-z0-9]+(-[a-z0-9]+)*$/.test(seoEl.value),sh=$('#seo-hint');
+  if(!seoEl.value){sh.textContent='Filled from Post Name. Lowercase, hyphens for spaces, no special characters.';sh.className=''}
+  else if(ok){sh.textContent=seoEdited?'Valid SEO URL.':'Filled from Post Name. Valid.';sh.className='good'}
+  else{sh.textContent='Use lowercase letters, numbers and single hyphens only.';sh.className='bad'}
+  folderEl.value=seoEl.value;
+}
+['#f-name','#f-pitch','#f-kw','#f-title','#f-tags'].forEach(function(s){$(s).addEventListener('input',meters)});
+seoEl.addEventListener('input',function(){seoEdited=seoEl.value.length>0;meters()});
+$('#use-name').addEventListener('click',function(){$('#f-title').value=nameEl.value;meters()});
+$('#clear-ex').addEventListener('click',function(){['#f-name','#f-pitch','#f-kw','#f-title','#f-tags'].forEach(function(s){$(s).value=''});seoEdited=false;meters();nameEl.focus()});
+try{$('#f-date').valueAsDate=new Date()}catch(e){}
+function seg(id,fn){var b=$$('#'+id+' button');b.forEach(function(x,i){x.addEventListener('click',function(){b.forEach(function(y){y.setAttribute('aria-pressed',y===x?'true':'false')});fn&&fn(i,x)})})}
+var LVL=['A microcontroller with 1 or 2 sensors, or basic Raspberry Pi functions.','2 or more sensors, or Raspberry Pi software projects.','AI or Industry projects. There are only these three levels.'];
+seg('seg-lvl',function(i){$('#lvl-d').textContent=LVL[i]});$('#lvl-d').textContent=LVL[0];
+seg('seg-ctx');
+var TYPE={'Tutorial':'A step-by-step build or how-to. Most posts.','Project':'A finished build shown as a showcase.','Protip':'A short explainer or guide.','News':'News, announcements, events and stories.','Uncategorised':'Avoid unless your supervisor asks.'};
+var STATUS={'Enabled':'Public and listed.','Disabled':'Hidden from everyone.','Enabled but hide in catalog':'Unlisted: reachable by its SEO URL only.'};
+function sel(id,map,out){var e=$(id),f=function(){$(out).textContent=map[e.value]};e.addEventListener('change',f);f()}
+sel('#f-type',TYPE,'#type-d');sel('#f-status',STATUS,'#status-d');
+meters();
 
-  // Telegram
-  var TG = [
-    ['Maker ESP32, ESP32 projects','ESP Makers Malaysia (Official)','https://t.me/ESPmakersMY','Maker ESP32 Telegram Banner.png'],
-    ['Maker UNO, Maker Drive and other Cytron Maker boards','Cytron Maker Board MY','http://qr.codes/0P3Lai','Cytron Maker Board Telegram.png'],
-    ['Arduino boards','Arduino','http://qr.codes/0P3Lai','Arduino Telegram.png'],
-    ['Raspberry Pi','Raspberry Pi','http://qr.link/aX8uQ7','Raspberry Pi Telegram.png'],
-    ['Raspberry Pi in industry and professional use','Raspberry Pi Professional','http://qr.link/BXAybc','Raspberry Pi for Professional-footer.png'],
-    ['NVIDIA Jetson','NVIDIA Jetson','http://qr.codes/b2TBX5','NVIDIA Jetson Telegram.png'],
-    ['RDK boards (RDK X5 and others)','RDK Series Community','http://qr.codes/0H84mK','RDK-telegram-footer.png'],
-    ['micro:bit','micro:bit','https://qr.link/owmYeg','microbit Telegram.png'],
-    ['EDU:BIT','EDU:BIT Support Group','https://t.me/edubit_trainers',''],
-    ['ZOOM:BIT','ZOOM:BIT Support Group','https://t.me/zoombit_support','Zoombit Support.png'],
-    ['SUMO:BIT','SUMO:BIT Support Group','https://t.me/sumobit_support','Sumobit Banner.png'],
-    ['SUMO Drone, school robotics and STEM','STEM Robotik','http://qr.codes/YO63x0','SUMO_Drone_STEM Robotik.png'],
-    ['CircuitPython projects','CircuitPython Malaysia','https://t.me/CircuitPythonMY',''],
-    ['3D printing','3D Printing','http://qr.io/r/pgVcQB','3D Printing Telegram.png'],
-    ['Tutorials for the Robomania competition','Robomania 2025','https://t.me/robomania_my','Robomania_Telegram_Banner.png'],
-    ['Only tutorials related to RAC, a Cytron event','RAC Helpdesk','https://t.me/RAC_helpdesk',''],
-    ['Cytron Learning Hub content','Cytron Learning Hub','http://qr.link/G7fcUA','Cytron Learning Hub.png'],
-    ['General maker projects that fit none of the above','Maker Gathering','http://qr.io/r/n7EwBk','']
-  ];
-  var list = document.getElementById('tg-list'), empty = document.getElementById('tg-empty');
-  function esc(s){ return s.replace(/[&<>"]/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]; }); }
-  function renderTG(q){
-    q = (q || '').toLowerCase().trim();
-    var html = '', n = 0;
-    TG.forEach(function(r){
-      if (q && (r[0]+' '+r[1]+' '+r[3]).toLowerCase().indexOf(q) === -1) return;
-      n++;
-      html += '<li><span class="use">'+esc(r[0])+'</span><span class="com"><a href="'+esc(r[2])+'" target="_blank" rel="noopener">'+esc(r[1])+'</a></span>' +
-        (r[3] ? '<span class="file">Banner: '+esc(r[3])+'</span>' : '<span class="file none">No banner yet: ask for one before publishing</span>') + '</li>';
-    });
-    list.innerHTML = html;
-    list.style.display = n ? '' : 'none';
-    empty.style.display = n ? 'none' : 'block';
-  }
-  renderTG('');
-  document.getElementById('tg-q').addEventListener('input', function(e){ renderTG(e.target.value); });
+/* image checker */
+var imgMode=0;seg('seg-img',function(i){imgMode=i;$('#img-frame').style.aspectRatio=i?'auto':'16/9';if(lastImg)checkImg(lastImg)});
+var lastImg=null;
+function checkImg(f){lastImg=f;var url=URL.createObjectURL(f),im=new Image();im.onload=function(){var w=im.naturalWidth,h=im.naturalHeight,kb=Math.round(f.size/1024),c=[];
+  var okType=/png|jpe?g/i.test(f.type);c.push([okType,okType?'PNG or JPEG':'Save it as PNG or JPEG']);
+  if(imgMode===0){var r=w/h,ok169=Math.abs(r-16/9)<.02;c.push([ok169,w+' × '+h+(ok169?' is 16:9':' is not 16:9. Crop it to 16:9')]);c.push([w>=1280,w>=1280?'At least 1280 px wide':'Narrower than 1280 px. Export at 1280 × 720']);}
+  else{c.push([true,w+' × '+h+(w>800?'. Set the width to 800 px with the ratio lock on':'. Leave it at its own size, never enlarge it')]);}
+  c.push([kb<=1024,kb+' KB'+(kb>1024?'. Over 1 MB: compress it':kb>400?'. Aim for about 300 KB':'')]);
+  c.push([!/^(screenshot|image|img|photo)[-_ ]?\d/i.test(f.name)&&/^[a-z0-9-]+\.(png|jpe?g)$/.test(f.name),'File name: '+f.name+(/^[a-z0-9-]+\.(png|jpe?g)$/.test(f.name)?'':'. Use lowercase and hyphens, starting with the project name')]);
+  $('#img-checks').innerHTML=c.map(function(x){return '<div><b class="'+(x[0]?'good':'bad')+'">'+(x[0]?'OK':'FIX')+'</b><span>'+esc(x[1])+'</span></div>'}).join('');
+  $('#img-frame').innerHTML='';$('#img-frame').appendChild(im);};im.src=url;}
+$('#img-in').addEventListener('change',function(e){if(e.target.files[0])checkImg(e.target.files[0])});
+var dz=$('#drop');['dragenter','dragover'].forEach(function(t){dz.addEventListener(t,function(e){e.preventDefault();dz.classList.add('on')})});
+['dragleave','drop'].forEach(function(t){dz.addEventListener(t,function(e){e.preventDefault();dz.classList.remove('on')})});
+dz.addEventListener('drop',function(e){var f=e.dataTransfer.files[0];if(f)checkImg(f)});
 
-  // Checklist
-  var GROUPS = [
-    ['Credentials (any miss stops publishing)', [
-      'Every credential in the body, Gists, downloads and repos is a placeholder from the Credentials table',
-      'Body, Gists and downloads searched for password, ssid, token, auth, key, secret, api and bot: no real value found',
-      'No credential visible in any screenshot, GIF or video (Serial Monitor, consoles, BotFather, address bar)',
-      'No Gist or repo revision ever held a real value, or that value has been revoked',
-      'Tokens used for screenshots and video revoked or regenerated'
-    ]],
-    ['Structure', [
-      'Every MUST heading present, in the order and wording of the structure',
-      'Disclaimer / Safety Notes and Downloads & Assets included where they apply',
-      'H3s named exactly: Install [Library] Library, Key Code Explanation, Expected Results',
-      'Objectives is one paragraph',
-      'Labelled system diagram at native aspect ratio, plus a pin-to-pin wiring table',
-      'A graphic wherever a step needs one',
-      'Demo / Results has photos, a YouTube embed or screen captures of the working project',
-      'Troubleshooting & Extra Tips has 3 to 4 symptom H3s',
-      'One Telegram banner at the end, linked to the matching community',
-      'No empty headings or leftover placeholders'
-    ]],
-    ['Formatting and layout', [
-      'Every paragraph justified; default font and size; copied text pasted as plain text',
-      'Section titles Heading 2, sub-titles Heading 3; no bold on headings; no headings in capitals',
-      'Body starts with the Introduction heading: no title, line or picture before it',
-      'One empty line between paragraphs, pictures and code; nothing overlaps',
-      'Every picture inserted through Browse Server as PNG or JPEG, 800 px wide at most, not enlarged, not stretched, not blurred',
-      'No picture of code that is already on the page as text',
-      'Telegram banner centred, 900 px wide, linked to the right group, New Window (_blank)',
-      'Conclusion at the end; video tutorial (if any) right after the Introduction',
-      'Read back as a beginner: easy to read, split into parts if too long'
-    ]],
-    ['Title and intro', [
-      'Post Name short and clear, 60 characters or fewer, no numbers unless required, not repeated in the body',
-      'Introduction is 2 to 4 sentences: what and why',
-      'Thumbnail 16:9, about 300 KB (1 MB at most), title in the image, real build, credentials blurred',
-      'Proofread for grammar and spelling (Grammarly)'
-    ]],
-    ['Products', [
-      'Every list item written [Product name] x1, link inside the name, link text = product-page name, no product pictures',
-      'cytron.io links use the SEO URL only, protocol <other>',
-      'Every link opens in a New Window (_blank)',
-      'Product links work on every store ticked in Store Name; regional alternatives noted',
-      'Maker ESP32 linked at its first mention in the Introduction; every product linked wherever it is named',
-      'No prices or discounts in the body',
-      'Related Product holds exactly the items in List of Components (the kit, if the tutorial uses a kit)',
-      'No discontinued products'
-    ]],
-    ['Admin, SEO and media', [
-      'Every WebAdmin field filled: General, Data, Links and Image tabs',
-      'Project Level matches the level definitions',
-      'Pitch is one complete "Build a…" sentence, 160 characters or fewer, unique',
-      'Meta Tag Keywords holds 3 to 8 keywords only',
-      'No index.php URLs; every link opened and working, including hub and prev/next',
-      'Inline images 800 px wide at most (wider ones resized with the ratio locked, narrower ones not enlarged), about 300 KB, uploaded to the SEO URL folder, with alt text and hyphenated file names',
-      'Gist and YouTube embeds render correctly'
-    ]],
-    ['Code and safety', [
-      'Long code in a public Gist (staff: own GitHub account; interns: the intern account); short commands in Computer Code style',
-      'IDE or toolchain version stated',
-      'Credentials are placeholders, replaced in a Testing & Validation step',
-      'Safety notes cover every trigger that applies, including classroom supervision',
-      'Proofread and tested by following the published steps',
-      'Peer review completed (recommended)'
-    ]],
-    ['After publishing', [
-      'Within 7 days, open the live page, check every link, embed and the browser-tab title, and fix anything broken'
-    ]]
-  ];
-  var KEY = 'cytron-tutorial-checklist-v3';
-  var state = {};
-  try { state = JSON.parse(localStorage.getItem(KEY) || '{}') || {}; } catch(e){ state = {}; }
-  function save(){ try { localStorage.setItem(KEY, JSON.stringify(state)); } catch(e){} }
-  var root = document.getElementById('checklist'), total = 0, h = '';
-  GROUPS.forEach(function(g, gi){
-    h += '<div class="group" data-g="'+gi+'"><h4>'+esc(g[0])+'<span class="gc"></span></h4>';
-    g[1].forEach(function(item, ii){
-      var id = 'c'+gi+'_'+ii; total++;
-      h += '<label class="ck"><input type="checkbox" data-id="'+id+'"'+(state[id]?' checked':'')+'><span>'+esc(item)+'</span></label>';
-    });
-    h += '</div>';
-  });
-  root.innerHTML = h;
-  var boxes = root.querySelectorAll('input[type=checkbox]');
-  function refresh(){
-    var n = 0;
-    boxes.forEach(function(b){ if (b.checked) n++; });
-    document.getElementById('count').textContent = n + ' / ' + total;
-    document.getElementById('mini-count').textContent = n + ' / ' + total;
-    var bar = document.getElementById('bar');
-    bar.querySelector('i').style.width = (total ? n/total*100 : 0) + '%';
-    bar.classList.toggle('done', n === total);
-    root.querySelectorAll('.group').forEach(function(g){
-      var bs = g.querySelectorAll('input'), c = 0;
-      bs.forEach(function(b){ if (b.checked) c++; });
-      var gc = g.querySelector('.gc'); gc.textContent = c + '/' + bs.length; gc.classList.toggle('ok', c === bs.length);
-    });
-  }
-  boxes.forEach(function(b){
-    b.addEventListener('change', function(){ if (b.checked) state[b.dataset.id] = 1; else delete state[b.dataset.id]; save(); refresh(); });
-  });
-  document.getElementById('reset').addEventListener('click', function(){
-    state = {}; save(); boxes.forEach(function(b){ b.checked = false; }); refresh();
-  });
-  refresh();
+/* ---------- step 3 ---------- */
+var LVLMAP={M:['must','Must'],O:['opt','If applicable']};
+$('#anat-page').insertAdjacentHTML('beforeend',STRUCT.map(function(b,i){var h3=b[2]==='H3',tg=b[2]==='none';return '<button type="button" class="blk'+(h3?' h3':'')+(tg?' tg':'')+'" data-b="'+i+'" data-find="'+esc(b[1]+' '+b[4].replace(/<[^>]+>/g,''))+'" aria-pressed="false"><span class="bn">'+b[0]+'</span><span class="bt">'+esc(b[1])+'</span><span class="bd '+(b[3]==='M'?'must':'opt')+'"></span></button>'}).join(''));
+var blks=$$('.blk');
+function showBlk(i){blks.forEach(function(b,j){b.setAttribute('aria-pressed',i===j?'true':'false')});var b=STRUCT[i],l=LVLMAP[b[3]];
+  $('#anat-detail').innerHTML='<div class="dk">'+(i+1)+' of '+STRUCT.length+'</div><h3>'+esc(b[1])+'</h3><div class="meta"><span class="lv '+l[0]+'">'+l[1]+'</span><span class="tag">'+(b[2]==='none'?'no heading':b[2])+'</span></div><p class="body">'+b[4]+'</p><div class="nav"><button class="btn" type="button" data-d="-1"'+(i===0?' disabled':'')+'>Previous</button><button class="btn" type="button" data-d="1"'+(i===STRUCT.length-1?' disabled':'')+'>Next block</button></div>';
+  $$('#anat-detail [data-d]').forEach(function(x){x.addEventListener('click',function(){showBlk(Math.min(STRUCT.length-1,Math.max(0,i+ +x.dataset.d)))})});}
+blks.forEach(function(b,i){b.addEventListener('click',function(){showBlk(i)});b.addEventListener('keydown',function(e){if(e.key==='ArrowDown'||e.key==='ArrowUp'){e.preventDefault();var n=Math.min(blks.length-1,Math.max(0,i+(e.key==='ArrowDown'?1:-1)));blks[n].focus();showBlk(n)}})});
+showBlk(0);
+$('#skeleton').textContent=$('#skeleton-src').textContent;
+$('#copy-skel').addEventListener('click',function(){copy($('#skeleton').textContent,'Skeleton copied')});
 
-  // Placeholder copy
-  document.querySelectorAll('.ph').forEach(function(b){
-    b.addEventListener('click', function(){
-      var t = b.textContent;
-      try { if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(t).catch(function(){ fallback(t); }); else fallback(t); } catch(e){ fallback(t); }
-      b.classList.add('ok'); setTimeout(function(){ b.classList.remove('ok'); }, 1000);
-    });
-  });
+seg('seg-mock',function(i){$('#mock').dataset.mode=i?'fixed':'mistakes';$('#mistake-list').hidden=!!i;$('#fixed-note').hidden=!i});
+$('#fmt-rows').innerHTML=FMT.map(function(r){return '<tr data-find="'+esc(r[0]+' '+r[1])+'"><td class="k">'+r[0]+'</td><td>'+esc(r[1])+'</td></tr>'}).join('');
+rules($('#r-intro'),INTRO);rules($('#r-parts'),PARTS);rules($('#r-code'),CODE);rules($('#r-media'),MEDIA);
 
-  // Credential check (local only)
-  var KNOWN = [
-    [/\b\d{8,10}:[A-Za-z0-9_-]{35}\b/g, 'Telegram bot token'],
-    [/\bAIza[0-9A-Za-z_-]{35}\b/g, 'Google or Firebase API key'],
-    [/\bsk-[A-Za-z0-9_-]{20,}/g, 'OpenAI-style API key'],
-    [/\b(?:gh[pousr]_[A-Za-z0-9]{30,}|github_pat_[A-Za-z0-9_]{30,})/g, 'GitHub token'],
-    [/\bAKIA[0-9A-Z]{16}\b/g, 'AWS access key']
-  ];
-  var NAME = /(ssid|pass|pwd|psk|token|auth|api[_-]?key|apikey|secret|chat[_-]?id|bot|key|user|login|email|template)/i;
-  function isPh(v){
-    v = v.trim();
-    return !v || /your|replace|change_?me|placeholder|example|\*{3,}|x{4,}/i.test(v) || /^[\[<].*[\]>]$/.test(v);
-  }
-  function mask(v){ return (v.length <= 4 ? '••••' : v.slice(0,3) + '••••') + ' (' + v.length + ' characters)'; }
-  function scan(code){
-    var out = [];
-    code.split(/\r?\n/).forEach(function(line, i){
-      var seen = {};
-      KNOWN.forEach(function(k){
-        var m; k[0].lastIndex = 0;
-        while ((m = k[0].exec(line))) { seen[m[0]] = 1; out.push({ln:i+1, kind:k[1], v:m[0], hard:true}); }
-      });
-      var re = /(["'])((?:\\.|(?!\1).)*)\1/g, m;
-      while ((m = re.exec(line))) {
-        var v = m[2], before = line.slice(0, m.index);
-        if (isPh(v) || seen[v]) continue;
-        var skip = false;
-        Object.keys(seen).forEach(function(s){ if (v.indexOf(s) !== -1) skip = true; });
-        if (skip) continue;
-        var id = before.match(/["']?([A-Za-z_][\w-]*)["']?\s*(?:\[\s*\d*\s*\])?\s*[:=]\s*(?:F\()?\s*$/) || before.match(/#define\s+(\w+)\s*$/);
-        if (id && NAME.test(id[1])) { out.push({ln:i+1, kind:'Real-looking value for ' + id[1], v:v, hard:true}); continue; }
-        if (/\.(begin|connect)\s*\((?:[^()]*,\s*)?$/.test(before)) { out.push({ln:i+1, kind:'Literal value passed to ' + before.match(/\.(begin|connect)\s*\(/)[1] + '(): check it is not a real Wi-Fi name, password or login', v:v, hard:false}); continue; }
-        if (v.length >= 20 && !/\s/.test(v) && /[A-Za-z]/.test(v) && /\d/.test(v) && !/:\/\//.test(v)) out.push({ln:i+1, kind:'Long random string: check it is not a key or token', v:v, hard:false});
-      }
-    });
-    return out;
-  }
-  var scanOut = document.getElementById('scan-out');
-  document.getElementById('scan-go').addEventListener('click', function(){
-    var code = document.getElementById('scan-in').value;
-    if (!code.trim()) { scanOut.innerHTML = '<span style="color:var(--muted)">Paste some code first.</span>'; return; }
-    var f = scan(code);
-    if (!f.length) { scanOut.innerHTML = '<span class="scan-ok">No likely credentials found.</span> Still read the code yourself before submitting.'; return; }
-    var hard = f.filter(function(x){ return x.hard; }).length;
-    var h = '<p><strong>' + f.length + ' item' + (f.length > 1 ? 's' : '') + ' to check' + (hard ? ', ' + hard + ' likely real' : '') + '.</strong> Replace each with its placeholder. If a real value was ever saved in a Gist or repo, revoke it too.</p>';
-    f.forEach(function(x){
-      h += '<div class="finding' + (x.hard ? '' : ' warn') + '"><span class="ln">line ' + x.ln + '</span><span>' + esc(x.kind) + ' <code>' + esc(mask(x.v)) + '</code></span></div>';
-    });
-    scanOut.innerHTML = h;
-  });
+var picked={};
+$('#chips').innerHTML=SAFETY.map(function(s,i){return '<button type="button" class="chip" data-s="'+i+'" aria-pressed="false" data-find="'+esc('safety '+s[0]+' '+s[1])+'">'+esc(s[0])+'</button>'}).join('');
+function safety(){var t='This project is an educational prototype designed for learning and experimentation.';SAFETY.forEach(function(s,i){if(picked[i])t+=' '+s[1]});$('#safety-out').textContent=t}
+$$('.chip').forEach(function(c){c.addEventListener('click',function(){var i=c.dataset.s;picked[i]=!picked[i];c.setAttribute('aria-pressed',picked[i]?'true':'false');safety()})});
+safety();
+$('#copy-safety').addEventListener('click',function(){copy($('#safety-out').textContent,'Safety note copied')});
 
-  // Scroll spy
-  var links = Array.prototype.slice.call(document.querySelectorAll('.toc a'));
-  var targets = links.map(function(a){ return document.querySelector(a.getAttribute('href')); });
-  function spy(){
-    var y = window.scrollY + 120, idx = 0;
-    targets.forEach(function(t, i){ if (t && t.getBoundingClientRect().top + window.scrollY <= y) idx = i; });
-    links.forEach(function(a, i){ a.classList.toggle('active', i === idx); });
-    var act = links[idx];
-    if (act && window.innerWidth <= 900) {
-      // on mobile, sub-links are hidden; highlight the parent step instead
-      if (act.classList.contains('sub')) { links.forEach(function(a){ a.classList.remove('active'); }); document.querySelector('.toc a[href="#write"]').classList.add('active'); act = document.querySelector('.toc a[href="#write"]'); }
-      var ol = act.parentNode.parentNode;
-      var l = act.offsetLeft - 16; if (Math.abs(ol.scrollLeft - l) > 40) ol.scrollTo({left: l, behavior: 'smooth'});
-    }
-  }
-  var ticking = false;
-  window.addEventListener('scroll', function(){ if (!ticking){ ticking = true; requestAnimationFrame(function(){ spy(); ticking = false; }); } }, {passive:true});
-  window.addEventListener('resize', spy);
-  spy();
+function renderTG(q){q=(q||'').toLowerCase().trim();var n=0;
+  $('#tg-list').innerHTML=TG.filter(function(r){return !q||(r[0]+' '+r[1]+' '+r[3]).toLowerCase().indexOf(q)>-1}).map(function(r){n++;return '<li data-find="'+esc('Telegram '+r[0]+' '+r[1])+'"><span class="u">'+esc(r[0])+'</span><span class="c"><a href="'+esc(r[2])+'" target="_blank" rel="noopener">'+esc(r[1])+'</a></span><button class="copy-s" type="button" data-link="'+esc(r[2])+'">Copy link</button><span class="f'+(r[3]?'':' none')+'">'+(r[3]?esc(r[3]):'No banner yet: ask for one before publishing')+'</span></li>'}).join('');
+  $('#tg-empty').hidden=n>0;
+  $$('#tg-list [data-link]').forEach(function(b){b.addEventListener('click',function(){copy(b.dataset.link,'Link copied')})});}
+renderTG('');$('#tg-q').addEventListener('input',function(e){renderTG(e.target.value)});
+
+/* ---------- step 4 checklist ---------- */
+var KEY='ctg-check-v1',ck=store(KEY)||{},total=0;
+$('#checklist').innerHTML=CHECK.map(function(g,gi){var items=g[1].map(function(t,ii){total++;var id=gi+'_'+ii;return '<label class="ci" data-find="'+esc(t)+'"><input type="checkbox" data-c="'+id+'"'+(ck[id]?' checked':'')+'><span>'+esc(t)+'</span></label>'}).join('');
+  return '<details class="grp'+(g[0]==='Credentials'?' alert':'')+'"'+(gi<2?' open':'')+'><summary><span>'+esc(g[0])+'</span><span class="gc"></span></summary><div class="items">'+items+'</div></details>'}).join('');
+var C=2*Math.PI*44;$('#ring').style.strokeDasharray=C;
+function prog(){var n=0;$$('#checklist input').forEach(function(b){if(b.checked)n++});var p=total?n/total:0;
+  $('#ring').style.strokeDashoffset=C*(1-p);$('#ring-n').textContent=Math.round(p*100)+'%';$('#pill-n').textContent=n+'/'+total;$('#pill-bar').style.width=(p*100)+'%';
+  $$('#checklist .grp').forEach(function(g){var b=$$('input',g),c=b.filter(function(x){return x.checked}).length,e=$('.gc',g);e.textContent=c+'/'+b.length;e.classList.toggle('done',c===b.length)})}
+$$('#checklist input').forEach(function(b){b.addEventListener('change',function(){if(b.checked)ck[b.dataset.c]=1;else delete ck[b.dataset.c];store(KEY,ck);prog()})});
+$('#reset').addEventListener('click',function(){ck={};store(KEY,ck);$$('#checklist input').forEach(function(b){b.checked=false});prog();toast('Ticks cleared')});
+$('#open-all').addEventListener('click',function(){var all=$$('#checklist details'),open=all.every(function(d){return d.open});all.forEach(function(d){d.open=!open});this.textContent=open?'Open all groups':'Close all groups'});
+prog();
+
+/* ---------- step 5 ---------- */
+$('#phs').innerHTML=PH.map(function(p){return '<div class="phc" data-find="'+esc('placeholder '+p[0]+' '+p[1]+' '+p[2].join(' '))+'"><span class="pt">'+p[0]+'</span><span class="pe">'+p[1]+'</span><span class="pb">'+p[2].map(function(x){return '<button type="button" class="ph">'+x+'</button>'}).join('')+'</span></div>'}).join('');
+$$('.ph').forEach(function(b){b.addEventListener('click',function(){copy(b.textContent,b.textContent+' copied');b.classList.add('ok');setTimeout(function(){b.classList.remove('ok')},900)})});
+rules($('#r-cred'),CRED);rules($('#r-leak'),LEAK);
+var KNOWN=[[/\b\d{8,10}:[A-Za-z0-9_-]{35}\b/g,'Telegram bot token'],[/\bAIza[0-9A-Za-z_-]{35}\b/g,'Google or Firebase API key'],[/\bsk-[A-Za-z0-9_-]{20,}/g,'OpenAI-style API key'],[/\b(?:gh[pousr]_[A-Za-z0-9]{30,}|github_pat_[A-Za-z0-9_]{30,})/g,'GitHub token'],[/\bAKIA[0-9A-Z]{16}\b/g,'AWS access key']];
+var NAME=/(ssid|pass|pwd|psk|token|auth|api[_-]?key|apikey|secret|chat[_-]?id|bot|key|user|login|email|template)/i;
+function isPh(v){v=v.trim();return !v||/your|replace|change_?me|placeholder|example|\*{3,}|x{4,}/i.test(v)||/^[\[<].*[\]>]$/.test(v)}
+function mask(v){return (v.length<=4?'••••':v.slice(0,3)+'••••')+' ('+v.length+' characters)'}
+function scan(code){var out=[];code.split(/\r?\n/).forEach(function(line,i){var seen={};
+  KNOWN.forEach(function(k){var m;k[0].lastIndex=0;while((m=k[0].exec(line))){seen[m[0]]=1;out.push({ln:i+1,k:k[1],v:m[0],hard:true})}});
+  var re=/(["'])((?:\\.|(?!\1).)*)\1/g,m;
+  while((m=re.exec(line))){var v=m[2],before=line.slice(0,m.index);if(isPh(v)||seen[v])continue;var skip=false;Object.keys(seen).forEach(function(s){if(v.indexOf(s)!==-1)skip=true});if(skip)continue;
+    var id=before.match(/["']?([A-Za-z_][\w-]*)["']?\s*(?:\[\s*\d*\s*\])?\s*[:=]\s*(?:F\()?\s*$/)||before.match(/#define\s+(\w+)\s*$/);
+    if(id&&NAME.test(id[1])){out.push({ln:i+1,k:'Real-looking value for '+id[1],v:v,hard:true});continue}
+    if(/\.(begin|connect)\s*\((?:[^()]*,\s*)?$/.test(before)){out.push({ln:i+1,k:'Value typed into '+before.match(/\.(begin|connect)\s*\(/)[1]+'(): check it is not a real name or password',v:v,hard:false});continue}
+    if(v.length>=20&&!/\s/.test(v)&&/[A-Za-z]/.test(v)&&/\d/.test(v)&&!/:\/\//.test(v))out.push({ln:i+1,k:'Long random string: check it is not a key',v:v,hard:false});}});
+  return out}
+$('#scan-go').addEventListener('click',function(){var c=$('#scan-in').value,o=$('#scan-out');if(!c.trim()){o.innerHTML='<p style="color:var(--ink-3)">Paste some code first.</p>';return}
+  var f=scan(c);if(!f.length){o.innerHTML='<p class="good">No likely credentials found.</p>';return}
+  var hard=f.filter(function(x){return x.hard}).length;
+  o.innerHTML='<p style="margin-bottom:8px"><strong>'+f.length+' to check'+(hard?', '+hard+' likely real':'')+'.</strong> Replace each with its placeholder. If a real value was ever saved in a Gist or repo, revoke it too.</p>'+f.map(function(x){return '<div class="fd'+(x.hard?' hard':'')+'"><span class="ln">line '+x.ln+'</span><span><span class="k">'+esc(x.k)+'</span> <code>'+esc(mask(x.v))+'</code></span></div>'}).join('')});
+$('#scan-clear').addEventListener('click',function(){$('#scan-in').value='';$('#scan-out').innerHTML='';$('#scan-in').focus()});
+
+/* ---------- navigation ---------- */
+var TITLES=['Get access','Fill the fields','Write','Check & publish','Credentials'];
+var steps=$$('.step'),cur=1,curTab={};
+$$('[data-tabs]').forEach(function(t){var s=t.dataset.tabs;curTab[s]=$('button',t).dataset.tab;$$('button',t).forEach(function(b){b.setAttribute('aria-selected','false');b.addEventListener('click',function(){location.hash=b.dataset.tab})})});
+function showTab(step,tab){var t=$('[data-tabs="'+step+'"]');if(!t)return;curTab[step]=tab;$$('button',t).forEach(function(b){b.setAttribute('aria-selected',b.dataset.tab===tab?'true':'false')});$$('#s'+step+' .tp').forEach(function(p){p.hidden=p.dataset.tab!==tab});var a=$('button[data-tab="'+tab+'"]',t);if(a&&a.scrollIntoView)try{a.scrollIntoView({block:'nearest',inline:'nearest'})}catch(e){}}
+function show(step,tab,keepScroll){step=Math.min(5,Math.max(1,step));var changed=step!==cur;cur=step;
+  steps.forEach(function(s){s.hidden=+s.dataset.step!==step});
+  $$('.st').forEach(function(b){b.toggleAttribute('aria-current',false);if(+b.dataset.go===step)b.setAttribute('aria-current','step')});
+  if(tab)showTab(step,tab);else if(curTab[step])showTab(step,curTab[step]);
+  var p=step>1?'<a href="#s'+(step-1)+'"><small>Previous · 0'+(step-1)+'</small><span>'+TITLES[step-2]+'</span></a>':'<span></span>';
+  var n=step<5?'<a class="nx" href="#s'+(step+1)+'"><small>Next · 0'+(step+1)+'</small><span>'+TITLES[step]+'</span></a>':'';
+  $('#pager').innerHTML=p+n;
+  if(changed&&!keepScroll)window.scrollTo({top:0});
+  var st=$('.st[data-go="'+step+'"]');if(st&&window.innerWidth<=980)try{st.scrollIntoView({block:'nearest',inline:'center'})}catch(e){}
+  store('ctg-last',location.hash||'#s1');}
+function route(){var h=(location.hash||'').slice(1),m=h.match(/^s([1-5])(?:-([a-z]+))?$/);if(!m){show(cur);return}show(+m[1],m[2]?h:null)}
+$$('.st').forEach(function(b){b.addEventListener('click',function(){location.hash='s'+b.dataset.go})});
+$('#pill').addEventListener('click',function(){location.hash='s4'});
+window.addEventListener('hashchange',route);
+if(!location.hash){var last=store('ctg-last');if(last&&/^#s[1-5]/.test(last))history.replaceState(null,'',last)}
+route();
+
+/* ---------- theme ---------- */
+var root=document.documentElement,saved=store('ctg-theme');if(saved)root.setAttribute('data-theme',saved);
+$('#theme').addEventListener('click',function(){var dark=root.getAttribute('data-theme')?root.getAttribute('data-theme')==='dark':matchMedia('(prefers-color-scheme: dark)').matches;var n=dark?'light':'dark';root.setAttribute('data-theme',n);store('ctg-theme',n)});
+
+/* ---------- search ---------- */
+function labelOf(el){if(el.tagName==='TR')return $$('td',el).map(function(t){return t.textContent}).join(': ');
+  var fl=el.querySelector('.fl');if(fl)return fl.childNodes[0].textContent;
+  var pick=null;['.rt','.u','.pt','summary','.bt','.tx'].some(function(s){var q=el.querySelector(s);if(q){pick=q.textContent;return true}return false});
+  return pick||el.textContent}
+var IDX=$$('[data-find]').map(function(el){var s=el.closest('.step'),tp=el.closest('.tp');var label=labelOf(el).trim();
+  var where='0'+s.dataset.step+' '+TITLES[s.dataset.step-1]+(tp?' · '+$('button[data-tab="'+tp.dataset.tab+'"]').textContent:'');
+  return {el:el,step:+s.dataset.step,tab:tp?tp.dataset.tab:null,text:(el.getAttribute('data-find')+' '+el.textContent).replace(/\s+/g,' ').toLowerCase(),label:label.replace(/\s+/g,' '),where:where}});
+var pal=$('#pal'),pq=$('#pal-q'),pr=$('#pal-res'),hits=[],sel=0;
+function openPal(){pal.hidden=false;pq.value='';renderPal();pq.focus()}
+function closePal(){pal.hidden=true}
+function hl(t,q){if(!q)return esc(t);var i=t.toLowerCase().indexOf(q);return i<0?esc(t):esc(t.slice(0,i))+'<mark>'+esc(t.slice(i,i+q.length))+'</mark>'+esc(t.slice(i+q.length))}
+function renderPal(){var q=pq.value.toLowerCase().trim(),words=q.split(/\s+/).filter(Boolean);
+  hits=(q?IDX.filter(function(x){return words.every(function(w){return x.text.indexOf(w)>-1})}).sort(function(a,b){return (b.label.toLowerCase().indexOf(words[0])>-1)-(a.label.toLowerCase().indexOf(words[0])>-1)}):IDX.filter(function(x){return /must|^post name|banner|browse server|placeholder|justify/i.test(x.text)}).slice(0,8)).slice(0,40);sel=0;
+  pr.innerHTML=hits.length?hits.map(function(x,i){var t=x.label.length>140?x.label.slice(0,140)+'…':x.label;return '<button type="button" data-i="'+i+'" aria-selected="'+(i===0)+'"><span class="rt">'+hl(t,words[0]||'')+'</span><span class="rw">'+esc(x.where)+'</span></button>'}).join(''):'<div class="pal-empty">No rule matches. Try a field name, "banner", "800 px" or "Gist".</div>';
+  $$('button',pr).forEach(function(b){b.addEventListener('click',function(){go(+b.dataset.i)});b.addEventListener('mousemove',function(){mark(+b.dataset.i)})})}
+function mark(i){sel=i;$$('button',pr).forEach(function(b,j){b.setAttribute('aria-selected',j===i?'true':'false')});var b=$$('button',pr)[i];if(b)b.scrollIntoView({block:'nearest'})}
+function go(i){var x=hits[i];if(!x)return;closePal();location.hash=x.tab||('s'+x.step);setTimeout(function(){var d=x.el.closest('details');if(d)d.open=true;var blk=x.el.classList.contains('blk');if(blk)x.el.click();x.el.scrollIntoView({block:'center',behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'});x.el.classList.remove('flash');void x.el.offsetWidth;x.el.classList.add('flash')},60)}
+pq.addEventListener('input',renderPal);
+pq.addEventListener('keydown',function(e){if(e.key==='ArrowDown'){e.preventDefault();mark(Math.min(hits.length-1,sel+1))}else if(e.key==='ArrowUp'){e.preventDefault();mark(Math.max(0,sel-1))}else if(e.key==='Enter'){e.preventDefault();go(sel)}});
+$('#open-search').addEventListener('click',openPal);
+pal.addEventListener('click',function(e){if(e.target===pal)closePal()});
+document.addEventListener('keydown',function(e){var typing=/INPUT|TEXTAREA|SELECT/.test(document.activeElement.tagName);
+  if(e.key==='Escape'&&!pal.hidden){closePal();return}
+  if((e.key==='k'&&(e.metaKey||e.ctrlKey))||(e.key==='/'&&!typing&&pal.hidden)){e.preventDefault();openPal();return}
+  if(!typing&&pal.hidden&&!e.metaKey&&!e.ctrlKey&&!e.altKey){if(e.key==='ArrowRight'&&cur<5&&!document.activeElement.classList.contains('blk')){location.hash='s'+(cur+1)}else if(e.key==='ArrowLeft'&&cur>1&&!document.activeElement.classList.contains('blk')){location.hash='s'+(cur-1)}}});
 })();
 </script>
-</body>
-</html>
+
+</body></html>
