@@ -218,6 +218,40 @@ tr.h3 td.h::before{content:"↳ ";color:var(--muted)}
 .flow span.opt{border-style:dashed;color:var(--muted)}
 .flow i{font-style:normal;color:var(--muted)}
 
+/* credentials */
+.toc a.alert{color:var(--accent);font-weight:600}
+.step-head.alert{border-bottom-color:var(--accent)}
+.hero-alert{display:flex;gap:12px;align-items:center;margin-top:12px;padding:14px 18px;border-radius:8px;background:var(--accent);color:var(--accent-ink);text-decoration:none;font-size:15.5px}
+.hero-alert strong{font-weight:700}
+.hero-alert .go{margin-left:auto;font-family:"IBM Plex Mono",monospace;font-size:13px;white-space:nowrap}
+.secret-hero{display:grid;grid-template-columns:190px minmax(0,1fr);gap:22px;align-items:center;background:var(--accent-soft);border:1px solid var(--accent);border-radius:10px;padding:20px 22px}
+.stat .big{display:block;font:700 60px/1 "IBM Plex Mono",monospace;color:var(--accent)}
+.stat .cap{display:block;font-size:13.5px;margin-top:6px}
+.secret-lead{font-size:17px;margin:0}
+.ph{font-family:"IBM Plex Mono",monospace;font-size:12.5px;background:var(--chip);border:1px solid var(--line);border-radius:4px;padding:2px 6px;cursor:pointer;margin:2px 4px 2px 0;color:var(--ink);white-space:nowrap}
+.ph:hover{border-color:var(--accent)}
+.ph.ok{background:var(--ok-soft);border-color:var(--ok)}
+.leaks{list-style:none;padding:0;display:flex;flex-wrap:wrap;gap:6px;margin:10px 0 0}
+.leaks li{margin:0;background:var(--surface);border:1px solid var(--line);border-radius:99px;padding:5px 12px;font-size:14px}
+ol.do.red>li{border-color:var(--accent)}
+.tool textarea.code{font:13px/1.5 "IBM Plex Mono",monospace;min-height:150px}
+.scan-btn{background:var(--accent);color:#fff;border:0;border-radius:6px;padding:8px 16px;font-weight:600;cursor:pointer;margin-top:10px}
+#scan-out{margin-top:14px;font-size:14.5px}
+.finding{display:grid;grid-template-columns:64px minmax(0,1fr);gap:2px 10px;padding:8px 12px;border-left:3px solid var(--accent);background:var(--accent-soft);border-radius:0 6px 6px 0;margin-bottom:6px}
+.finding.warn{border-left-color:var(--muted);background:var(--surface-2)}
+.finding .ln{font-family:"IBM Plex Mono",monospace;font-size:12px;color:var(--muted);padding-top:2px}
+.finding code{font-size:12.5px}
+.scan-ok{color:var(--ok);font-weight:600}
+@media (max-width:720px){.secret-hero{grid-template-columns:1fr}.hero-alert{flex-wrap:wrap}.hero-alert .go{margin-left:0}}
+
+/* videos */
+.videos{display:grid;gap:22px;margin:22px 0 0}
+.videos figure{margin:0}
+.videos video{display:block;width:100%;height:auto;border-radius:8px;border:1px solid var(--line);background:#000}
+.videos figcaption{font-size:14px;color:var(--muted);margin-top:8px}
+.videos figcaption strong{color:var(--ink)}
+.videos .bad figcaption strong{color:var(--accent)}
+
 footer{border-top:1px solid var(--line);padding:24px;color:var(--muted);font-size:14px;text-align:left}
 footer .in{max-width:1120px;margin:0 auto}
 
@@ -271,6 +305,7 @@ footer .in{max-width:1120px;margin:0 auto}
       <div><span class="b must">MUST</span><br>Compulsory for every tutorial.</div>
       <div><span class="b should">SHOULD</span><br>Follow it where it applies; skip it if it doesn't fit the tutorial.</div>
     </div>
+    <a class="hero-alert" href="#secrets"><span><strong>Zero tolerance:</strong> never publish a real password, token or key, anywhere on a tutorial page.</span><span class="go">Read this first →</span></a>
   </div>
 </section>
 
@@ -278,10 +313,12 @@ footer .in{max-width:1120px;margin:0 auto}
   <nav class="toc" aria-label="Guide sections">
     <div class="label">On this page</div>
     <ol>
+      <li><a class="alert" href="#secrets"><span class="n">00</span>Credentials</a></li>
       <li><a href="#access"><span class="n">01</span>Get access</a></li>
       <li><a href="#fields"><span class="n">02</span>Fill the fields</a></li>
       <li><a href="#write"><span class="n">03</span>Write the tutorial</a></li>
       <li><a class="sub" href="#structure">Structure</a></li>
+      <li><a class="sub" href="#format">Formatting &amp; layout</a></li>
       <li><a class="sub" href="#intro">Introduction &amp; cover</a></li>
       <li><a class="sub" href="#components">Components &amp; links</a></li>
       <li><a class="sub" href="#code">Code &amp; versions</a></li>
@@ -295,6 +332,63 @@ footer .in{max-width:1120px;margin:0 auto}
   </nav>
 
   <main>
+    <!-- 00 -->
+    <section class="step" id="secrets">
+      <div class="step-head alert"><span class="num">00</span><h2>Credentials and secrets: zero tolerance</h2></div>
+      <div class="secret-hero">
+        <div class="stat"><span class="big">11</span><span class="cap">published tutorials found with a real Blynk token, Telegram bot token or Wi-Fi password (Q4 2026 quick scan, so far)</span></div>
+        <p class="secret-lead"><strong>Never publish a real password, token or key, anywhere on a tutorial page.</strong> This is the most serious rule in this guide. Anyone who copies one can take over that device, bot or account. Every rule in this section is <span class="b must">MUST</span>.</p>
+      </div>
+
+      <h3 class="sub">What counts, and the placeholder to use</h3>
+      <p>Write each credential as its placeholder in code, Gists, downloads and repos. Click a placeholder to copy it.</p>
+      <div class="tablewrap"><table>
+        <thead><tr><th>Type</th><th>Examples</th><th>Placeholder</th></tr></thead>
+        <tbody>
+          <tr><td class="h">Wi-Fi</td><td>Network name (SSID) and password</td><td><button class="ph" type="button">YOUR_WIFI_SSID</button><button class="ph" type="button">YOUR_WIFI_PASSWORD</button></td></tr>
+          <tr><td class="h">IoT platform</td><td>Blynk auth token, template ID and name; ThingSpeak write key; Adafruit IO key</td><td><button class="ph" type="button">YOUR_BLYNK_AUTH_TOKEN</button><button class="ph" type="button">YOUR_TEMPLATE_ID</button><button class="ph" type="button">YOUR_API_KEY</button></td></tr>
+          <tr><td class="h">Bots</td><td>Telegram bot token and chat ID</td><td><button class="ph" type="button">YOUR_TELEGRAM_BOT_TOKEN</button><button class="ph" type="button">YOUR_CHAT_ID</button></td></tr>
+          <tr><td class="h">Cloud and AI services</td><td>Firebase API key and database secret; OpenAI, Gemini or Google API keys</td><td><button class="ph" type="button">YOUR_API_KEY</button></td></tr>
+          <tr><td class="h">Logins</td><td>MQTT broker user and password, email or SMTP password, any account password</td><td><button class="ph" type="button">YOUR_MQTT_USER</button><button class="ph" type="button">YOUR_MQTT_PASSWORD</button></td></tr>
+          <tr><td class="h">Device keys</td><td>LoRaWAN AppKey, device certificates and private keys</td><td><button class="ph" type="button">YOUR_APP_KEY</button></td></tr>
+          <tr><td class="h">Personal details</td><td>Phone number, personal email, home address</td><td>Leave out, or blur in images</td></tr>
+        </tbody>
+      </table></div>
+
+      <h3 class="sub">Where they leak</h3>
+      <ul class="leaks">
+        <li>Gists (every old revision stays public)</li><li>Code typed into the page body</li><li>Serial Monitor screenshots</li><li>Blynk Console screenshots</li><li>BotFather chat screenshots</li><li>Browser address bar</li><li>Videos</li><li>ZIP and Google Drive downloads</li><li>GitHub repos</li>
+      </ul>
+
+      <h3 class="sub">Rules</h3>
+      <ol class="do red">
+        <li>Test with your own values on your own computer, then <strong>swap in placeholders before you copy the code anywhere</strong>. Never type a real value into the WebAdmin editor, a Gist or a repo, not even in a draft.</li>
+        <li>Put a comment beside each placeholder, for example <code>// Replace with your own Wi-Fi name</code>, and tell the reader to replace it in a Testing &amp; Validation step.</li>
+        <li>Use a bot, Blynk device or account made only for the tutorial, never a personal or Cytron office one.</li>
+        <li>Hide every credential before you save a screenshot or record a video: crop or blur the Serial Monitor, consoles, BotFather chat and the address bar (a Telegram API link contains the bot token).</li>
+        <li>Before submitting, search the body, every Gist and every download for <em>password, ssid, token, auth, key, secret, api</em> and <em>bot</em>. Check any long random string that is not a placeholder.</li>
+        <li>When the screenshots and video are done, <strong>revoke or regenerate the tokens you used</strong>.</li>
+        <li>If a real value was ever saved in a Gist or repo, deleting it is not enough: the old revision stays public. Revoke the credential and create a new Gist.</li>
+      </ol>
+
+      <div class="tool" id="scanner">
+        <h4>Credential check</h4>
+        <div class="sub-t">Paste your sketch or Gist code to look for real-looking passwords, tokens and keys. It runs in your browser only; nothing is sent or saved. It catches common patterns, so still read the code yourself.</div>
+        <label for="scan-in">Code</label>
+        <textarea id="scan-in" class="code" spellcheck="false" placeholder='const char* ssid = "YOUR_WIFI_SSID";&#10;const char* password = "YOUR_WIFI_PASSWORD";'></textarea>
+        <button class="scan-btn" id="scan-go" type="button">Check code</button>
+        <div id="scan-out" aria-live="polite"></div>
+      </div>
+
+      <h3 class="sub">If a real credential is already published</h3>
+      <ol class="do red">
+        <li><strong>Revoke or regenerate it the same day:</strong> /revoke in BotFather for a Telegram bot, Blynk Console for an auth token, the provider's console for an API key, or change the Wi-Fi password.</li>
+        <li><strong>Replace it with a placeholder everywhere it appears:</strong> WebAdmin body, Gist (a new one), repo, Drive file, screenshots and video.</li>
+        <li><strong>Tell your supervisor the same day.</strong> Name the page and where the credential sits, but never paste the value itself into chat, email, a report or a comment.</li>
+      </ol>
+      <div class="callout"><p>Removing the value without revoking it does not fix the leak: Gist revisions, Git history, search caches and readers who already copied it still hold it. <strong>Only revoking makes it useless.</strong></p></div>
+    </section>
+
     <!-- 01 -->
     <section class="step" id="access">
       <div class="step-head"><span class="num">01</span><h2>Get access and create the post</h2></div>
@@ -342,11 +436,10 @@ footer .in{max-width:1120px;margin:0 auto}
           <dl class="levels">
             <dt>Beginner</dt><dd>A microcontroller with 1 or 2 sensors, or basic Raspberry Pi functions</dd>
             <dt>Intermediate</dt><dd>2 or more sensors, or Raspberry Pi software projects</dd>
-            <dt>Advanced</dt><dd>AI projects, basic Industry</dd>
-            <dt>Expert</dt><dd>Complex AI, complex Industry</dd>
+            <dt>Advanced</dt><dd>AI or Industry projects</dd>
           </dl></div></div>
         <div class="field"><div class="fn">Status</div><div><strong>Enabled</strong> (public), <strong>Disabled</strong> (hidden), or <strong>Enabled but hide in catalog</strong> (unlisted, reachable by its SEO URL).</div></div>
-        <div class="field"><div class="fn">Sort Order</div><div>Set it to <strong>1</strong>, unless your supervisor makes a special request.</div></div>
+        <div class="field"><div class="fn">Sort Order</div><div>Set it to <strong>1</strong>. In a series, number the parts in order: 1, 2, 3 and so on. Use another number only when your supervisor asks.</div></div>
       </div>
 
       <div class="panel" id="p-links" role="tabpanel">
@@ -355,11 +448,11 @@ footer .in{max-width:1120px;margin:0 auto}
         <div class="field"><div class="fn">Store Name</div><div><strong>Tick every store first.</strong> Then untick a store only if a Related Product is not available there (for example, untick TH if a product isn't sold in the TH store).</div></div>
         <div class="field"><div class="fn">Parent</div><div>Only for a series: the main post (for example the series hub) that this part belongs to. Leave empty for a standalone tutorial.</div></div>
         <div class="field"><div class="fn">Related Post</div><div>Existing posts on the same topic.</div><div class="ex"><span>e.g.</span>Getting Started with Maker ESP32</div></div>
-        <div class="field"><div class="fn">Related Product</div><div>Every item from List of Components. Use the <strong>variation product code</strong> (the parent product with options) rather than a single product code where one exists. This fills the Hardware Components block below the body.</div></div>
+        <div class="field"><div class="fn">Related Product</div><div>Exactly the items in List of Components, no more and no less (a kit tutorial attaches the kit, not its parts). Use the <strong>variation product code</strong> (the parent product with options) rather than a single product code where one exists. This fills the Hardware Components block below the body.</div></div>
       </div>
 
       <div class="panel" id="p-image" role="tabpanel">
-        <div class="field"><div class="fn">Image<small>thumbnail</small></div><div><strong>16:9</strong>, preferably 1280 × 720, about 300 KB (1 MB at most), title in the image, a clear hardware photo and/or output.</div></div>
+        <div class="field"><div class="fn">Image<small>thumbnail</small></div><div><strong>16:9</strong>, preferably 1280 × 720, about 300 KB (1 MB at most), title in the image, a clear hardware photo and/or output. <span class="b should">SHOULD</span> minimalist colours, the Cytron logo, real and clear photos of the parts used (nothing cut off by background removal); a kit tutorial shows the kit. Every part of a series has its own thumbnail.</div></div>
       </div>
 
       <div class="tool" id="checker">
@@ -396,13 +489,13 @@ footer .in{max-width:1120px;margin:0 auto}
       <h3 class="sub" id="structure"><span class="n">3.1</span>Required structure</h3>
       <p>Every tutorial uses these headings, in this order, worded exactly as shown. The page title is set in Post Name and never repeated in the body, so the body starts at H2. No H1 in the body, no empty headings.</p>
       <ol class="ladder">
-        <li><span class="k">01</span><span class="hd">Introduction<span class="lvl">H2</span></span><span class="b must">MUST</span><span class="what">2 to 4 sentences: what the reader builds and why it matters for Education or Industry use. Open with the reader's problem. Optional hero image or 30 to 60 s video teaser after the paragraph.</span></li>
+        <li><span class="k">01</span><span class="hd">Introduction<span class="lvl">H2</span></span><span class="b must">MUST</span><span class="what">2 to 4 sentences: what the reader builds and why it matters for Education or Industry use. Open with the reader's problem. Right after the paragraph, put the video tutorial if there is one, or an optional hero image.</span></li>
         <li><span class="k">02</span><span class="hd">Disclaimer / Safety Notes<span class="lvl">H2</span></span><span class="b opt">IF APPLICABLE</span><span class="what">Electrical, battery or heat cautions, warranty notes, classroom supervision. See <a href="#safety">Safety notes</a>.</span></li>
         <li><span class="k">03</span><span class="hd">Prerequisites<span class="lvl">H2</span></span><span class="b must">MUST</span><span class="what">Link the Getting Started guides or basics to finish first. Name the software, accounts, firmware or SDKs to install.</span></li>
         <li><span class="k">04</span><span class="hd">Objectives<span class="lvl">H2</span></span><span class="b must">MUST</span><span class="what">One paragraph only.</span></li>
-        <li><span class="k">05</span><span class="hd">List of Components<span class="lvl">H2</span></span><span class="b must">MUST</span><span class="what">Numbered list, <code>[Product name] x1</code>, name linked, opens in a new window. See <a href="#components">Components &amp; links</a>.</span></li>
+        <li><span class="k">05</span><span class="hd">List of Components<span class="lvl">H2</span></span><span class="b must">MUST</span><span class="what">Numbered list, <code>[Product name] x1</code>, name linked, opens in a new window. Name and link only, no product pictures. See <a href="#components">Components &amp; links</a>.</span></li>
         <li><span class="k">06</span><span class="hd">System Diagram &amp; Wiring<span class="lvl">H2</span></span><span class="b must">MUST</span><span class="what">A block or circuit diagram (Canva, Fritzing) at its native aspect ratio, plus a pin-to-pin wiring table: [Board], [Module], Function. Add a <strong>Note:</strong> for mounting tips or other ways to connect.</span></li>
-        <li><span class="k">07</span><span class="hd">Software Setup<span class="lvl">H2</span></span><span class="b must">MUST</span><span class="what">IDE or toolchain version, library names with install steps, board and port selection. Screenshots encouraged.</span></li>
+        <li><span class="k">07</span><span class="hd">Software Setup<span class="lvl">H2</span></span><span class="b must">MUST</span><span class="what">IDE or toolchain version, library names with install steps, board and port selection. Link the official download or documentation page of every software. Screenshots encouraged.</span></li>
         <li class="h3"><span class="k">07a</span><span class="hd">Install [Library name] Library<span class="lvl">H3</span></span><span class="b opt">IF A LIBRARY</span><span class="what">Numbered Library Manager steps, including the "Install All" dependency prompt.</span></li>
         <li><span class="k">08</span><span class="hd">Sample Code<span class="lvl">H2</span></span><span class="b must">MUST</span><span class="what">"Upload the following sketch to your Maker ESP32:" then a public GitHub Gist embed.</span></li>
         <li class="h3"><span class="k">08a</span><span class="hd">Key Code Explanation<span class="lvl">H3</span></span><span class="b must">MUST</span><span class="what">Brief explanation of the key blocks: one bullet per line, <code>code</code>: what it does.</span></li>
@@ -410,8 +503,9 @@ footer .in{max-width:1120px;margin:0 auto}
         <li class="h3"><span class="k">09a</span><span class="hd">Expected Results<span class="lvl">H3</span></span><span class="b must">MUST</span><span class="what">Expected outputs: Serial Monitor lines, LEDs, sounds, browser view.</span></li>
         <li><span class="k">10</span><span class="hd">Demo / Results<span class="lvl">H2</span></span><span class="b must">MUST</span><span class="what">Photos or a YouTube embed of the working project, and screenshots of dashboards or the Serial Monitor.</span></li>
         <li><span class="k">11</span><span class="hd">Troubleshooting &amp; Extra Tips<span class="lvl">H2</span></span><span class="b must">MUST</span><span class="what">3 to 4 H3s, each a symptom as the reader sees it, with bullet fixes: power, baud rate, library conflicts, sensor orientation, calibration.</span></li>
-        <li><span class="k">12</span><span class="hd">Downloads &amp; Assets<span class="lvl">H2</span></span><span class="b opt">IF APPLICABLE</span><span class="what">ZIP of diagrams or configs, repo links, datasets, example flows, STL or 3D files.</span></li>
-        <li class="end"><span class="k">13</span><span class="hd">Telegram community banner<span class="lvl">no heading</span></span><span class="b must">MUST</span><span class="what">One banner at the very end, linked to the matching community. See <a href="#telegram">Telegram banner</a>.</span></li>
+        <li><span class="k">12</span><span class="hd">Conclusion<span class="lvl">H2</span></span><span class="b must">MUST</span><span class="what">2 to 3 sentences: what the reader built and learned, the final result, and what to try next (link a related tutorial).</span></li>
+        <li><span class="k">13</span><span class="hd">Downloads &amp; Assets<span class="lvl">H2</span></span><span class="b opt">IF APPLICABLE</span><span class="what">ZIP of diagrams or configs, repo links, datasets, example flows, STL or 3D files.</span></li>
+        <li class="end"><span class="k">14</span><span class="hd">Telegram community banner<span class="lvl">no heading</span></span><span class="b must">MUST</span><span class="what">One banner at the very end, centred, 900 px wide, linked to the matching community. See <a href="#telegram">Telegram banner</a>.</span></li>
       </ol>
       <p class="note">The Hardware Components block and Related Posts below the body come from the Related Product, Parent and Related Post fields in the Links tab, not from the body.</p>
 
@@ -422,19 +516,38 @@ footer .in{max-width:1120px;margin:0 auto}
         <pre id="skeleton"></pre>
       </div>
 
-      <h3 class="sub" id="intro"><span class="n">3.2</span>Introduction and cover image</h3>
+      <h3 class="sub" id="format"><span class="n">3.2</span>Formatting and layout</h3>
+      <p>Most review comments are about how the page looks, not what it says. Every rule here is <span class="b must">MUST</span>: check each one in the editor, then again on the live page after publishing.</p>
+      <div class="tablewrap"><table>
+        <thead><tr><th>Area</th><th>Rule</th></tr></thead>
+        <tbody>
+          <tr><td class="h">Alignment</td><td><strong>Justify</strong> every paragraph, the Introduction included.</td></tr>
+          <tr><td class="h">Font</td><td>The editor's default font and size only. Never set another font or sizes such as 16 or 20. Copying from Word, Google Docs, ChatGPT or a website? Use <strong>Paste as plain text</strong> so the old formatting doesn't come along.</td></tr>
+          <tr><td class="h">Headings</td><td>Every section title is a <strong>Heading 2</strong>; sub-titles inside it are Heading 3. Never use bold text as a heading, and don't bold a heading (it is already bold), Troubleshooting H3s included. Title case, not capitals: "Introduction", not "INTRODUCTION".</td></tr>
+          <tr><td class="h">Start of the body</td><td>Start straight with the Introduction heading: no page title, horizontal line or picture before it. Prerequisites gets its own Heading 2, separate from the Introduction.</td></tr>
+          <tr><td class="h">Spacing</td><td><strong>One empty line</strong> between paragraphs, between text and a picture, between two pictures, and between code and a picture. Nothing touches or overlaps.</td></tr>
+          <tr><td class="h">Pictures</td><td>Insert through <strong>Browse Server</strong> only, saved as PNG or JPEG. Never paste a picture copied from Google Docs, Word or a website: it keeps an outside link (such as googleusercontent.com) and breaks into a red X. <strong>800 px wide at most</strong>: resize wider pictures with the ratio lock on, and never enlarge narrower ones. No stretched or blurred pictures. No picture of code that is already on the page as text.</td></tr>
+          <tr><td class="h">Links</td><td>Every link opens in <strong>New Window (_blank)</strong>.</td></tr>
+          <tr><td class="h">Banner</td><td>One Telegram banner at the very end: <strong>centred, 900 px wide</strong>, linked to its community in a New Window (_blank). Steps in <a href="#editor">Editor how-tos</a>.</td></tr>
+          <tr><td class="h">Length</td><td>If the tutorial is too long, split it into a series: set Parent in the Links tab and number the parts in Sort Order.</td></tr>
+        </tbody>
+      </table></div>
+
+      <h3 class="sub" id="intro"><span class="n">3.3</span>Introduction and cover image</h3>
       <p>A reader decides from the first paragraph whether this tutorial solves their problem, so the introduction names the problem and the Cytron board.</p>
       <ul class="rules">
         <li><span><span class="b must">MUST</span></span><div>2 to 4 sentences: what the reader builds and why it matters.</div></li>
         <li><span><span class="b should">SHOULD</span></span><div>Open with the reader's problem, not "In this tutorial…".<span class="why">e.g. "Overheating equipment in server cabinets… can lead to permanent hardware damage."</span></div></li>
         <li><span><span class="b must">MUST</span></span><div>Name the Maker ESP32 and the main part, and link the Maker ESP32 at its first mention.</div></li>
-        <li><span><span class="b opt">OPTIONAL</span></span><div>A hero image or 30 to 60 s video teaser directly after the paragraph.</div></li>
+        <li><span><span class="b must">MUST</span></span><div>Link anything the reader may want to learn more about, such as MediaPipe or ROS 2, to its official page.</div></li>
+        <li><span><span class="b must">MUST</span></span><div>Put the <strong>video tutorial</strong>, if there is one, directly after the paragraph, before the next section. Otherwise an optional hero image can go there.</div></li>
         <li><span><span class="b must">MUST</span></span><div><strong>Cover image:</strong> a real photo of the finished build with the Cytron board clearly visible. No stock photos. Landscape, named after the SEO URL (e.g. <code>esp32-digital-clock.png</code>). It shows above the page title and as the listing thumbnail.</div></li>
         <li><span><span class="b must">MUST</span></span><div>Blur any tokens, passwords or personal details that appear on screen.</div></li>
-        <li><span><span class="b must">MUST</span></span><div>Check grammar and spelling (for example with Grammarly) before submitting.</div></li>
+        <li><span><span class="b must">MUST</span></span><div>Use full product names: "Raspberry Pi 5", not "Pi 5". Check grammar and spelling across the whole tutorial (for example with Grammarly) before submitting.</div></li>
+        <li><span><span class="b must">MUST</span></span><div>Read the whole tutorial back as a beginner would. If it is hard to read, simplify it. If it is too long, split it into a series.</div></li>
       </ul>
 
-      <h3 class="sub" id="components"><span class="n">3.3</span>List of Components and product links</h3>
+      <h3 class="sub" id="components"><span class="n">3.4</span>List of Components and product links</h3>
       <p>Every item Cytron sells links to its live product page, so the reader can buy the exact parts the tutorial was tested with.</p>
       <ul class="rules">
         <li><span><span class="b must">MUST</span></span><div>One numbered list, one line per item: <code>[Product name] x1</code>.<span class="why">e.g. "Grove to JST-SH (Qwiic) Cable - 20cm x1"</span></div></li>
@@ -446,40 +559,45 @@ footer .in{max-width:1120px;margin:0 auto}
         <li><span><span class="b must">MUST</span></span><div>Note regional alternatives when a product differs between the stores ticked in Store Name.</div></li>
         <li><span><span class="b must">MUST</span></span><div>No prices, discounts or stock levels in the body text.<span class="why">The Hardware Components block shows live prices and stock.</span></div></li>
         <li><span><span class="b must">MUST</span></span><div>Attach every listed item in Related Product.<span class="why">This fills the Hardware Components block with Add to Cart.</span></div></li>
+        <li><span><span class="b must">MUST</span></span><div><strong>Name and link only:</strong> no product pictures in the list.<span class="why">The Hardware Components block below the body already shows the pictures.</span></div></li>
+        <li><span><span class="b must">MUST</span></span><div>A tutorial built on a <strong>training kit</strong> lists the kit, not each part in it.<span class="why">Related Product and the thumbnail show the kit too.</span></div></li>
+        <li><span><span class="b must">MUST</span></span><div>List every item the build uses, cameras and cables included, and nothing it doesn't use.<span class="why">List of Components and Related Product must match exactly.</span></div></li>
+        <li><span><span class="b must">MUST</span></span><div>Link a product even when the Malaysia store doesn't sell it.<span class="why">Readers on other Cytron stores, such as SG, can still buy it.</span></div></li>
+        <li><span><span class="b must">MUST</span></span><div>Link a product wherever it is named, in the Introduction and other sections too.</div></li>
         <li><span><span class="b must">MUST</span></span><div>Items Cytron does not sell get a generic name and no link to another store.<span class="why">e.g. "Female-to-female jumper wires"</span></div></li>
         <li><span><span class="b must">MUST</span></span><div>No new tutorials on discontinued products. In a revamp, name the product that replaces it.<span class="why">e.g. NodeMCU-32S replaced by Maker ESP32.</span></div></li>
         <li><span><span class="b must">MUST</span></span><div>Open every product link, on each ticked store, before submitting.<span class="why">A dead product link is a lost sale.</span></div></li>
         <li><span><span class="b must">MUST</span></span><div>3D files, PCB files and downloads live on Cytron-owned storage, linked under Downloads &amp; Assets. Never a personal Google Drive or GitHub account.</div></li>
       </ul>
 
-      <h3 class="sub" id="code"><span class="n">3.4</span>Code, versions and setup</h3>
+      <h3 class="sub" id="code"><span class="n">3.5</span>Code, versions and setup</h3>
       <p>A reader must be able to rebuild the project months later, so tested versions are named and every file lives where Cytron controls it.</p>
       <ul class="rules">
-        <li><span><span class="b must">MUST</span></span><div><strong>Long code: a public GitHub Gist from the shared Cytron team account</strong>, never a personal account, so the code survives staff changes. Ask your supervisor for access.</div></li>
+        <li><span><span class="b must">MUST</span></span><div><strong>Long code: a public GitHub Gist.</strong> Staff use their own GitHub account. Interns use the intern GitHub account; ask your supervisor for access, and Mat Liven for the authentication code. Never use the account of someone outside Cytron.</div></li>
         <li><span><span class="b must">MUST</span></span><div><strong>Short command lines:</strong> the editor's Computer Code style. Use Shift+Enter for a new line, or each line lands in its own box.</div></li>
         <li><span><span class="b must">MUST</span></span><div><strong>State the IDE or toolchain version</strong> and the board package, e.g. "esp32 by Espressif Systems 3.3.12". Library versions <span class="b should">SHOULD</span> be named too.<span class="why">An unpinned core caused <code>ledcAttach</code> compile errors for readers on core 2.x.</span></div></li>
         <li><span><span class="b should">SHOULD</span></span><div>Open the sketch with a header comment: project, board (Cytron Maker ESP32) and main module.</div></li>
-        <li><span><span class="b must">MUST</span></span><div><strong>Placeholders, never real credentials:</strong> <code>YOUR_WIFI_SSID</code>, <code>YOUR_WIFI_PASSWORD</code>. Tell the reader to replace them in a Testing &amp; Validation step.</div></li>
+        <li><span><span class="b must">MUST</span></span><div><strong>Placeholders, never real credentials:</strong> <code>YOUR_WIFI_SSID</code>, <code>YOUR_WIFI_PASSWORD</code>. Tell the reader to replace them in a Testing &amp; Validation step. Full rules in <a href="#secrets">Credentials</a>.</div></li>
         <li><span><span class="b must">MUST</span></span><div><strong>Code is text, never a screenshot.</strong> Terminal and Serial Monitor output can be a screen capture under Demo / Results.</div></li>
         <li><span><span class="b should">SHOULD</span></span><div>Name built-in libraries: when <code>WiFi.h</code> or <code>WebServer.h</code> need no install, say so in Software Setup.</div></li>
         <li><span><span class="b must">MUST</span></span><div><strong>Quote error messages literally</strong> as the Troubleshooting H3.<span class="why">e.g. Serial Monitor shows "Failed to read from DHT sensor!"</span></div></li>
         <li><span><span class="b must">MUST</span></span><div><strong>Proofread and test it yourself:</strong> follow your own tutorial on a clean setup before submitting. Peer review is recommended.</div></li>
       </ul>
 
-      <h3 class="sub" id="media"><span class="n">3.5</span>Links, images and media</h3>
+      <h3 class="sub" id="media"><span class="n">3.6</span>Links, images and media</h3>
       <ul class="rules">
         <li><span><span class="b must">MUST</span></span><div><strong>Internal links:</strong> SEO URL only, never <code>index.php?route=eblog/epost…</code> URLs. Always link the Getting Started prerequisite.</div></li>
         <li><span><span class="b must">MUST</span></span><div><strong>External links:</strong> official docs only, New Window (_blank). Datasheets as a PDF on <code>static.cytron.io</code> or a Google Docs <code>/preview</code> link, never <code>/edit</code>.</div></li>
         <li><span><span class="b must">MUST</span></span><div><strong>A graphic per step:</strong> a screen capture, schematic or hardware assembly photo wherever a step needs one.<span class="why">A beginner follows a picture more easily than a paragraph.</span></div></li>
-        <li><span><span class="b must">MUST</span></span><div><strong>Inline images:</strong> wider than 800 px, about 300 KB (1 MB at most), clear. Set width to 800 px in Image Properties. Never upscale a smaller image; never distort the ratio.<span class="why">Edit in the team Canva; download as PNG limited to 300 KB.</span></div></li>
+        <li><span><span class="b must">MUST</span></span><div><strong>Inline images:</strong> 800 px wide at most, about 300 KB (1 MB at most), clear. A wider picture: set the width to 800 px with the ratio lock on. A narrower picture: leave it at its original size, never enlarge it. Never stretch a picture; replace blurred ones.<span class="why">Edit in the team Canva; download as PNG limited to 300 KB.</span></div></li>
         <li><span><span class="b must">MUST</span></span><div><strong>Diagrams and assembly photos:</strong> every connection clearly visible, labelled where needed.</div></li>
-        <li><span><span class="b must">MUST</span></span><div><strong>Uploading:</strong> Browse Server, then upload into the folder named after the SEO URL.</div></li>
+        <li><span><span class="b must">MUST</span></span><div><strong>Uploading:</strong> every picture through Browse Server only. Save it as PNG or JPEG, upload it into the folder named after the SEO URL and insert it from there. Never link or paste a picture from another website, Google Docs or Word.<span class="why">A picture linked from elsewhere is a common reason pictures disappear. <a href="#videos">Watch what happens</a>.</span></div></li>
         <li><span><span class="b must">MUST</span></span><div><strong>Image file names:</strong> lowercase, hyphenated, starting with the project name.<span class="why"><code>esp32-water-tank-dashboard.png</code>, not <code>screenshot-2025-06-04-164317.png</code></span></div></li>
         <li><span><span class="b must">MUST</span></span><div><strong>Alt text</strong> on every image, screenshots included: 5 to 15 words saying what it shows.<span class="why">e.g. "Water tank web dashboard showing 75% level on a phone"</span></div></li>
         <li><span><span class="b must">MUST</span></span><div><strong>YouTube:</strong> Share &gt; Embed, tick Start at if needed, paste with the editor's Embedded YouTube Video button.</div></li>
       </ul>
 
-      <h3 class="sub" id="safety"><span class="n">3.6</span>Safety notes and disclaimers</h3>
+      <h3 class="sub" id="safety"><span class="n">3.7</span>Safety notes and disclaimers</h3>
       <p>Add the <strong>Disclaimer / Safety Notes</strong> section directly after the Introduction when any trigger below applies. Including it even for low-risk builds is good practice. Open with <em>"This project is an educational prototype designed for learning…"</em>, then name the concrete risk and the precaution. A generic "be careful" does not count.</p>
       <div class="tablewrap"><table>
         <thead><tr><th>Trigger</th><th>What the note must say</th></tr></thead>
@@ -491,12 +609,12 @@ footer .in{max-width:1120px;margin:0 auto}
           <tr><td class="h">Food, pets or people</td><td>Food-grade materials for food contact; someone checks in person if the device fails.</td></tr>
           <tr><td class="h">Alarms, gas, fire, temperature, medical</td><td>"Educational prototype, not a certified safety device."</td></tr>
           <tr><td class="h">5 V sensors on 3.3 V pins</td><td>Use a level shifter or divider; state the pin voltage.</td></tr>
-          <tr><td class="h">Passwords, bot tokens, API keys</td><td>Keep them private; never publish code containing real credentials.</td></tr>
+          <tr><td class="h">Passwords, bot tokens, API keys</td><td>Keep them private; never publish code containing real credentials (see <a href="#secrets">Credentials</a>).</td></tr>
         </tbody>
       </table></div>
       <p class="note">Also add warranty notes where a build could void one (modifying a board, overdriving a motor), and state that adult supervision is required when the tutorial is meant for classroom use.</p>
 
-      <h3 class="sub" id="telegram"><span class="n">3.7</span>Telegram community banner</h3>
+      <h3 class="sub" id="telegram"><span class="n">3.8</span>Telegram community banner</h3>
       <p>Download the banner from the <a href="https://drive.google.com/drive/folders/186p2woTflBfHwUBpQwDWdBDOdYqAaUaE" target="_blank" rel="noopener">Community Banner folder</a>, place it at the very end of the body, and link the image to its community in a New Window (_blank). All channels are also listed on <a href="https://my.cytron.io/cytrons-telegram-channel" target="_blank" rel="noopener">Cytron's Telegram Channel page</a>.</p>
       <div class="callout"><p><strong>Pick by the main board, not the sensor.</strong> A Maker ESP32 tutorial gets ESP Makers Malaysia even if it uses an Arduino library. Use Maker Gathering only when no product community fits. If a community has no banner yet, ask for one before publishing.</p></div>
       <label class="mono" for="tg-q" style="font-size:13px;color:var(--muted)">Find your community</label>
@@ -504,7 +622,7 @@ footer .in{max-width:1120px;margin:0 auto}
       <ul class="tg" id="tg-list"></ul>
       <div class="tg-empty" id="tg-empty">No match. Use <strong>Maker Gathering</strong> for general maker projects.</div>
 
-      <h3 class="sub" id="editor"><span class="n">3.8</span>Editor how-tos</h3>
+      <h3 class="sub" id="editor"><span class="n">3.9</span>Editor how-tos</h3>
       <p>The WebAdmin editor steps for everything above.</p>
       <div class="howto">
         <details open><summary>Add a link</summary><div><ol>
@@ -514,25 +632,38 @@ footer .in{max-width:1120px;margin:0 auto}
           <li>In the Target tab, choose New Window (_blank), then click OK.</li>
         </ol></div></details>
         <details open><summary>Add an image</summary><div><ol>
-          <li>Click the Image button, then Browse Server.</li>
-          <li>Open the folder named after your SEO URL, click Upload, then click your file to insert it.</li>
-          <li>In Image Properties, set the width to 800 px and unlock it.</li>
+          <li>Save the picture on your computer as PNG or JPEG first.</li>
+          <li>Click the Image button. In Image Properties, click Browse Server.</li>
+          <li>The S3 Image Manager opens on your folder, <code>tutorial/your-seo-url</code>. Click the blue Upload button, choose your file and wait for "Success: Your file has been uploaded!".</li>
+          <li>Click the picture in the folder to insert it.</li>
+          <li>In Image Properties, keep the ratio lock on and set the width to 800 px if the picture is wider than that. Leave a narrower picture at its original size. Click OK.</li>
           <li>Edit images and thumbnails in the team Canva account (ask Ms. Hamimah, Mr. Solehin or Ms. Iffah for the login code). Save designs in Projects &gt; 2025 Trainees &gt; your own folder, and download as PNG limited to 300 KB.</li>
         </ol></div></details>
         <details><summary>Add code</summary><div><ol>
           <li>A few command lines: use the editor's Computer Code format style. Press Shift+Enter for a new line.</li>
-          <li>Longer code: log in to the team GitHub account (ask your supervisor for access), create a Public Gist with a title and file name, and copy the embed code.</li>
+          <li>Longer code: log in to GitHub (staff: your own account; interns: the intern account, ask your supervisor for access), create a Public Gist with a title and file name, and copy the embed code.</li>
           <li>Click Source in the editor and paste the embed code where the code belongs.</li>
         </ol></div></details>
         <details><summary>Embed a YouTube video</summary><div><ol>
           <li>On YouTube, click Share &gt; Embed. Tick Start at if the video should start part-way. Copy the code.</li>
           <li>In the editor, click the Embedded YouTube Video button, paste the code and click OK.</li>
         </ol></div></details>
-        <details><summary>Add the Telegram banner</summary><div><ol>
-          <li>Download the right banner from the Community Banner folder (see <a href="#telegram">3.7</a>).</li>
-          <li>Insert it as an image at the end of the body.</li>
-          <li>Link the image to its community, New Window (_blank).</li>
+        <details open><summary>Add the Telegram banner</summary><div><ol>
+          <li>Download the right banner from the Community Banner folder (see <a href="#telegram">3.8</a>).</li>
+          <li>Put the cursor on an empty line at the very end of the body and click Align Center.</li>
+          <li>Click the Image button, then Browse Server. Upload the banner into your SEO URL folder and click it to insert it.</li>
+          <li>In Image Properties, set the width to 900 px with the ratio lock on.</li>
+          <li>In the Link tab, paste the community's Telegram link.</li>
+          <li>In the Target tab, choose New Window (_blank), then click OK.</li>
+          <li>Save, open the page and click the banner to check it opens the right group.</li>
         </ol></div></details>
+      </div>
+
+      <h4 id="videos">Watch how it's done</h4>
+      <div class="videos">
+        <figure><video controls playsinline preload="none" poster="videos/upload-image-browse-server.jpg"><source src="videos/upload-image-browse-server.webm" type="video/webm"><source src="videos/upload-image-browse-server.mp4" type="video/mp4"></video><figcaption><strong>Upload a picture through Browse Server</strong> (30 s): Image button, Browse Server, Upload into the tutorial folder, then insert.</figcaption></figure>
+        <figure><video controls playsinline preload="none" poster="videos/insert-telegram-banner.jpg"><source src="videos/insert-telegram-banner.webm" type="video/webm"><source src="videos/insert-telegram-banner.mp4" type="video/mp4"></video><figcaption><strong>Insert the Telegram banner</strong> (28 s): centre, Browse Server, width 900 px, Link tab, New Window (_blank).</figcaption></figure>
+        <figure class="bad"><video controls playsinline preload="none" poster="videos/broken-outside-image.jpg"><source src="videos/broken-outside-image.webm" type="video/webm"><source src="videos/broken-outside-image.mp4" type="video/mp4"></video><figcaption><strong>What goes wrong:</strong> a picture pasted from Google Docs keeps a googleusercontent.com link and breaks into a red X (15 s).</figcaption></figure>
       </div>
     </section>
 
@@ -556,17 +687,17 @@ footer .in{max-width:1120px;margin:0 auto}
 <footer><div class="in">Cytron tutorial writing guide · for staff and interns. Questions about a rule? Ask your supervisor.</div></footer>
 
 <script type="text/plain" id="skeleton-src"><h2>Introduction</h2>
-<p>[The reader's problem.] In this project, you will build [project] using the <a href="/p-maker-esp32" target="_blank">Maker ESP32</a> and [main part]. [Why it matters.]</p>
-<!-- IMAGE: optional hero photo or 30-60 s video teaser -->
+<p style="text-align: justify;">[The reader's problem.] In this project, you will build [project] using the <a href="/p-maker-esp32" target="_blank">Maker ESP32</a> and [main part]. [Why it matters.]</p>
+<!-- VIDEO TUTORIAL (if there is one) or optional hero IMAGE -->
 
 <h2>Disclaimer / Safety Notes</h2>
-<p>This project is an educational prototype designed for learning and experimentation. [Concrete risk and precaution for this build.]</p>
+<p style="text-align: justify;">This project is an educational prototype designed for learning and experimentation. [Concrete risk and precaution for this build.]</p>
 
 <h2>Prerequisites</h2>
-<p>Before starting, make sure your Maker ESP32 is ready to program. If this is your first time using the board, follow the <a href="/tutorial/getting-started-with-maker-esp32" target="_blank">Maker ESP32 Getting Started guide</a> first.</p>
+<p style="text-align: justify;">Before starting, make sure your Maker ESP32 is ready to program. If this is your first time using the board, follow the <a href="/tutorial/getting-started-with-maker-esp32" target="_blank">Maker ESP32 Getting Started guide</a> first.</p>
 
 <h2>Objectives</h2>
-<p>[One paragraph.]</p>
+<p style="text-align: justify;">[One paragraph.]</p>
 
 <h2>List of Components</h2>
 <ol>
@@ -575,15 +706,15 @@ footer .in{max-width:1120px;margin:0 auto}
 </ol>
 
 <h2>System Diagram &amp; Wiring</h2>
-<!-- IMAGE: labelled block or circuit diagram, native aspect ratio -->
+<!-- IMAGE: labelled block or circuit diagram, native aspect ratio, 800 px wide at most -->
 <table>
   <tr><th>Maker ESP32</th><th>[Module]</th><th>Function</th></tr>
   <tr><td>[GPIO]</td><td>[Pin]</td><td>[Function]</td></tr>
 </table>
-<p><strong>Note:</strong> [Mounting tip or other way to connect.]</p>
+<p style="text-align: justify;"><strong>Note:</strong> [Mounting tip or other way to connect.]</p>
 
 <h2>Software Setup</h2>
-<p>[IDE and version, board package and version, board and port selection.]</p>
+<p style="text-align: justify;">[IDE and version, board package and version, board and port selection, link to the official download page.]</p>
 <h3>Install [Library name] Library</h3>
 <ol>
   <li>Open the Arduino IDE.</li>
@@ -593,7 +724,7 @@ footer .in{max-width:1120px;margin:0 auto}
 </ol>
 
 <h2>Sample Code</h2>
-<p>Upload the following sketch to your Maker ESP32:</p>
+<p style="text-align: justify;">Upload the following sketch to your Maker ESP32:</p>
 <!-- GIST: paste the public Gist embed code here -->
 <h3>Key Code Explanation</h3>
 <ul>
@@ -618,12 +749,16 @@ footer .in{max-width:1120px;margin:0 auto}
   <li>[Fix]</li>
 </ul>
 
+<h2>Conclusion</h2>
+<p style="text-align: justify;">[What the reader built and learned, the final result, and what to try next.]</p>
+
 <h2>Downloads &amp; Assets</h2>
 <ul>
   <li><a href="[link]" target="_blank">[File or repo]</a></li>
 </ul>
 
-<!-- TELEGRAM: community banner image, linked to the community, New Window (_blank) --></script>
+<!-- TELEGRAM BANNER: inserted through Browse Server, 900 px wide, centred -->
+<p style="text-align: center;"><a href="[community Telegram link]" target="_blank"><img alt="[Community] Telegram group banner" src="[banner from Browse Server]" style="width: 900px;" /></a></p></script>
 
 <script>
 (function(){
@@ -743,6 +878,13 @@ footer .in{max-width:1120px;margin:0 auto}
 
   // Checklist
   var GROUPS = [
+    ['Credentials (any miss stops publishing)', [
+      'Every credential in the body, Gists, downloads and repos is a placeholder from the Credentials table',
+      'Body, Gists and downloads searched for password, ssid, token, auth, key, secret, api and bot: no real value found',
+      'No credential visible in any screenshot, GIF or video (Serial Monitor, consoles, BotFather, address bar)',
+      'No Gist or repo revision ever held a real value, or that value has been revoked',
+      'Tokens used for screenshots and video revoked or regenerated'
+    ]],
     ['Structure', [
       'Every MUST heading present, in the order and wording of the structure',
       'Disclaimer / Safety Notes and Downloads & Assets included where they apply',
@@ -755,6 +897,17 @@ footer .in{max-width:1120px;margin:0 auto}
       'One Telegram banner at the end, linked to the matching community',
       'No empty headings or leftover placeholders'
     ]],
+    ['Formatting and layout', [
+      'Every paragraph justified; default font and size; copied text pasted as plain text',
+      'Section titles Heading 2, sub-titles Heading 3; no bold on headings; no headings in capitals',
+      'Body starts with the Introduction heading: no title, line or picture before it',
+      'One empty line between paragraphs, pictures and code; nothing overlaps',
+      'Every picture inserted through Browse Server as PNG or JPEG, 800 px wide at most, not enlarged, not stretched, not blurred',
+      'No picture of code that is already on the page as text',
+      'Telegram banner centred, 900 px wide, linked to the right group, New Window (_blank)',
+      'Conclusion at the end; video tutorial (if any) right after the Introduction',
+      'Read back as a beginner: easy to read, split into parts if too long'
+    ]],
     ['Title and intro', [
       'Post Name short and clear, 60 characters or fewer, no numbers unless required, not repeated in the body',
       'Introduction is 2 to 4 sentences: what and why',
@@ -762,13 +915,13 @@ footer .in{max-width:1120px;margin:0 auto}
       'Proofread for grammar and spelling (Grammarly)'
     ]],
     ['Products', [
-      'Every list item written [Product name] x1, link inside the name, link text = product-page name',
+      'Every list item written [Product name] x1, link inside the name, link text = product-page name, no product pictures',
       'cytron.io links use the SEO URL only, protocol <other>',
       'Every link opens in a New Window (_blank)',
       'Product links work on every store ticked in Store Name; regional alternatives noted',
-      'Maker ESP32 linked at its first mention in the Introduction',
+      'Maker ESP32 linked at its first mention in the Introduction; every product linked wherever it is named',
       'No prices or discounts in the body',
-      'Every listed item attached in Related Product',
+      'Related Product holds exactly the items in List of Components (the kit, if the tutorial uses a kit)',
       'No discontinued products'
     ]],
     ['Admin, SEO and media', [
@@ -777,11 +930,11 @@ footer .in{max-width:1120px;margin:0 auto}
       'Pitch is one complete "Build a…" sentence, 160 characters or fewer, unique',
       'Meta Tag Keywords holds 3 to 8 keywords only',
       'No index.php URLs; every link opened and working, including hub and prev/next',
-      'Inline images wider than 800 px, set to 800 px, not upscaled, about 300 KB, uploaded to the SEO URL folder, with alt text and hyphenated file names',
+      'Inline images 800 px wide at most (wider ones resized with the ratio locked, narrower ones not enlarged), about 300 KB, uploaded to the SEO URL folder, with alt text and hyphenated file names',
       'Gist and YouTube embeds render correctly'
     ]],
     ['Code and safety', [
-      'Long code in a public Gist from the shared Cytron account; short commands in Computer Code style',
+      'Long code in a public Gist (staff: own GitHub account; interns: the intern account); short commands in Computer Code style',
       'IDE or toolchain version stated',
       'Credentials are placeholders, replaced in a Testing & Validation step',
       'Safety notes cover every trigger that applies, including classroom supervision',
@@ -792,7 +945,7 @@ footer .in{max-width:1120px;margin:0 auto}
       'Within 7 days, open the live page, check every link, embed and the browser-tab title, and fix anything broken'
     ]]
   ];
-  var KEY = 'cytron-tutorial-checklist-v1';
+  var KEY = 'cytron-tutorial-checklist-v3';
   var state = {};
   try { state = JSON.parse(localStorage.getItem(KEY) || '{}') || {}; } catch(e){ state = {}; }
   function save(){ try { localStorage.setItem(KEY, JSON.stringify(state)); } catch(e){} }
@@ -828,6 +981,66 @@ footer .in{max-width:1120px;margin:0 auto}
     state = {}; save(); boxes.forEach(function(b){ b.checked = false; }); refresh();
   });
   refresh();
+
+  // Placeholder copy
+  document.querySelectorAll('.ph').forEach(function(b){
+    b.addEventListener('click', function(){
+      var t = b.textContent;
+      try { if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(t).catch(function(){ fallback(t); }); else fallback(t); } catch(e){ fallback(t); }
+      b.classList.add('ok'); setTimeout(function(){ b.classList.remove('ok'); }, 1000);
+    });
+  });
+
+  // Credential check (local only)
+  var KNOWN = [
+    [/\b\d{8,10}:[A-Za-z0-9_-]{35}\b/g, 'Telegram bot token'],
+    [/\bAIza[0-9A-Za-z_-]{35}\b/g, 'Google or Firebase API key'],
+    [/\bsk-[A-Za-z0-9_-]{20,}/g, 'OpenAI-style API key'],
+    [/\b(?:gh[pousr]_[A-Za-z0-9]{30,}|github_pat_[A-Za-z0-9_]{30,})/g, 'GitHub token'],
+    [/\bAKIA[0-9A-Z]{16}\b/g, 'AWS access key']
+  ];
+  var NAME = /(ssid|pass|pwd|psk|token|auth|api[_-]?key|apikey|secret|chat[_-]?id|bot|key|user|login|email|template)/i;
+  function isPh(v){
+    v = v.trim();
+    return !v || /your|replace|change_?me|placeholder|example|\*{3,}|x{4,}/i.test(v) || /^[\[<].*[\]>]$/.test(v);
+  }
+  function mask(v){ return (v.length <= 4 ? '••••' : v.slice(0,3) + '••••') + ' (' + v.length + ' characters)'; }
+  function scan(code){
+    var out = [];
+    code.split(/\r?\n/).forEach(function(line, i){
+      var seen = {};
+      KNOWN.forEach(function(k){
+        var m; k[0].lastIndex = 0;
+        while ((m = k[0].exec(line))) { seen[m[0]] = 1; out.push({ln:i+1, kind:k[1], v:m[0], hard:true}); }
+      });
+      var re = /(["'])((?:\\.|(?!\1).)*)\1/g, m;
+      while ((m = re.exec(line))) {
+        var v = m[2], before = line.slice(0, m.index);
+        if (isPh(v) || seen[v]) continue;
+        var skip = false;
+        Object.keys(seen).forEach(function(s){ if (v.indexOf(s) !== -1) skip = true; });
+        if (skip) continue;
+        var id = before.match(/["']?([A-Za-z_][\w-]*)["']?\s*(?:\[\s*\d*\s*\])?\s*[:=]\s*(?:F\()?\s*$/) || before.match(/#define\s+(\w+)\s*$/);
+        if (id && NAME.test(id[1])) { out.push({ln:i+1, kind:'Real-looking value for ' + id[1], v:v, hard:true}); continue; }
+        if (/\.(begin|connect)\s*\((?:[^()]*,\s*)?$/.test(before)) { out.push({ln:i+1, kind:'Literal value passed to ' + before.match(/\.(begin|connect)\s*\(/)[1] + '(): check it is not a real Wi-Fi name, password or login', v:v, hard:false}); continue; }
+        if (v.length >= 20 && !/\s/.test(v) && /[A-Za-z]/.test(v) && /\d/.test(v) && !/:\/\//.test(v)) out.push({ln:i+1, kind:'Long random string: check it is not a key or token', v:v, hard:false});
+      }
+    });
+    return out;
+  }
+  var scanOut = document.getElementById('scan-out');
+  document.getElementById('scan-go').addEventListener('click', function(){
+    var code = document.getElementById('scan-in').value;
+    if (!code.trim()) { scanOut.innerHTML = '<span style="color:var(--muted)">Paste some code first.</span>'; return; }
+    var f = scan(code);
+    if (!f.length) { scanOut.innerHTML = '<span class="scan-ok">No likely credentials found.</span> Still read the code yourself before submitting.'; return; }
+    var hard = f.filter(function(x){ return x.hard; }).length;
+    var h = '<p><strong>' + f.length + ' item' + (f.length > 1 ? 's' : '') + ' to check' + (hard ? ', ' + hard + ' likely real' : '') + '.</strong> Replace each with its placeholder. If a real value was ever saved in a Gist or repo, revoke it too.</p>';
+    f.forEach(function(x){
+      h += '<div class="finding' + (x.hard ? '' : ' warn') + '"><span class="ln">line ' + x.ln + '</span><span>' + esc(x.kind) + ' <code>' + esc(mask(x.v)) + '</code></span></div>';
+    });
+    scanOut.innerHTML = h;
+  });
 
   // Scroll spy
   var links = Array.prototype.slice.call(document.querySelectorAll('.toc a'));
