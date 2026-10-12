@@ -1037,7 +1037,7 @@ $('#scan-clear').addEventListener('click',function(){$('#scan-in').value='';$('#
 var TITLES=['Get access','Fill the fields','Write','Check & publish','Credentials'];
 var steps=$$('.step'),cur=1,curTab={};
 $$('[data-tabs]').forEach(function(t){var s=t.dataset.tabs;curTab[s]=$('button',t).dataset.tab;$$('button',t).forEach(function(b){b.setAttribute('aria-selected','false');b.addEventListener('click',function(){location.hash=b.dataset.tab})})});
-function showTab(step,tab){var t=$('[data-tabs="'+step+'"]');if(!t)return;curTab[step]=tab;$$('button',t).forEach(function(b){b.setAttribute('aria-selected',b.dataset.tab===tab?'true':'false')});$$('#s'+step+' .tp').forEach(function(p){p.hidden=p.dataset.tab!==tab});var a=$('button[data-tab="'+tab+'"]',t);if(a&&a.scrollIntoView)try{a.scrollIntoView({block:'nearest',inline:'nearest'})}catch(e){}}
+function showTab(step,tab){var t=$('[data-tabs="'+step+'"]');if(!t)return;curTab[step]=tab;$$('button',t).forEach(function(b){b.setAttribute('aria-selected',b.dataset.tab===tab?'true':'false')});$$('.step[data-step="'+step+'"] .tp').forEach(function(p){p.hidden=p.dataset.tab!==tab});var a=$('button[data-tab="'+tab+'"]',t);if(a&&a.scrollIntoView)try{a.scrollIntoView({block:'nearest',inline:'nearest'})}catch(e){}}
 function show(step,tab,keepScroll){step=Math.min(5,Math.max(1,step));var changed=step!==cur;cur=step;
   steps.forEach(function(s){s.hidden=+s.dataset.step!==step});
   $$('.st').forEach(function(b){b.toggleAttribute('aria-current',false);if(+b.dataset.go===step)b.setAttribute('aria-current','step')});

@@ -6,4 +6,4 @@ Live page: https://marketingcytron.github.io/Cytron-Tutorial-Writing-Rules/
 Cytron-Build-Tutorial hub at `projects/tutorial-writing-guide/` and is pushed here with `publish.sh`.
 Any change made here is overwritten on the next publish.
 
-Last published from hub commit `2e27f02`.
+Last published from hub commit `5c936a2`.
