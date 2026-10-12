@@ -483,7 +483,7 @@ figure.badvid figcaption b{color:var(--accent)}
       </div>
 
       <div class="tp" data-tab="s2-image" hidden>
-        <p class="tp-lead">The thumbnail is 16:9, preferably 1280 × 720, about 300 KB (1 MB at most), with the title in the image and a clear photo of the hardware or the output. Drop a picture here to check it before you upload.</p>
+        <p class="tp-lead">The thumbnail is 16:9, preferably 1280 × 720, about 300 KB (1 MB at most), with the title in the image. Keep it minimalist: clear pictures of the products used only, no photo of the real build needed. Drop a picture here to check it before you upload.</p>
         <div class="sheet" style="padding:20px">
           <div class="seg" id="seg-img" role="group" aria-label="Picture type" style="margin-bottom:14px"><button type="button" aria-pressed="true">Thumbnail</button><button type="button" aria-pressed="false">Picture in the body</button></div>
           <div class="fmt" style="grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:20px">
@@ -495,7 +495,7 @@ figure.badvid figcaption b{color:var(--accent)}
           </div>
         </div>
         <div class="rules" style="margin-top:22px">
-          <div class="rl" data-find="thumbnail design minimalist Cytron logo"><span class="lv should">Should</span><div class="tx">Minimalist colours, the Cytron logo, and real, clear photos of the parts used. Check nothing got cut off by background removal. A kit tutorial shows the kit.</div></div>
+          <div class="rl" data-find="thumbnail design minimalist Cytron logo product pictures"><span class="lv must">Must</span><div class="tx"><strong>Minimalist:</strong> product pictures only on a plain background, few colours, the Cytron logo. No photo of the real build needed. Check nothing got cut off by background removal. A kit tutorial shows the kit.</div></div>
           <div class="rl" data-find="series thumbnail every part"><span class="lv must">Must</span><div class="tx">Every part of a series has its own thumbnail.</div></div>
         </div>
       </div>
@@ -522,7 +522,7 @@ figure.badvid figcaption b{color:var(--accent)}
       </div>
 
       <div class="tp" data-tab="s3-structure">
-        <p class="tp-lead">Every tutorial uses these headings, in this order, worded exactly as shown. The body starts at H2 with the Introduction. Click a block to see what it needs.</p>
+        <p class="tp-lead">Follow this order of H2 sections. Close equivalent names are fine (Overview for Objectives, Hardware Required for List of Components), and so are extra H2s the tutorial needs. Click a block to see what it needs.</p>
         <div class="anat">
           <div class="page" id="anat-page"><div class="ph"><span>Description</span><span>H2 / H3</span></div></div>
           <div class="detail" id="anat-detail" aria-live="polite"></div>
@@ -568,7 +568,7 @@ figure.badvid figcaption b{color:var(--accent)}
       <div class="tp" data-tab="s3-media" hidden><div class="rules" id="r-media"></div></div>
 
       <div class="tp" data-tab="s3-safety" hidden>
-        <p class="tp-lead">Add <strong>Disclaimer / Safety Notes</strong> right after the Introduction when anything below applies. Pick what your build involves and copy the note.</p>
+        <p class="tp-lead"><strong>Disclaimer / Safety Notes</strong> is optional. When your build involves anything below, add it right after the Introduction: pick what applies and copy the note.</p>
         <div class="chips" id="chips"></div>
         <div class="out">
           <div class="out-h"><span>Your safety note</span><button class="copy-s" id="copy-safety" type="button">Copy text</button></div>
@@ -676,12 +676,12 @@ const char* password = "YOUR_WIFI_PASSWORD";
 <p style="text-align: justify;">Before starting, make sure your Maker ESP32 is ready to program. If this is your first time using the board, follow the <a href="/tutorial/getting-started-with-maker-esp32" target="_blank">Maker ESP32 Getting Started guide</a> first.</p>
 
 <h2>Objectives</h2>
-<p style="text-align: justify;">[One paragraph.]</p>
+<p style="text-align: justify;">[What the reader will learn or build.]</p>
 
 <h2>List of Components</h2>
 <ol>
-  <li><a href="/p-maker-esp32" target="_blank">Maker ESP32</a> x1</li>
-  <li><a href="/p-[seo-url]" target="_blank">[Exact product name]</a> x1</li>
+  <li><a href="/p-maker-esp32" target="_blank">Maker ESP32</a></li>
+  <li><a href="/p-[seo-url]" target="_blank">[Product name]</a> x2</li> <!-- quantity only when more than one unit -->
 </ol>
 
 <h2>System Diagram &amp; Wiring</h2>
@@ -768,19 +768,19 @@ var AFTER=[
 ];
 var STRUCT=[
  ['1','Introduction','H2','M','2 to 4 sentences: what the reader builds and why it matters for Education or Industry. Open with the reader\'s problem. Right after the paragraph, put the video tutorial if there is one, or an optional hero image.'],
- ['2','Disclaimer / Safety Notes','H2','O','When a safety trigger applies. Use the Safety tab to build it.'],
+ ['2','Disclaimer / Safety Notes','H2','O','Optional. Recommended when a safety trigger applies; use the Safety tab to build it.'],
  ['3','Prerequisites','H2','M','Link the Getting Started guides or basics to finish first. Name the software, accounts, firmware or SDKs to install. Its own heading, separate from the Introduction.'],
- ['4','Objectives','H2','M','One paragraph only.'],
- ['5','List of Components','H2','M','Numbered list, <code>[Product name] x1</code>, the name linked, New Window. Name and link only, no product pictures.'],
+ ['4','Objectives (or Overview)','H2','M','What the reader will learn or build. No length limit.'],
+ ['5','List of Components (or Hardware Required)','H2','M','Numbered list, each product name linked, New Window. Add the quantity only when more than one unit is used (e.g. x2). Name and link only, no product pictures.'],
  ['6','System Diagram & Wiring','H2','M','A labelled block or circuit diagram (Canva, Fritzing) at its native ratio, plus a pin-to-pin wiring table: [Board], [Module], Function. A <strong>Note:</strong> for mounting tips.'],
- ['7','Software Setup','H2','M','IDE or toolchain version, libraries with install steps, board and port selection. Link the official download page. Screenshots encouraged.'],
+ ['7','Software Setup','H2','M','IDE or toolchain version, libraries with install steps, board and port selection. Link the official download page. If Prerequisites already links a board setup guide, don\'t repeat the board setup unless this tutorial needs a new one.'],
  ['7a','Install [Library name] Library','H3','O','When a library is installed: numbered Library Manager steps, including the "Install All" prompt.'],
  ['8','Sample Code','H2','M','"Upload the following sketch to your Maker ESP32:" then a public GitHub Gist embed.'],
  ['8a','Key Code Explanation','H3','M','One bullet per key line: <code>code</code>: what it does.'],
  ['9','Testing & Validation','H2','M','Numbered steps to run and verify, with a short troubleshooting note where a step often fails.'],
  ['9a','Expected Results','H3','M','Serial Monitor lines, LEDs, sounds, browser view.'],
  ['10','Demo / Results','H2','M','Photos or a YouTube embed of the working project, and screenshots of dashboards or the Serial Monitor.'],
- ['11','Troubleshooting & Extra Tips','H2','M','3 to 4 H3s, each a symptom as the reader sees it, with bullet fixes. H3s are not bold.'],
+ ['11','Troubleshooting & Extra Tips','H2','O','Optional. If included: H3s, each a symptom as the reader sees it, with bullet fixes. H3s are not bold.'],
  ['12','Conclusion','H2','M','2 to 3 sentences: what the reader built and learned, the final result, and what to try next.'],
  ['13','Downloads & Assets','H2','O','ZIP of diagrams or configs, repo links, datasets, STL or 3D files, on Cytron-owned storage.'],
  ['14','Telegram banner','none','M','One banner at the very end, centred, 900 px wide, linked to the matching community in a New Window. No heading.']
@@ -802,15 +802,15 @@ var INTRO=[
  ['M','Name the Maker ESP32 and the main part, and link the Maker ESP32 at its first mention.'],
  ['M','Link anything the reader may want to learn more about, such as MediaPipe or ROS 2, to its official page.'],
  ['M','Put the video tutorial, if there is one, right after the paragraph.'],
- ['M','<strong>Cover image:</strong> a real photo of the finished build with the Cytron board visible. No stock photos. Landscape, named after the SEO URL.','e.g. <code>esp32-digital-clock.png</code>'],
+ ['M','<strong>Cover image (thumbnail):</strong> minimalist, with clear pictures of the products used only, on a plain background. No photo of the real build needed. Landscape 16:9, named after the SEO URL.','e.g. <code>esp32-digital-clock.png</code>'],
  ['M','Blur any tokens, passwords or personal details on screen.'],
  ['M','Full product names: "Raspberry Pi 5", not "Pi 5". Check grammar and spelling across the whole tutorial (Grammarly).'],
  ['M','Read it back as a beginner. Hard to read? Simplify. Too long? Split it into a series.']
 ];
 var PARTS=[
- ['M','One numbered list, one line per item: <code>[Product name] x1</code>.','"Grove to JST-SH (Qwiic) Cable - 20cm x1"'],
+ ['M','One numbered list, one line per item. Add the quantity only when more than one unit is used.','"Maker ESP32" for one board; "Female-to-female jumper wires x10" for ten.'],
  ['M','<strong>Name and link only</strong>, no product pictures.','The Hardware Components block already shows them.'],
- ['M','The link sits inside the name, and the name is written exactly as on its product page.','Write "Crowtail - Temperature and Humidity Sensor 2.0", not "DHT 11".'],
+ ['M','The link sits inside the name. The name must clearly mean the same product as its product page; the exact page title is not required.','"DHT11 Temperature and Humidity Sensor" is fine for the Crowtail DHT11 module; a name pointing to a different product is not.'],
  ['M','cytron.io links use the <strong>SEO URL only</strong>: protocol <code>&lt;other&gt;</code>, path such as <code>/p-maker-esp32</code>.','So a reader on another Cytron store stays in their own store.'],
  ['M','Every link opens in New Window (_blank).'],
  ['M','A training-kit tutorial lists the kit, not each part.'],
@@ -879,12 +879,12 @@ var TG=[
  ['General maker projects, none of the above','Maker Gathering','http://qr.io/r/n7EwBk','']
 ];
 var CHECK=[
- ['Structure',['Every Must heading present, in the order and wording of the structure','Disclaimer / Safety Notes and Downloads & Assets included where they apply','H3s named exactly: Install [Library] Library, Key Code Explanation, Expected Results','Objectives is one paragraph','Labelled system diagram at native ratio, plus a pin-to-pin wiring table','A graphic wherever a step needs one','Demo / Results has photos, a YouTube embed or screen captures','Troubleshooting & Extra Tips has 3 to 4 symptom H3s','Conclusion at the end','One Telegram banner at the end, linked to the matching community','No empty headings or leftover placeholders']],
+ ['Structure',['Every Must section present, in the structure\'s order (close equivalent names and extra H2s are fine)','Disclaimer / Safety Notes, Troubleshooting & Extra Tips and Downloads & Assets included where useful','Labelled system diagram at native ratio, plus a pin-to-pin wiring table','A graphic wherever a step needs one','Demo / Results has photos, a YouTube embed or screen captures','Conclusion at the end','One Telegram banner at the end, linked to the matching community','No empty headings or leftover placeholders']],
  ['Formatting and layout',['Every paragraph justified; default font and size; copied text pasted as plain text','Section titles Heading 2, sub-titles Heading 3; no bold on headings; no headings in capitals','Body starts with the Introduction heading: no title, line or picture before it','One empty line between paragraphs, pictures and code; nothing overlaps','Every picture inserted through Browse Server, 800 px wide at most, not enlarged, stretched or blurred','No picture of code that is already on the page as text','Telegram banner centred, 900 px wide, New Window','Video tutorial (if any) right after the Introduction','Read back as a beginner; split into parts if too long']],
- ['Title and intro',['Post Name short and clear, 60 characters or fewer, no numbers unless required','Introduction is 2 to 4 sentences: what and why','Thumbnail 16:9, about 300 KB, title in the image, real build, credentials blurred','Proofread for grammar and spelling']],
- ['Products',['Every item [Product name] x1, link inside the name, no product pictures','cytron.io links use the SEO URL only, protocol <other>','Every link opens in a New Window','Product links work on every ticked store; regional alternatives noted','Maker ESP32 linked at its first mention; every product linked where it is named','No prices or discounts in the body','Related Product holds exactly the items in List of Components','No discontinued products']],
+ ['Title and intro',['Post Name short and clear, 60 characters or fewer, no numbers unless required','Introduction is 2 to 4 sentences: what and why','Thumbnail 16:9, about 300 KB, title in the image, minimalist, product pictures only','Proofread for grammar and spelling']],
+ ['Products',['Every item linked by its product name (quantity only when more than one), clearly the right product, no product pictures','cytron.io links use the SEO URL only, protocol <other>','Every link opens in a New Window','Product links work on every ticked store; regional alternatives noted','Maker ESP32 linked at its first mention; every product linked where it is named','No prices or discounts in the body','Related Product holds exactly the items in List of Components','No discontinued products']],
  ['Admin, SEO and media',['Every WebAdmin field filled: General, Data, Links and Image','Project Level matches Beginner, Intermediate or Advanced','Pitch is one "Build a…" sentence, 160 characters or fewer','Meta Tag Keywords holds 3 to 8 keywords','No index.php URLs; every link opened and working','Pictures in the SEO URL folder, with alt text and hyphenated names','Gist and YouTube embeds render correctly']],
- ['Code and safety',['Long code in a public Gist (staff: own account; interns: intern account)','IDE or toolchain version stated','Safety notes cover every trigger that applies','Tested by following the published steps','Peer review completed (recommended)']],
+ ['Code and safety',['Long code in a public Gist (staff: own account; interns: intern account)','IDE or toolchain version stated','Safety notes, if included, name the concrete risk and precaution','Tested by following the published steps','Peer review completed (recommended)']],
  ['Credentials',['Every credential in the body, Gists, downloads and repos is a placeholder','Body, Gists and downloads searched for password, ssid, token, auth, key, secret, api, bot','No credential visible in any screenshot, GIF or video','No Gist or repo revision ever held a real value, or it has been revoked','Tokens used for screenshots and video revoked or regenerated']],
  ['After publishing',['Within 7 days: every link, embed and the browser-tab title checked on the live page']]
 ];
@@ -969,7 +969,7 @@ var dz=$('#drop');['dragenter','dragover'].forEach(function(t){dz.addEventListen
 dz.addEventListener('drop',function(e){var f=e.dataTransfer.files[0];if(f)checkImg(f)});
 
 /* ---------- step 3 ---------- */
-var LVLMAP={M:['must','Must'],O:['opt','If applicable']};
+var LVLMAP={M:['must','Must'],O:['opt','Optional']};
 $('#anat-page').insertAdjacentHTML('beforeend',STRUCT.map(function(b,i){var h3=b[2]==='H3',tg=b[2]==='none';return '<button type="button" class="blk'+(h3?' h3':'')+(tg?' tg':'')+'" data-b="'+i+'" data-find="'+esc(b[1]+' '+b[4].replace(/<[^>]+>/g,''))+'" aria-pressed="false"><span class="bn">'+b[0]+'</span><span class="bt">'+esc(b[1])+'</span><span class="bd '+(b[3]==='M'?'must':'opt')+'"></span></button>'}).join(''));
 var blks=$$('.blk');
 function showBlk(i){blks.forEach(function(b,j){b.setAttribute('aria-pressed',i===j?'true':'false')});var b=STRUCT[i],l=LVLMAP[b[3]];
@@ -998,7 +998,7 @@ function renderTG(q){q=(q||'').toLowerCase().trim();var n=0;
 renderTG('');$('#tg-q').addEventListener('input',function(e){renderTG(e.target.value)});
 
 /* ---------- step 4 checklist ---------- */
-var KEY='ctg-check-v1',ck=store(KEY)||{},total=0;
+var KEY='ctg-check-v2',ck=store(KEY)||{},total=0;
 $('#checklist').innerHTML=CHECK.map(function(g,gi){var items=g[1].map(function(t,ii){total++;var id=gi+'_'+ii;return '<label class="ci" data-find="'+esc(t)+'"><input type="checkbox" data-c="'+id+'"'+(ck[id]?' checked':'')+'><span>'+esc(t)+'</span></label>'}).join('');
   return '<details class="grp'+(g[0]==='Credentials'?' alert':'')+'"'+(gi<2?' open':'')+'><summary><span>'+esc(g[0])+'</span><span class="gc"></span></summary><div class="items">'+items+'</div></details>'}).join('');
 var C=2*Math.PI*44;$('#ring').style.strokeDasharray=C;
