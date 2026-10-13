@@ -6,4 +6,11 @@ Live page: https://marketingcytron.github.io/Cytron-Tutorial-Writing-Rules/
 Cytron-Build-Tutorial hub at `projects/tutorial-writing-guide/` and is pushed here with `publish.sh`.
 Any change made here is overwritten on the next publish.
 
-Last published from hub commit `4bcc86f`.
+## What's here
+
+| Path | What it is |
+|---|---|
+| `index.html` + `videos/` | The Cytron Tutorial Guide page for staff and trainees |
+| `skills/cytron-tutorial-rules/SKILL.md` | The `cytron-tutorial-rules` Claude skill: the same rules, for drafting and reviewing tutorials with Claude. To use it, add it as a skill in Claude (Customize → Skills → upload, or copy the folder into your skills directory). |
+
+Last published from hub commit `1e9e5c1`.
