@@ -427,11 +427,11 @@ figure.badvid figcaption b{color:var(--accent)}
           <div class="fr" data-find="Pitch Meta Tag Description 160 characters Build a"><div class="fl">Pitch<small>Meta Tag Description</small></div><div>
             <textarea class="ctl" id="f-pitch">Build a high temperature alert system using Maker ESP32 and a DHT11 sensor to sound a buzzer when a room gets too hot.</textarea>
             <div class="meter"><span id="pitch-hint"></span><span class="cnt" data-max="160" data-for="f-pitch"></span></div>
-            <p class="rule">Not shown on the page. One complete, unique sentence: <code>Build a/an [project] using Maker ESP32 and [main part] to [outcome].</code></p></div></div>
+            <p class="rule">Not shown on the page. One complete, unique sentence: <code>Build a/an [project] using [main board] and [main part] to [outcome].</code></p></div></div>
           <div class="fr" data-find="Description body"><div class="fl">Description</div><div><p class="rule">The tutorial body. Write it by following <a href="#s3-structure">step 03</a>.</p></div></div>
           <div class="fr" data-find="Post Tags"><div class="fl">Post Tags</div><div>
             <input class="ctl" id="f-tags" type="text" value="ESP32, Maker ESP32, DHT11, Buzzer, Temperature">
-            <p class="rule">ESP32 and Maker ESP32 first, then the main modules, protocols and topic.</p></div></div>
+            <p class="rule">The board family and main board first (e.g. ESP32, Maker ESP32), then the main modules, protocols and topic.</p></div></div>
           <div class="fr" data-find="Meta Tag Keywords 3 to 8"><div class="fl">Meta Tag Keywords</div><div>
             <input class="ctl" id="f-kw" type="text" value="ESP32, Maker ESP32, DHT11, Temperature Alert, Buzzer">
             <div class="meter"><span>3 to 8 keywords, comma-separated. Never paste the Pitch here.</span><span class="cnt" id="kw-n"></span></div></div></div>
@@ -666,77 +666,65 @@ const char* password = "YOUR_WIFI_PASSWORD";
 <div class="toast" id="toast"></div>
 
 <script type="text/plain" id="skeleton-src"><h2>Introduction</h2>
-<p style="text-align: justify;">[The reader's problem.] In this project, you will build [project] using the <a href="/p-maker-esp32" target="_blank">Maker ESP32</a> and [main part]. [Why it matters.]</p>
+<p style="text-align: justify;">[The reader's problem.] In this project, you will build [project] using the <a href="/p-[board-slug]" target="_blank">[Main board]</a> and [main part]. [Why it matters.]</p>
 <!-- VIDEO TUTORIAL (if there is one) or optional hero IMAGE -->
 
 <h2>Disclaimer / Safety Notes</h2>
-<p style="text-align: justify;">This project is an educational prototype designed for learning and experimentation. [Concrete risk and precaution for this build.]</p>
+<!-- optional: recommended when a safety trigger applies -->
+<p style="text-align: justify;">This project is an educational prototype designed for learning and experimentation. [Precaution for this build.]</p>
 
 <h2>Prerequisites</h2>
-<p style="text-align: justify;">Before starting, make sure your Maker ESP32 is ready to program. If this is your first time using the board, follow the <a href="/tutorial/getting-started-with-maker-esp32" target="_blank">Maker ESP32 Getting Started guide</a> first.</p>
+<p style="text-align: justify;">Before starting, make sure your [Main board] is ready to program. If this is your first time using the board, follow the <a href="/tutorial/[getting-started-slug]" target="_blank">[Main board] Getting Started guide</a> first.</p>
 
 <h2>Objectives</h2>
 <p style="text-align: justify;">[What the reader will learn or build.]</p>
 
 <h2>List of Components</h2>
 <ol>
-  <li><a href="/p-maker-esp32" target="_blank">Maker ESP32</a></li>
-  <li><a href="/p-[seo-url]" target="_blank">[Product name]</a> x2</li> <!-- quantity only when more than one unit -->
+  <li><a href="/p-[board-slug]" target="_blank">[Main board]</a></li>
+  <li><a href="/p-[product-slug]" target="_blank">[Product name]</a> x2</li> <!-- quantity only when more than one unit -->
 </ol>
 
 <h2>System Diagram &amp; Wiring</h2>
-<!-- IMAGE: labelled block or circuit diagram, native aspect ratio, 800 px wide at most -->
-<table>
-  <tr><th>Maker ESP32</th><th>[Module]</th><th>Function</th></tr>
-  <tr><td>[GPIO]</td><td>[Pin]</td><td>[Function]</td></tr>
-</table>
+<!-- IMAGE: system diagram, labelled, native aspect ratio, 800 px wide at most -->
+<table><thead><tr><th>[Main board]</th><th>[Module]</th><th>Function</th></tr></thead></table>
 <p style="text-align: justify;"><strong>Note:</strong> [Mounting tip or other way to connect.]</p>
+<!-- IMAGE: hardware assembly photo, connections clearly visible -->
 
 <h2>Software Setup</h2>
-<p style="text-align: justify;">[IDE and version, board package and version, board and port selection, link to the official download page.]</p>
+<p style="text-align: justify;">[IDE or toolchain and version, board and port selection, link to the official download page.]</p>
 <h3>Install [Library name] Library</h3>
-<ol>
-  <li>Open the Arduino IDE.</li>
-  <li>Navigate to Sketch &gt; Include Library &gt; Manage Libraries...</li>
-  <li>Search for [library] by [author] and click Install.</li>
-  <li>When prompted to install missing dependencies, click Install All.</li>
-</ol>
+<!-- Arduino IDE example: use the steps for your board's own tool (Thonny, MakeCode, Raspberry Pi OS...) -->
+<ol><li>Open the Arduino IDE.</li><li>Navigate to Sketch &gt; Include Library &gt; Manage Libraries...</li><li>Search for [library] by [author] and click Install.</li><li>When prompted to install missing dependencies, click Install All.</li></ol>
+<!-- IMAGE: screen capture of each step -->
 
 <h2>Sample Code</h2>
-<p style="text-align: justify;">Upload the following sketch to your Maker ESP32:</p>
-<!-- GIST: paste the public Gist embed code here -->
+<p style="text-align: justify;">Upload the following code to your [Main board]:</p>
+<!-- GIST EMBED: paste the script in Source view -->
 <h3>Key Code Explanation</h3>
-<ul>
-  <li><code>[code]</code>: [what it does]</li>
-</ul>
+<ul><li><code>[code]</code>: [what it does]</li></ul>
 
 <h2>Testing &amp; Validation</h2>
-<ol>
-  <li>[Step, e.g. replace YOUR_WIFI_SSID and YOUR_WIFI_PASSWORD with your own]</li>
-</ol>
+<ol><li>[Step, e.g. replace YOUR_WIFI_SSID and YOUR_WIFI_PASSWORD with your own]</li></ol>
 <h3>Expected Results</h3>
-<ul>
-  <li>[Expected output]</li>
-</ul>
+<ul><li>[Expected output]</li></ul>
 
 <h2>Demo / Results</h2>
-<!-- IMAGE or YOUTUBE: the working project, plus Serial Monitor or dashboard screenshots -->
+<!-- IMAGE or YOUTUBE EMBED: working project; screen capture of terminal or dashboard -->
 
 <h2>Troubleshooting &amp; Extra Tips</h2>
+<!-- optional -->
 <h3>[Symptom as the reader sees it]</h3>
-<ul>
-  <li>[Fix]</li>
-</ul>
+<ul><li>[Fix]</li></ul>
 
 <h2>Conclusion</h2>
 <p style="text-align: justify;">[What the reader built and learned, the final result, and what to try next.]</p>
 
 <h2>Downloads &amp; Assets</h2>
-<ul>
-  <li><a href="[link]" target="_blank">[File or repo]</a></li>
-</ul>
+<!-- optional -->
+<ul><li><a href="[link]" target="_blank">[File or repo]</a></li></ul>
 
-<!-- TELEGRAM BANNER: inserted through Browse Server, 900 px wide, centred -->
+<!-- TELEGRAM BANNER: the main board's community, inserted through Browse Server, 900 px wide, centred -->
 <p style="text-align: center;"><a href="[community Telegram link]" target="_blank"><img alt="[Community] Telegram group banner" src="[banner from Browse Server]" style="width: 900px;" /></a></p></script>
 
 <script>
@@ -775,7 +763,7 @@ var STRUCT=[
  ['6','System Diagram & Wiring','H2','M','A labelled block or circuit diagram (Canva, Fritzing) at its native ratio, plus a pin-to-pin wiring table: [Board], [Module], Function. A <strong>Note:</strong> for mounting tips.'],
  ['7','Software Setup','H2','M','IDE or toolchain version, libraries with install steps, board and port selection. Link the official download page. If Prerequisites already links a board setup guide, don\'t repeat the board setup unless this tutorial needs a new one.'],
  ['7a','Install [Library name] Library','H3','O','When a library is installed: numbered Library Manager steps, including the "Install All" prompt.'],
- ['8','Sample Code','H2','M','"Upload the following sketch to your Maker ESP32:" then a public GitHub Gist embed.'],
+ ['8','Sample Code','H2','M','A line such as "Upload the following code to your [board]:", then a public GitHub Gist embed.'],
  ['8a','Key Code Explanation','H3','M','One bullet per key line: <code>code</code>: what it does.'],
  ['9','Testing & Validation','H2','M','Numbered steps to run and verify, with a short troubleshooting note where a step often fails.'],
  ['9a','Expected Results','H3','M','Serial Monitor lines, LEDs, sounds, browser view.'],
@@ -799,7 +787,7 @@ var FMT=[
 var INTRO=[
  ['M','2 to 4 sentences: what the reader builds and why it matters.'],
  ['S','Open with the reader\'s problem, not "In this tutorial…".','"Overheating equipment in server cabinets… can lead to permanent hardware damage."'],
- ['M','Name the Maker ESP32 and the main part, and link the Maker ESP32 at its first mention.'],
+ ['M','Name the main board (e.g. Maker ESP32, Raspberry Pi 5, micro:bit) and the main part, and link the board at its first mention.'],
  ['M','Link anything the reader may want to learn more about, such as MediaPipe or ROS 2, to its official page.'],
  ['M','Put the video tutorial, if there is one, right after the paragraph.'],
  ['M','<strong>Cover image (thumbnail):</strong> minimalist, with clear pictures of the products used only, on a plain background. No photo of the real build needed. Landscape 16:9, named after the SEO URL.','e.g. <code>esp32-digital-clock.png</code>'],
@@ -828,7 +816,7 @@ var CODE=[
  ['M','<strong>Long code: a public GitHub Gist.</strong> Staff use their own GitHub account; interns use the intern account (ask your supervisor for access, and Mat Liven for the authentication code). Never an account outside Cytron.'],
  ['M','<strong>Short command lines:</strong> the Computer Code style, Shift+Enter for a new line.'],
  ['M','State the IDE or toolchain version and the board package, e.g. "esp32 by Espressif Systems 3.3.12". Library versions should be named too.','An unpinned core caused ledcAttach compile errors for readers on core 2.x.'],
- ['S','Open the sketch with a header comment: project, board (Cytron Maker ESP32) and main module.'],
+ ['S','Open the code with a header comment: project, board (e.g. Cytron Maker ESP32) and main module.'],
  ['M','Placeholders, never real credentials. See <a href="#s5">05 Credentials</a>.'],
  ['M','Code is text, never a screenshot. Serial Monitor output can be a screen capture.'],
  ['S','Name built-in libraries such as <code>WiFi.h</code> when they need no install.'],
@@ -853,7 +841,7 @@ var SAFETY=[
  ['Soldering or heat','Solder in a ventilated area and wear eye protection.'],
  ['Food, pets or people','Use food-grade materials for anything that touches food, and have someone check in person if the device fails.'],
  ['Alarms, gas, fire, temperature, medical','This is an educational prototype, not a certified safety device. Do not rely on it to protect people or property.'],
- ['5 V sensors on 3.3 V pins','The ESP32 pins work at 3.3 V. Use a level shifter or voltage divider when you connect a 5 V sensor.'],
+ ['5 V sensors on 3.3 V pins','ESP32, Raspberry Pi and many other boards work at 3.3 V. Use a level shifter or voltage divider when you connect a 5 V sensor.'],
  ['Passwords, tokens, API keys','Keep your Wi-Fi password, tokens and API keys private, and never publish code that contains them.'],
  ['Board modification','Modifying the board or overdriving components may void the warranty.'],
  ['Classroom use','Adult supervision is required when this project is used in a classroom.']
@@ -882,7 +870,7 @@ var CHECK=[
  ['Structure',['Every Must section present, in the structure\'s order (close equivalent names and extra H2s are fine)','Disclaimer / Safety Notes, Troubleshooting & Extra Tips and Downloads & Assets included where useful','Labelled system diagram at native ratio, plus a pin-to-pin wiring table','A graphic wherever a step needs one','Demo / Results has photos, a YouTube embed or screen captures','Conclusion at the end','One Telegram banner at the end, linked to the matching community','No empty headings or leftover placeholders']],
  ['Formatting and layout',['Every paragraph justified; default font and size; copied text pasted as plain text','Section titles Heading 2, sub-titles Heading 3; no bold on headings; no headings in capitals','Body starts with the Introduction heading: no title, line or picture before it','One empty line between paragraphs, pictures and code; nothing overlaps','Every picture inserted through Browse Server, 800 px wide at most, not enlarged, stretched or blurred','No picture of code that is already on the page as text','Telegram banner centred, 900 px wide, New Window','Video tutorial (if any) right after the Introduction','Read back as a beginner; split into parts if too long']],
  ['Title and intro',['Post Name short and clear, 60 characters or fewer, no numbers unless required','Introduction is 2 to 4 sentences: what and why','Thumbnail 16:9, about 300 KB, title in the image, minimalist, product pictures only','Proofread for grammar and spelling']],
- ['Products',['Every item linked by its product name (quantity only when more than one), clearly the right product, no product pictures','cytron.io links use the SEO URL only, protocol <other>','Every link opens in a New Window','Product links work on every ticked store; regional alternatives noted','Maker ESP32 linked at its first mention; every product linked where it is named','No prices or discounts in the body','Related Product holds exactly the items in List of Components','No discontinued products']],
+ ['Products',['Every item linked by its product name (quantity only when more than one), clearly the right product, no product pictures','cytron.io links use the SEO URL only, protocol <other>','Every link opens in a New Window','Product links work on every ticked store; regional alternatives noted','Main board linked at its first mention; every product linked where it is named','No prices or discounts in the body','Related Product holds exactly the items in List of Components','No discontinued products']],
  ['Admin, SEO and media',['Every WebAdmin field filled: General, Data, Links and Image','Project Level matches Beginner, Intermediate or Advanced','Pitch is one "Build a…" sentence, 160 characters or fewer','Meta Tag Keywords holds 3 to 8 keywords','No index.php URLs; every link opened and working','Pictures in the SEO URL folder, with alt text and hyphenated names','Gist and YouTube embeds render correctly']],
  ['Code and safety',['Long code in a public Gist (staff: own account; interns: intern account)','IDE or toolchain version stated','Safety notes, if included, name the concrete risk and precaution','Tested by following the published steps','Peer review completed (recommended)']],
  ['Credentials',['Every credential in the body, Gists, downloads and repos is a placeholder','Body, Gists and downloads searched for password, ssid, token, auth, key, secret, api, bot','No credential visible in any screenshot, GIF or video','No Gist or repo revision ever held a real value, or it has been revoked','Tokens used for screenshots and video revoked or regenerated']],
