@@ -1,5 +1,5 @@
 ---
-name: "cytron-tutorial-rules"
+name: cytron-tutorial-rules
 description: "Apply Cytron's Tutorial Writing Rules when drafting, revamping or reviewing any tutorial for my.cytron.io/tutorial: credentials, structure, formatting, product links, SEO, safety, pre-publish checklist."
 ---
 
@@ -77,12 +77,12 @@ literal strings passed to `WiFi.begin()` or `.connect()`. Check rendered Gists a
 
 | # | Heading | Level | Required | Must contain |
 |---|---|---|---|---|
-| 1 | Introduction | H2 | MUST | 2–4 sentences: what the reader builds and why it matters (Education/Industry). Open with the reader's problem. Right after the paragraph: the video tutorial if there is one, or an optional hero image. |
-| 2 | Disclaimer / Safety Notes | H2 | Optional (§6) | Recommended when a safety trigger applies: electrical, battery or heat cautions, warranty notes, classroom supervision. |
+| 1 | Introduction | H2 | MUST | Keep it short, 2–3 sentences: open with the reader's problem, then what the reader builds and why it matters. Right after the paragraph: the video tutorial if there is one, or an optional hero image. |
+| 2 | Disclaimer / Safety Notes | H2 | Optional (§6) | Recommended when a safety trigger applies. Keep it short, 1–2 sentences: the concrete risk and its precaution (electrical, battery or heat, warranty, classroom supervision). |
 | 3 | Prerequisites | H2 | MUST | Link Getting Started guides/basics; name software, accounts, firmware or SDKs to install. |
 | 4 | Objectives (or Overview) | H2 | MUST | What the reader will learn or build. No length limit. |
 | 5 | List of Components (or Hardware Components / Hardware Required) | H2 | MUST | Numbered list, product name linked, new window; quantity only when more than one unit (e.g. x2); name and link only, no product pictures (§3). |
-| 6 | System Diagram & Wiring | H2 | MUST | Labelled block/circuit diagram (Canva, Fritzing) at native aspect ratio + pin-to-pin wiring table ([Main board] · [Module] · Function). **Note:** for mounting tips or other ways to connect. A hardware assembly photo with every connection visible where it helps. |
+| 6 | System Diagram & Wiring | H2 | MUST | Labelled block/circuit diagram (Canva, Fritzing) at native aspect ratio + pin-to-pin wiring table ([Main board] · [Module] · Function). Keep the text short: 1–2 sentences before the table and a 1–2 sentence **Note:** for mounting tips or other ways to connect, with one empty line before and after the table. A hardware assembly photo with every connection visible where it helps. |
 | 7 | Software Setup | H2 | MUST | IDE/toolchain version, library names + install steps, board and port selection; link the official download/docs page of every software; screenshots encouraged. If Prerequisites already links a board setup guide, don't repeat the board setup unless the tutorial needs a new setup. |
 | 7a | Install [Library name] Library | H3 | When a library is installed | Numbered install steps in the board's own tool, with a screen capture per step. Arduino IDE: Library Manager incl. the "Install All" dependency prompt; others: Thonny's package manager, MakeCode Extensions, pip/apt on Raspberry Pi OS. |
 | 8 | Sample Code | H2 | MUST | A line such as "Upload the following code to your [board]:" + public GitHub Gist embed. |
@@ -91,7 +91,7 @@ literal strings passed to `WiFi.begin()` or `.connect()`. Check rendered Gists a
 | 9a | Expected Results | H3 | MUST | Expected outputs: Serial Monitor or terminal lines, LEDs, sounds, browser view. |
 | 10 | Demo / Results | H2 | MUST | Photos or a YouTube embed of the working project; screen captures of dashboards, the Serial Monitor or the terminal. |
 | 11 | Troubleshooting & Extra Tips | H2 | Optional | If included: H3s, each a symptom as the reader sees it, bullet fixes (power, baud rate, library conflicts, sensor orientation, calibration). |
-| 12 | Conclusion | H2 | MUST | 2–3 sentences: what the reader built and learned, the final result, what to try next (link a related tutorial). |
+| 12 | Conclusion | H2 | MUST | Keep it short, 2 sentences: what the reader built, and what to try next (link a related tutorial). |
 | 13 | Downloads & Assets | H2 | Optional | ZIP of diagrams/configs, repos, datasets, example flows, STL/3D files. |
 | 14 | Telegram community banner | no heading | MUST | One banner at the end, centred, 900 px wide, image linked (new window) to the matching community. |
 
@@ -134,18 +134,18 @@ and link in the `<!-- TELEGRAM BANNER: … -->` placeholder.
 | Font | Editor default font and size only; never other fonts or sizes such as 16 or 20. Text copied from Word, Google Docs, ChatGPT or a website is pasted with Paste as plain text. |
 | Headings | Section titles Heading 2, sub-titles Heading 3. No bold text used as a heading, no bold on headings (Troubleshooting H3s included). Title case, not capitals ("Introduction", not "INTRODUCTION"). |
 | Start of the body | Straight into the Introduction heading: no title, horizontal line or picture before it. Prerequisites is its own H2. |
-| Spacing | One empty line between paragraphs, text and pictures, two pictures, code and pictures. Nothing touches or overlaps. |
+| Spacing | One empty line between paragraphs, text and pictures, two pictures, code and pictures, and before and after every table (e.g. a wiring table and the **Note:** under it). Nothing touches or overlaps. |
 | Pictures | Through Browse Server only (PNG or JPEG, uploaded into the SEO URL folder); never hotlinked or pasted from Google Docs, Word or a website (they keep an outside link such as googleusercontent.com and break into a red X; a common cause of missing pictures). Steps: Image button > Browse Server > S3 Image Manager opens on tutorial/<seo-url> > blue Upload > click the file to insert. 800 px wide at most: wider ones resized with the ratio lock on, narrower ones never enlarged. No stretched or blurred pictures; no picture of code already shown as text. |
 | Links | Every link New Window (_blank). |
 | Banner | Centred, 900 px wide, ratio locked, inserted via Browse Server, Link tab = the community's Telegram link, Target New Window (_blank). Check it opens the right group. |
 | Length | Too long → split into a series (Parent + Sort Order 1, 2, 3…). |
 
-In reviews of a live or saved page, check: `text-align: justify` on body paragraphs; `<h2>` for sections (not `<p><strong>`); `<strong>`/`<b>` inside headings; inline `font-family`/`font-size` styles; `<hr>` or content before the first `<h2>`; consecutive blocks with no spacing; `<img>` with `src` outside the tutorial's image folder (e.g. googleusercontent.com); image widths over 800 px or enlarged/stretched; banner width ≠ 900 px or not centred; `<a>` without `target="_blank"`.
+In reviews of a live or saved page, check: `text-align: justify` on body paragraphs; `<h2>` for sections (not `<p><strong>`); `<strong>`/`<b>` inside headings; inline `font-family`/`font-size` styles; `<hr>` or content before the first `<h2>`; consecutive blocks with no spacing (a `<table>` directly after or before a paragraph or Note included); `<img>` with `src` outside the tutorial's image folder (e.g. googleusercontent.com); image widths over 800 px or enlarged/stretched; banner width ≠ 900 px or not centred; `<a>` without `target="_blank"`.
 
 ## 2. Title, intro, writing quality
 
 - Post Name (MUST): short, clear tutorial title, ≤60 characters; avoid numbers (e.g. version numbers) unless required; not repeated in the body.
-- Intro (MUST): 2–4 sentences, what and why; name the main board (e.g. Maker ESP32, Raspberry Pi 5, micro:bit) and the main part, and link the board (first mention); link anything readers may want to learn more about (e.g. MediaPipe, ROS 2) to its official page. SHOULD open with the reader's problem, not "In this tutorial…".
+- Intro (MUST): keep it short, 2–3 sentences, what and why; name the main board (e.g. Maker ESP32, Raspberry Pi 5, micro:bit) and the main part, and link the board (first mention); link anything readers may want to learn more about (e.g. MediaPipe, ROS 2) to its official page. SHOULD open with the reader's problem, not "In this tutorial…".
 - Video tutorial (if any): directly after the Introduction paragraph.
 - Cover image / thumbnail (MUST): minimalist; clear pictures of the products used only, on a plain background (no photo of the real build needed); landscape 16:9; file named after the SEO URL.
 - Writing (MUST): complete-beginner language, active voice, short sentences; full product names ("Raspberry Pi 5", not "Pi 5"); grammar and spelling checked across the whole tutorial (e.g. Grammarly). Read it back as a beginner: hard to read → simplify; too long → split into a series.
@@ -225,7 +225,7 @@ Other SEO and media rules (MUST):
 
 ## 6. Safety notes (optional; right after Introduction, recommended when a trigger applies)
 
-Open with "This project is an educational prototype designed for learning…", then the concrete risk and precaution:
+Open with "This project is an educational prototype designed for learning…", then the concrete risk and precaution. Keep the whole note to 1–2 sentences: pick only the triggers that apply.
 
 | Trigger | Note must say |
 |---|---|
@@ -267,7 +267,7 @@ Formatting and layout
 - [ ] Every paragraph justified; default font and size; copied text pasted as plain text
 - [ ] Section titles H2, sub-titles H3; no bold on headings; no headings in capitals
 - [ ] Body starts with the Introduction heading: no title, line or picture before it
-- [ ] One empty line between paragraphs, pictures and code; nothing overlaps
+- [ ] One empty line between paragraphs, pictures, code and tables (the Note under a table included); nothing overlaps
 - [ ] Every picture via Browse Server (PNG/JPEG), ≤800 px wide, not enlarged, stretched or blurred
 - [ ] No picture of code already shown as text
 - [ ] Telegram banner centred, 900 px, linked to the right group, New Window (_blank)
@@ -276,7 +276,7 @@ Formatting and layout
 
 Title and intro
 - [ ] Post Name short and clear, ≤60 chars, no numbers unless required, not repeated in the body
-- [ ] Introduction 2–4 sentences: what and why
+- [ ] Kept short: Introduction 2–3 sentences, Safety Notes 1–2, wiring text 1–2 plus a short Note, Conclusion 2
 - [ ] Thumbnail 16:9, ~300 KB (max 1 MB), title in image, minimalist, product pictures only
 - [ ] Proofread (Grammarly)
 
