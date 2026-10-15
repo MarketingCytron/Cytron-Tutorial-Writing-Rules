@@ -575,7 +575,7 @@ figure.badvid figcaption b{color:var(--accent)}
         <p class="tp-lead">One banner at the very end of the body, linked to the community of the tutorial's <strong>main board</strong>, not its sensor. Banners are in the <a href="https://drive.google.com/drive/folders/186p2woTflBfHwUBpQwDWdBDOdYqAaUaE" target="_blank" rel="noopener">Community Banner folder</a>; all channels are on <a href="https://my.cytron.io/cytrons-telegram-channel" target="_blank" rel="noopener">Cytron's Telegram page</a>.</p>
         <input class="find" id="tg-q" type="search" placeholder="Find a board or topic: micro:bit, Jetson, 3D…" autocomplete="off" aria-label="Find a community">
         <ul class="tg" id="tg-list"></ul>
-        <p class="note" id="tg-empty" hidden>No match. Use Maker Gathering for general maker projects.</p>
+        <p class="note" id="tg-empty" hidden>No match. Only communities with a banner are listed: ask your supervisor which one to use.</p>
       </div>
 
       <div class="tp" data-tab="s3-howto" hidden>
@@ -850,16 +850,12 @@ var TG=[
  ['NVIDIA Jetson','NVIDIA Jetson','http://qr.codes/b2TBX5','NVIDIA Jetson Telegram.png'],
  ['RDK boards (RDK X5 and others)','RDK Series Community','http://qr.codes/0H84mK','RDK-telegram-footer.png'],
  ['micro:bit','micro:bit','https://qr.link/owmYeg','microbit Telegram.png'],
- ['EDU:BIT','EDU:BIT Support Group','https://t.me/edubit_trainers',''],
  ['ZOOM:BIT','ZOOM:BIT Support Group','https://t.me/zoombit_support','Zoombit Support.png'],
  ['SUMO:BIT','SUMO:BIT Support Group','https://t.me/sumobit_support','Sumobit Banner.png'],
  ['SUMO Drone, school robotics and STEM','STEM Robotik','http://qr.codes/YO63x0','SUMO_Drone_STEM Robotik.png'],
- ['CircuitPython projects','CircuitPython Malaysia','https://t.me/CircuitPythonMY',''],
  ['3D printing','3D Printing','http://qr.io/r/pgVcQB','3D Printing Telegram.png'],
  ['Robomania competition tutorials','Robomania 2025','https://t.me/robomania_my','Robomania_Telegram_Banner.png'],
- ['Only tutorials related to RAC, a Cytron event','RAC Helpdesk','https://t.me/RAC_helpdesk',''],
- ['Cytron Learning Hub content','Cytron Learning Hub','http://qr.link/G7fcUA','Cytron Learning Hub.png'],
- ['General maker projects, none of the above','Maker Gathering','http://qr.io/r/n7EwBk','']
+ ['Cytron Learning Hub content','Cytron Learning Hub','http://qr.link/G7fcUA','Cytron Learning Hub.png']
 ];
 var CHECK=[
  ['Structure',['Every Must section present, in the structure\'s order (close equivalent names and extra H2s are fine)','Disclaimer / Safety Notes, Troubleshooting & Extra Tips and Downloads & Assets included where useful','Labelled system diagram at native ratio, plus a pin-to-pin wiring table','A graphic wherever a step needs one (Protip: where it helps)','Demo / Results has photos, a YouTube embed or screen captures','Conclusion at the end','One Telegram banner at the end, linked to the matching community','No empty headings or leftover placeholders']],
@@ -977,7 +973,7 @@ safety();
 $('#copy-safety').addEventListener('click',function(){copy($('#safety-out').textContent,'Safety note copied')});
 
 function renderTG(q){q=(q||'').toLowerCase().trim();var n=0;
-  $('#tg-list').innerHTML=TG.filter(function(r){return !q||(r[0]+' '+r[1]+' '+r[3]).toLowerCase().indexOf(q)>-1}).map(function(r){n++;return '<li data-find="'+esc('Telegram '+r[0]+' '+r[1])+'"><span class="u">'+esc(r[0])+'</span><span class="c"><a href="'+esc(r[2])+'" target="_blank" rel="noopener">'+esc(r[1])+'</a></span><button class="copy-s" type="button" data-link="'+esc(r[2])+'">Copy link</button><span class="f'+(r[3]?'':' none')+'">'+(r[3]?esc(r[3]):'No banner yet: ask for one before publishing')+'</span></li>'}).join('');
+  $('#tg-list').innerHTML=TG.filter(function(r){return !q||(r[0]+' '+r[1]+' '+r[3]).toLowerCase().indexOf(q)>-1}).map(function(r){n++;return '<li data-find="'+esc('Telegram '+r[0]+' '+r[1])+'"><span class="u">'+esc(r[0])+'</span><span class="c"><a href="'+esc(r[2])+'" target="_blank" rel="noopener">'+esc(r[1])+'</a></span><button class="copy-s" type="button" data-link="'+esc(r[2])+'">Copy link</button><span class="f">'+esc(r[3])+'</span></li>'}).join('');
   $('#tg-empty').hidden=n>0;
   $$('#tg-list [data-link]').forEach(function(b){b.addEventListener('click',function(){copy(b.dataset.link,'Link copied')})});}
 renderTG('');$('#tg-q').addEventListener('input',function(e){renderTG(e.target.value)});

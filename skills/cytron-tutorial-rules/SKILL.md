@@ -112,7 +112,7 @@ Older pages use "List of Components / BOM"; new tutorials use "List of Component
 
 Telegram banners: download the named file from the Community Banner folder
 (https://drive.google.com/drive/folders/186p2woTflBfHwUBpQwDWdBDOdYqAaUaE); all channels: https://my.cytron.io/cytrons-telegram-channel.
-Pick by the main board, not the sensor. Maker Gathering only when no product community fits. In drafts, name the banner file
+Pick by the main board, not the sensor. In drafts, name the banner file
 and link in the `<!-- TELEGRAM BANNER: … -->` placeholder.
 
 | Use for | Community | Link | Banner file |
@@ -125,18 +125,14 @@ and link in the `<!-- TELEGRAM BANNER: … -->` placeholder.
 | NVIDIA Jetson | NVIDIA Jetson | http://qr.codes/b2TBX5 | NVIDIA Jetson Telegram.png |
 | RDK boards (RDK X5 etc.) | RDK Series Community | http://qr.codes/0H84mK | RDK-telegram-footer.png |
 | micro:bit | micro:bit | https://qr.link/owmYeg | microbit Telegram.png |
-| EDU:BIT | EDU:BIT Support Group | https://t.me/edubit_trainers | none yet |
 | ZOOM:BIT | ZOOM:BIT Support Group | https://t.me/zoombit_support | Zoombit Support.png |
 | SUMO:BIT | SUMO:BIT Support Group | https://t.me/sumobit_support | Sumobit Banner.png |
 | SUMO Drone, school robotics, STEM | STEM Robotik | http://qr.codes/YO63x0 | SUMO_Drone_STEM Robotik.png |
-| CircuitPython projects | CircuitPython Malaysia | https://t.me/CircuitPythonMY | none yet |
 | 3D printing | 3D Printing | http://qr.io/r/pgVcQB | 3D Printing Telegram.png |
 | Robomania competition tutorials | Robomania 2025 | https://t.me/robomania_my | Robomania_Telegram_Banner.png |
-| Only tutorials related to RAC (a Cytron event) | RAC Helpdesk | https://t.me/RAC_helpdesk | none yet |
 | Cytron Learning Hub content | Cytron Learning Hub | http://qr.link/G7fcUA | Cytron Learning Hub.png |
-| General maker projects, none of the above | Maker Gathering | http://qr.io/r/n7EwBk | none yet |
 
-"none yet" = no banner in the folder; flag it so the writer asks for one. Never invent a Telegram link.
+Only communities with a banner in the folder are listed; a group without a banner is not used. If none fits, the writer asks the supervisor. Never invent a Telegram link.
 
 ## 1b. Formatting and layout (all MUST; the most common review comments)
 
