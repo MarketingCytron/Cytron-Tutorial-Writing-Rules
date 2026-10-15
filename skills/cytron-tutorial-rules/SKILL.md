@@ -36,8 +36,10 @@ MakeCode, etc.), Getting Started guide and Telegram community.
   Conclusion and the Telegram banner are enough. Objectives, System Diagram & Wiring, Sample Code + Key Code Explanation,
   Testing & Validation and Demo / Results apply only where the Protip includes a build or code; a decision table
   ("what you see → what it means → go to step") can replace Testing & Validation. Credentials (§0), formatting (§1b),
-  product links (§3) and WebAdmin fields (§5) apply in full. The Pitch may start with the outcome ("Fix …", "Choose …")
-  instead of "Build a …".
+  product links (§3) and WebAdmin fields (§5) apply, with three Protip exceptions: the Pitch may start with the outcome
+  ("Fix …", "Choose …") instead of "Build a …"; Related Product may hold only the main board (or the one or two products
+  the tip is about), not every item in What You Need; and pictures are added where they help (a diagram, a reused
+  picture), with no need for real hardware photos or screenshots when the text or a code block already shows the result.
 - **Review**: check §0 first, then the checklist (§8). Report failures as a table (Rule · MUST/SHOULD · What's wrong · Fix),
   credentials first, then other MUST items. Quote the exact offending text or URL, **except a credential**: name its type,
   where it sits (page body, Gist file and line, screenshot) and show it masked (first 3 characters + ••••). Don't rewrite the
@@ -146,7 +148,7 @@ and link in the `<!-- TELEGRAM BANNER: … -->` placeholder.
 | Start of the body | Straight into the Introduction heading: no title, horizontal line or picture before it. Prerequisites is its own H2. |
 | Spacing | One empty line between paragraphs, text and pictures, two pictures, code and pictures, and before and after every table (e.g. a wiring table and the **Note:** under it). Nothing touches or overlaps. In HTML the empty line is `<p>&nbsp;</p>` (see Editor HTML below). |
 | Code in text | Never Computer Code style (`<code>`) inside a sentence: the site turns it into a full-width code box. Values and names in sentences are plain text or bold. |
-| Pictures | Through Browse Server only (PNG or JPEG, uploaded into the SEO URL folder); never hotlinked or pasted from Google Docs, Word or a website (they keep an outside link such as googleusercontent.com and break into a red X; a common cause of missing pictures). Steps: Image button > Browse Server > S3 Image Manager opens on tutorial/<seo-url> > blue Upload > click the file to insert. 800 px wide at most: wider ones resized with the ratio lock on, narrower ones never enlarged. No stretched or blurred pictures; no picture of code already shown as text. |
+| Pictures | Through Browse Server only (PNG or JPEG, uploaded into the SEO URL folder); never hotlinked or pasted from Google Docs, Word or a website (they keep an outside link such as googleusercontent.com and break into a red X; a common cause of missing pictures). Steps: Image button > Browse Server > S3 Image Manager opens on tutorial/<seo-url> > blue Upload > click the file to insert. 800 px wide at most: wider ones resized with the ratio lock on, narrower ones never enlarged. No stretched or blurred pictures; no picture of code already shown as text. A picture already on `static.cytron.io` (e.g. in another tutorial's folder) may be reused as it is; no need to upload it again. |
 | Links | Every link New Window (_blank). |
 | Banner | Centred, 900 px wide, ratio locked, inserted via Browse Server, Link tab = the community's Telegram link, Target New Window (_blank). Check it opens the right group. |
 | Length | Too long → split into a series (Parent + Sort Order 1, 2, 3…). |
@@ -188,14 +190,14 @@ blocks; `<code>` inside a sentence (renders as a broken-up code box); `<h2>` for
 - SHOULD: a product family with versions may link to a store search (e.g. SPG30-XX*).
 - MUST: note regional alternatives when products differ between the stores ticked in Store Name.
 - MUST: no prices, discounts or stock levels in body text.
-- MUST: every listed item attached in Related Product (fills the Hardware Components block).
+- MUST: every listed item attached in Related Product (fills the Hardware Components block). Protip: the main board alone is enough (§1, Protip mode).
 - MUST: non-Cytron parts get a generic name, no link to another store.
 - MUST: no new tutorials on discontinued products; revamps name the replacement.
 - MUST: every product link opened on each ticked store before submitting.
 - MUST: 3D, PCB files and downloads on Cytron-owned storage, linked under Downloads & Assets.
 - MUST: name and link only in the list, no product pictures (the Hardware Components block shows them).
 - MUST: a training-kit tutorial lists the kit, not each part; Related Product and thumbnail show the kit.
-- MUST: list every item the build uses (cameras, cables included) and nothing else; List of Components and Related Product match exactly.
+- MUST: list every item the build uses (cameras, cables included) and nothing else; List of Components and Related Product match exactly (Tutorial and Project; a Protip may attach only the main board).
 - MUST: link a product even if the Malaysia store doesn't sell it (other stores, e.g. SG, do); link products wherever they are named, Introduction included.
 - Tracking parameters: team decision pending. Don't add or strip them unless asked; flag `&tracking=…&utm_campaign=…` with no `?`.
 
@@ -239,7 +241,7 @@ Forgot Password); Tutorial > Tutorials > +; set the SEO URL first.
 | Links | Store Name | Tick every store first; untick only a store where a Related Product isn't sold. |
 | Links | Parent | Series only: the main post (e.g. series hub). Empty for standalone tutorials. |
 | Links | Related Post | Existing posts on the same topic (e.g. Getting Started with Maker ESP32). |
-| Links | Related Product | Exactly the items in List of Components (the kit for a kit tutorial); use the variation product code (parent product with options) where one exists. |
+| Links | Related Product | Exactly the items in List of Components (the kit for a kit tutorial); use the variation product code (parent product with options) where one exists. Protip: the main board alone is enough (or the one or two products the tip is about). |
 | Image | Image (thumbnail) | 16:9, preferably 1280×720, ~300 KB (max 1 MB), title in the image. Minimalist: clear pictures of the products used only (no photo of the real build needed), plain background, few colours, Cytron logo; nothing cut off by background removal; kit tutorials show the kit. Every series part has its own thumbnail. |
 
 Other SEO and media rules (MUST):
@@ -247,9 +249,9 @@ Other SEO and media rules (MUST):
 - Headings: H2 sections, H3 inside, no empty headings, no H1 in the body.
 - Internal links: SEO URL only; never `index.php?route=eblog/epost…`. Always link the Getting Started prerequisite.
 - External links: official docs, new window; datasheets as `static.cytron.io` PDF or Google Docs `/preview`, never `/edit`.
-- A graphic (screen capture, schematic, assembly photo) wherever a step needs one.
-- Inline images: 800 px wide at most (wider → 800 px, ratio locked; narrower → original size, never enlarged), ~300 KB (max 1 MB), not stretched or blurred; every connection visible and labelled where needed. Only via Browse Server into the SEO URL folder, PNG or JPEG. Edit in the team Canva.
-- Image files lowercase, hyphenated, starting with the project name; every image has 5–15 word alt text.
+- A graphic (screen capture, schematic, assembly photo) wherever a step needs one. Protip: optional; a diagram or a reused picture is enough, and a code block can stand in for an output screenshot.
+- Inline images: 800 px wide at most (wider → 800 px, ratio locked; narrower → original size, never enlarged), ~300 KB (max 1 MB), not stretched or blurred; every connection visible and labelled where needed. Only via Browse Server, PNG or JPEG: new pictures into the SEO URL folder; a picture already on `static.cytron.io` (another tutorial's folder) may be reused. Edit in the team Canva.
+- Image files lowercase, hyphenated, starting with the project name. Alt text is optional (team decision, 15 Oct 2026); if added, 5–15 words saying what the picture shows.
 - YouTube: Share > Embed (Start at if needed), paste via the Embedded YouTube Video button.
 
 ## 6. Safety notes (optional; right after Introduction, recommended when a trigger applies)
@@ -287,7 +289,7 @@ Structure
 - [ ] Every MUST section present in §1 order (close equivalent names and extra H2s are fine)
 - [ ] Disclaimer / Safety Notes, Troubleshooting & Extra Tips and Downloads & Assets where useful
 - [ ] Labelled system diagram at native ratio + pin-to-pin wiring table
-- [ ] A graphic wherever a step needs one
+- [ ] A graphic wherever a step needs one (Protip: where it helps)
 - [ ] Demo / Results has photos, a YouTube embed or screen captures
 - [ ] One Telegram banner at the end, linked to the matching community
 - [ ] No empty headings or leftover placeholders
@@ -317,7 +319,7 @@ Products
 - [ ] Product links work on every ticked store; regional alternatives noted
 - [ ] Main board linked at first mention in the Introduction
 - [ ] No prices/discounts in body
-- [ ] Related Product holds exactly the items in List of Components (the kit for a kit tutorial)
+- [ ] Related Product holds exactly the items in List of Components (the kit for a kit tutorial; a Protip may hold only the main board)
 - [ ] No discontinued products
 
 Admin, SEO and media
@@ -326,7 +328,7 @@ Admin, SEO and media
 - [ ] Pitch one complete "Build a…" sentence (Protip: may start with the outcome, e.g. "Fix…"), ≤160 chars, unique
 - [ ] Meta Tag Keywords 3–8 keywords only
 - [ ] No `index.php` URLs; every link opened and working, incl. hub and prev/next
-- [ ] Inline images ≤800 px wide (wider resized, ratio locked; narrower not enlarged), ~300 KB, in the SEO URL folder, alt text, hyphenated names
+- [ ] Inline images ≤800 px wide (wider resized, ratio locked; narrower not enlarged), ~300 KB, new ones in the SEO URL folder (reused `static.cytron.io` pictures are fine), hyphenated names
 - [ ] Gist and YouTube embeds render correctly
 
 Code and safety
