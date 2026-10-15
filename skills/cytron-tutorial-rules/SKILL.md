@@ -28,8 +28,16 @@ MakeCode, etc.), Getting Started guide and Telegram community.
   demo), `<!-- GIST EMBED -->`, `<!-- TELEGRAM BANNER -->`; mark optional sections with `<!-- optional -->`. Use the tutorial's
   own main board, tool and Getting Started guide, never a hard-coded Maker ESP32. Every credential is a placeholder (§0).
   Body paragraphs carry `style="text-align: justify;"`, no font styles, every `<a>` has `target="_blank"`,
-  and the banner is a centred `<p>` with the linked `<img>` at `width: 900px` (§1b). After the HTML, output every WebAdmin
-  field (§5) as a table, with character counts for Post Name, Pitch and Meta Tag Title.
+  and the banner is a centred `<p>` with the linked `<img>` at `width: 900px` (§1b). Put one `<p>&nbsp;</p>` between every
+  two blocks, none directly under a heading, and never put `<code>` inside a sentence (§1b, Editor HTML on my.cytron.io).
+  After the HTML, output every WebAdmin field (§5) as a table, with character counts for Post Name, Pitch and Meta Tag Title.
+- **Protip** (Post Type Protip: troubleshooting guides, explainers, how-tos without a full build): apply §1 loosely.
+  Introduction, Prerequisites (if any), What You Need (the List of Components), numbered steps as H2s ("Step 1: …"),
+  Conclusion and the Telegram banner are enough. Objectives, System Diagram & Wiring, Sample Code + Key Code Explanation,
+  Testing & Validation and Demo / Results apply only where the Protip includes a build or code; a decision table
+  ("what you see → what it means → go to step") can replace Testing & Validation. Credentials (§0), formatting (§1b),
+  product links (§3) and WebAdmin fields (§5) apply in full. The Pitch may start with the outcome ("Fix …", "Choose …")
+  instead of "Build a …".
 - **Review**: check §0 first, then the checklist (§8). Report failures as a table (Rule · MUST/SHOULD · What's wrong · Fix),
   credentials first, then other MUST items. Quote the exact offending text or URL, **except a credential**: name its type,
   where it sits (page body, Gist file and line, screenshot) and show it masked (first 3 characters + ••••). Don't rewrite the
@@ -86,7 +94,7 @@ literal strings passed to `WiFi.begin()` or `.connect()`. Check rendered Gists a
 | 7 | Software Setup | H2 | MUST | IDE/toolchain version, library names + install steps, board and port selection; link the official download/docs page of every software; screenshots encouraged. If Prerequisites already links a board setup guide, don't repeat the board setup unless the tutorial needs a new setup. |
 | 7a | Install [Library name] Library | H3 | When a library is installed | Numbered install steps in the board's own tool, with a screen capture per step. Arduino IDE: Library Manager incl. the "Install All" dependency prompt; others: Thonny's package manager, MakeCode Extensions, pip/apt on Raspberry Pi OS. |
 | 8 | Sample Code | H2 | MUST | A line such as "Upload the following code to your [board]:" + public GitHub Gist embed. |
-| 8a | Key Code Explanation | H3 | MUST | One bullet per key line/block: `code`: what it does. |
+| 8a | Key Code Explanation | H3 | MUST | One bullet per key line/block: **name in bold**: what it does (bold, not `<code>`: see §1b Editor HTML). |
 | 9 | Testing & Validation | H2 | MUST | Numbered steps to run and verify; inline troubleshooting note where a step often fails. |
 | 9a | Expected Results | H3 | MUST | Expected outputs: Serial Monitor or terminal lines, LEDs, sounds, browser view. |
 | 10 | Demo / Results | H2 | MUST | Photos or a YouTube embed of the working project; screen captures of dashboards, the Serial Monitor or the terminal. |
@@ -134,13 +142,32 @@ and link in the `<!-- TELEGRAM BANNER: … -->` placeholder.
 | Font | Editor default font and size only; never other fonts or sizes such as 16 or 20. Text copied from Word, Google Docs, ChatGPT or a website is pasted with Paste as plain text. |
 | Headings | Section titles Heading 2, sub-titles Heading 3. No bold text used as a heading, no bold on headings (Troubleshooting H3s included). Title case, not capitals ("Introduction", not "INTRODUCTION"). |
 | Start of the body | Straight into the Introduction heading: no title, horizontal line or picture before it. Prerequisites is its own H2. |
-| Spacing | One empty line between paragraphs, text and pictures, two pictures, code and pictures, and before and after every table (e.g. a wiring table and the **Note:** under it). Nothing touches or overlaps. |
+| Spacing | One empty line between paragraphs, text and pictures, two pictures, code and pictures, and before and after every table (e.g. a wiring table and the **Note:** under it). Nothing touches or overlaps. In HTML the empty line is `<p>&nbsp;</p>` (see Editor HTML below). |
+| Code in text | Never Computer Code style (`<code>`) inside a sentence: the site turns it into a full-width code box. Values and names in sentences are plain text or bold. |
 | Pictures | Through Browse Server only (PNG or JPEG, uploaded into the SEO URL folder); never hotlinked or pasted from Google Docs, Word or a website (they keep an outside link such as googleusercontent.com and break into a red X; a common cause of missing pictures). Steps: Image button > Browse Server > S3 Image Manager opens on tutorial/<seo-url> > blue Upload > click the file to insert. 800 px wide at most: wider ones resized with the ratio lock on, narrower ones never enlarged. No stretched or blurred pictures; no picture of code already shown as text. |
 | Links | Every link New Window (_blank). |
 | Banner | Centred, 900 px wide, ratio locked, inserted via Browse Server, Link tab = the community's Telegram link, Target New Window (_blank). Check it opens the right group. |
 | Length | Too long → split into a series (Parent + Sort Order 1, 2, 3…). |
 
-In reviews of a live or saved page, check: `text-align: justify` on body paragraphs; `<h2>` for sections (not `<p><strong>`); `<strong>`/`<b>` inside headings; inline `font-family`/`font-size` styles; `<hr>` or content before the first `<h2>`; consecutive blocks with no spacing (a `<table>` directly after or before a paragraph or Note included); `<img>` with `src` outside the tutorial's image folder (e.g. googleusercontent.com); image widths over 800 px or enlarged/stretched; banner width ≠ 900 px or not centred; `<a>` without `target="_blank"`.
+### Editor HTML on my.cytron.io (MUST; learned from live previews, Oct 2026)
+
+- **Empty line = `<p>&nbsp;</p>`.** That is what the editor saves when you press Enter on an empty line. Blank lines
+  typed in the Source view are ignored, so without it the page shows no gap. Put exactly one between every two blocks:
+  paragraphs, lists, tables, the Note under a table, code paragraphs, images, Gist and YouTube embeds, and the banner;
+  and one before every H2 and H3. None directly under a heading (the heading sits on its first block), none before the
+  first H2, never two in a row.
+- **`<code>` is always a code box.** The site turns every `<code>` element into a full-width code box with a Copy
+  button, so `<code>` inside a sentence splits the sentence into pieces, and a short word can vanish from it. Inside
+  sentences, write pin names, values, addresses, file and function names in plain text or `<strong>` (e.g.
+  **0x3C**, **Wire.h**). Key Code Explanation bullets start with `<strong>name</strong>:`. Commands, terminal and
+  Serial Monitor output go in their own paragraph, `<p><code>line 1<br>line 2</code></p>` (Computer Code style,
+  Shift+Enter between lines), with the text before and after split into separate paragraphs.
+- **Replacing a draft:** in the Source view select all, delete, paste the whole new body, Save, then reopen the Source
+  view and check the `<p>&nbsp;</p>` lines are still there. Keep one current draft file and number new versions
+  (`-v2`, `-v3`) so an old copy is never pasted by mistake.
+
+In reviews of a live or saved page, check: `text-align: justify` on body paragraphs; missing `<p>&nbsp;</p>` between
+blocks; `<code>` inside a sentence (renders as a broken-up code box); `<h2>` for sections (not `<p><strong>`); `<strong>`/`<b>` inside headings; inline `font-family`/`font-size` styles; `<hr>` or content before the first `<h2>`; consecutive blocks with no spacing (a `<table>` directly after or before a paragraph or Note included); `<img>` with `src` outside the tutorial's image folder (e.g. googleusercontent.com); image widths over 800 px or enlarged/stretched; banner width ≠ 900 px or not centred; `<a>` without `target="_blank"`.
 
 ## 2. Title, intro, writing quality
 
@@ -175,7 +202,7 @@ In reviews of a live or saved page, check: `text-align: justify` on body paragra
 - MUST: long code as a public GitHub Gist, pasted via the editor's Source view. **Staff use their own GitHub account; interns
   use the intern GitHub account** (access from their supervisor; authentication code from Mat Liven). Never the account of someone outside Cytron. Accounts of
   ex-staff: suggest copying the Gist to a current Cytron account in a revamp.
-- MUST: short command lines in the editor's Computer Code style, Shift+Enter for new lines.
+- MUST: short command lines in the editor's Computer Code style, Shift+Enter for new lines, each block in its own paragraph; never Computer Code inside a sentence (§1b).
 - MUST: state the IDE/toolchain version and board package (e.g. "esp32 by Espressif Systems 3.3.12"); SHOULD: library versions.
 - SHOULD: header comment (Project, Board e.g. Cytron Maker ESP32, main module).
 - MUST: credentials as placeholders per §0, replaced by the reader in a Testing & Validation step.
@@ -192,7 +219,7 @@ Forgot Password); Tutorial > Tutorials > +; set the SEO URL first.
 | Tab | Field | Rule |
 |---|---|---|
 | General | Post Name | §2, ≤60 chars. |
-| General | Pitch (Meta Tag Description) | Not shown on the page: one complete sentence, "Build a/an [project] using [main board] and [main part] to [outcome].", ≤160 chars, unique. Count with code. |
+| General | Pitch (Meta Tag Description) | Not shown on the page: one complete sentence, "Build a/an [project] using [main board] and [main part] to [outcome]." (Protip: may start with the outcome, e.g. "Fix …"), ≤160 chars, unique. Count with code. |
 | General | Description | The body (§1). |
 | General | Post Tags | Board family and main board first (e.g. ESP32, Maker ESP32), then main modules, protocols, topic. |
 | General | Meta Tag Keywords | 3–8 keywords, comma-separated; never the Pitch. |
@@ -267,7 +294,8 @@ Formatting and layout
 - [ ] Every paragraph justified; default font and size; copied text pasted as plain text
 - [ ] Section titles H2, sub-titles H3; no bold on headings; no headings in capitals
 - [ ] Body starts with the Introduction heading: no title, line or picture before it
-- [ ] One empty line between paragraphs, pictures, code and tables (the Note under a table included); nothing overlaps
+- [ ] One empty line (`<p>&nbsp;</p>`) between paragraphs, pictures, code and tables (the Note under a table included) and before every heading; none directly under a heading; nothing overlaps
+- [ ] No Computer Code (`<code>`) inside a sentence; commands and output in their own Computer Code paragraph
 - [ ] Every picture via Browse Server (PNG/JPEG), ≤800 px wide, not enlarged, stretched or blurred
 - [ ] No picture of code already shown as text
 - [ ] Telegram banner centred, 900 px, linked to the right group, New Window (_blank)
@@ -293,7 +321,7 @@ Products
 Admin, SEO and media
 - [ ] Every WebAdmin field filled (General, Data, Links, Image)
 - [ ] Project Level matches the §5 definitions
-- [ ] Pitch one complete "Build a…" sentence, ≤160 chars, unique
+- [ ] Pitch one complete "Build a…" sentence (Protip: may start with the outcome, e.g. "Fix…"), ≤160 chars, unique
 - [ ] Meta Tag Keywords 3–8 keywords only
 - [ ] No `index.php` URLs; every link opened and working, incl. hub and prev/next
 - [ ] Inline images ≤800 px wide (wider resized, ratio locked; narrower not enlarged), ~300 KB, in the SEO URL folder, alt text, hyphenated names
