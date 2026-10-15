@@ -247,8 +247,8 @@ td.k{font-weight:500;white-space:nowrap}
 .acc details[open] summary::after{content:"−"}
 .acc .in{padding:0 2px 20px;display:grid;gap:16px}
 .steps{counter-reset:s;display:grid;gap:8px;max-width:68ch}
-.steps li{counter-increment:s;display:grid;grid-template-columns:24px minmax(0,1fr);gap:10px;font-size:14.5px;color:var(--ink-2)}
-.steps li::before{content:counter(s);font-family:var(--f-mono);font-size:12px;color:var(--ink-3);padding-top:2px}
+.steps li{counter-increment:s;position:relative;padding-left:34px;font-size:14.5px;color:var(--ink-2)}
+.steps li::before{content:counter(s);position:absolute;left:0;top:2px;font-family:var(--f-mono);font-size:12px;color:var(--ink-3)}
 figure{margin:0}
 video{display:block;width:100%;max-width:100%;height:auto;border-radius:8px;border:1px solid var(--line);background:#000}
 figcaption{font-size:13px;color:var(--ink-3);margin-top:8px}
