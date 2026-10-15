@@ -41,7 +41,9 @@ MakeCode, etc.), Getting Started guide and Telegram community.
 - **Review**: check §0 first, then the checklist (§8). Report failures as a table (Rule · MUST/SHOULD · What's wrong · Fix),
   credentials first, then other MUST items. Quote the exact offending text or URL, **except a credential**: name its type,
   where it sits (page body, Gist file and line, screenshot) and show it masked (first 3 characters + ••••). Don't rewrite the
-  whole tutorial unless asked. Don't be strict about wording or optional sections: flag real misses, not close equivalents.
+  whole tutorial unless asked. Don't be strict about wording or optional sections: flag real misses, not close equivalents. Section lengths (sentence
+  counts) are guidance, not a MUST: flag length only when padding makes the page hard to read, never a section that is
+  longer because the topic needs it.
 
 ## 0. Credentials and secrets: zero tolerance (all MUST)
 
@@ -85,8 +87,8 @@ literal strings passed to `WiFi.begin()` or `.connect()`. Check rendered Gists a
 
 | # | Heading | Level | Required | Must contain |
 |---|---|---|---|---|
-| 1 | Introduction | H2 | MUST | Keep it short, 2–3 sentences: open with the reader's problem, then what the reader builds and why it matters. Right after the paragraph: the video tutorial if there is one, or an optional hero image. |
-| 2 | Disclaimer / Safety Notes | H2 | Optional (§6) | Recommended when a safety trigger applies. Keep it short, 1–2 sentences: the concrete risk and its precaution (electrical, battery or heat, warranty, classroom supervision). |
+| 1 | Introduction | H2 | MUST | Short by default (usually 2–3 sentences; longer when the topic needs more context): open with the reader's problem, then what the reader builds and why it matters. Right after the paragraph: the video tutorial if there is one, or an optional hero image. |
+| 2 | Disclaimer / Safety Notes | H2 | Optional (§6) | Recommended when a safety trigger applies. Short by default (usually 1–2 sentences): the concrete risk and its precaution (electrical, battery or heat, warranty, classroom supervision). |
 | 3 | Prerequisites | H2 | MUST | Link Getting Started guides/basics; name software, accounts, firmware or SDKs to install. |
 | 4 | Objectives (or Overview) | H2 | MUST | What the reader will learn or build. No length limit. |
 | 5 | List of Components (or Hardware Components / Hardware Required) | H2 | MUST | Numbered list, product name linked, new window; quantity only when more than one unit (e.g. x2); name and link only, no product pictures (§3). |
@@ -99,7 +101,7 @@ literal strings passed to `WiFi.begin()` or `.connect()`. Check rendered Gists a
 | 9a | Expected Results | H3 | MUST | Expected outputs: Serial Monitor or terminal lines, LEDs, sounds, browser view. |
 | 10 | Demo / Results | H2 | MUST | Photos or a YouTube embed of the working project; screen captures of dashboards, the Serial Monitor or the terminal. |
 | 11 | Troubleshooting & Extra Tips | H2 | Optional | If included: H3s, each a symptom as the reader sees it, bullet fixes (power, baud rate, library conflicts, sensor orientation, calibration). |
-| 12 | Conclusion | H2 | MUST | Keep it short, 2 sentences: what the reader built, and what to try next (link a related tutorial). |
+| 12 | Conclusion | H2 | MUST | Short by default (usually 2 sentences): what the reader built, and what to try next (link a related tutorial). |
 | 13 | Downloads & Assets | H2 | Optional | ZIP of diagrams/configs, repos, datasets, example flows, STL/3D files. |
 | 14 | Telegram community banner | no heading | MUST | One banner at the end, centred, 900 px wide, image linked (new window) to the matching community. |
 
@@ -172,7 +174,7 @@ blocks; `<code>` inside a sentence (renders as a broken-up code box); `<h2>` for
 ## 2. Title, intro, writing quality
 
 - Post Name (MUST): short, clear tutorial title, ≤60 characters; avoid numbers (e.g. version numbers) unless required; not repeated in the body.
-- Intro (MUST): keep it short, 2–3 sentences, what and why; name the main board (e.g. Maker ESP32, Raspberry Pi 5, micro:bit) and the main part, and link the board (first mention); link anything readers may want to learn more about (e.g. MediaPipe, ROS 2) to its official page. SHOULD open with the reader's problem, not "In this tutorial…".
+- Intro (MUST): what and why, short by default (usually 2–3 sentences; longer when the reader needs more context, e.g. a Protip that explains a common problem); name the main board (e.g. Maker ESP32, Raspberry Pi 5, micro:bit) and the main part, and link the board (first mention); link anything readers may want to learn more about (e.g. MediaPipe, ROS 2) to its official page. SHOULD open with the reader's problem, not "In this tutorial…".
 - Video tutorial (if any): directly after the Introduction paragraph.
 - Cover image / thumbnail (MUST): minimalist; clear pictures of the products used only, on a plain background (no photo of the real build needed); landscape 16:9; file named after the SEO URL.
 - Writing (MUST): complete-beginner language, active voice, short sentences; full product names ("Raspberry Pi 5", not "Pi 5"); grammar and spelling checked across the whole tutorial (e.g. Grammarly). Read it back as a beginner: hard to read → simplify; too long → split into a series.
@@ -252,7 +254,7 @@ Other SEO and media rules (MUST):
 
 ## 6. Safety notes (optional; right after Introduction, recommended when a trigger applies)
 
-Open with "This project is an educational prototype designed for learning…", then the concrete risk and precaution. Keep the whole note to 1–2 sentences: pick only the triggers that apply.
+Open with "This project is an educational prototype designed for learning…", then the concrete risk and precaution. Keep the note short (usually 1–2 sentences): pick only the triggers that apply.
 
 | Trigger | Note must say |
 |---|---|
@@ -304,7 +306,7 @@ Formatting and layout
 
 Title and intro
 - [ ] Post Name short and clear, ≤60 chars, no numbers unless required, not repeated in the body
-- [ ] Kept short: Introduction 2–3 sentences, Safety Notes 1–2, wiring text 1–2 plus a short Note, Conclusion 2
+- [ ] Kept short where it can be: Introduction, Safety Notes, wiring text and Conclusion without padding (sentence counts in §1 are a guide, not a limit)
 - [ ] Thumbnail 16:9, ~300 KB (max 1 MB), title in image, minimalist, product pictures only
 - [ ] Proofread (Grammarly)
 

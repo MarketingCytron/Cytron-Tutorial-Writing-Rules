@@ -478,7 +478,7 @@ figure.badvid figcaption b{color:var(--accent)}
           <div class="fr" data-find="Store Name tick every store TH VN"><div class="fl">Store Name</div><div><p class="rule"><strong>Tick every store first.</strong> Untick a store only when a Related Product isn't sold there.</p></div></div>
           <div class="fr" data-find="Parent series hub"><div class="fl">Parent</div><div><p class="rule">Series only: the main post (for example the series hub) this part belongs to. Empty for a standalone tutorial.</p></div></div>
           <div class="fr" data-find="Related Post"><div class="fl">Related Post</div><div><p class="rule">Existing posts on the same topic, e.g. Getting Started with Maker ESP32.</p></div></div>
-          <div class="fr" data-find="Related Product variation product code kit"><div class="fl">Related Product</div><div><p class="rule"><strong>Exactly the items in List of Components</strong>, no more and no less. A kit tutorial attaches the kit. Use the variation product code (the parent product with options) where one exists.</p><p class="rule">This fills the Hardware Components block below the body.</p></div></div>
+          <div class="fr" data-find="Related Product variation product code kit"><div class="fl">Related Product</div><div><p class="rule"><strong>Exactly the items in List of Components</strong>, no more and no less. A kit tutorial attaches the kit. A Protip can attach only the main board. Use the variation product code (the parent product with options) where one exists.</p><p class="rule">This fills the Hardware Components block below the body.</p></div></div>
         </div>
       </div>
 
@@ -781,7 +781,7 @@ var FMT=[
  ['Start','Start with the Introduction heading. No page title, line or picture before it.'],
  ['Spacing','Leave one empty line (press Enter once) between paragraphs, text and a picture, two pictures, code and a picture, before and after every table (e.g. a wiring table and the Note under it), and before every heading. No empty line right under a heading. Nothing touches: check it in Preview.'],
  ['Code in text','Use Computer Code only for a whole command or output on its own line. Inside a sentence, write pin names, values and file names (e.g. GPIO21, 0x3C, Wire.h) as plain text or bold: on the website, Computer Code always becomes a separate code box and breaks the sentence.'],
- ['Pictures','Browse Server only, PNG or JPEG. 800 px wide at most with the ratio lock on; never enlarge a smaller picture. No stretched or blurred pictures, no picture of code already shown as text.'],
+ ['Pictures','Browse Server only, PNG or JPEG. 800 px wide at most with the ratio lock on; never enlarge a smaller picture. No stretched or blurred pictures, no picture of code already shown as text. A picture from another Cytron tutorial can be reused.'],
  ['Links','Every link opens in New Window (_blank).'],
  ['Banner','Centred, 900 px wide, linked to its community, New Window.'],
  ['Length','Too long? Split it into a series with Parent and Sort Order.']
@@ -804,7 +804,7 @@ var PARTS=[
  ['M','cytron.io links use the <strong>SEO URL only</strong>: protocol <code>&lt;other&gt;</code>, path such as <code>/p-maker-esp32</code>.','So a reader on another Cytron store stays in their own store.'],
  ['M','Every link opens in New Window (_blank).'],
  ['M','A training-kit tutorial lists the kit, not each part.'],
- ['M','List every item the build uses, cameras and cables included, and nothing else. It must match Related Product exactly.'],
+ ['M','List every item the build uses, cameras and cables included, and nothing else. It must match Related Product exactly.','A Protip can attach only the main board in Related Product.'],
  ['M','Link a product even when the Malaysia store doesn\'t sell it, and link it wherever it is named.','Readers on other stores, such as SG, can still buy it.'],
  ['S','A product family with several versions may link to a store search.','SPG30-XX* links to a search for spg30.'],
  ['M','Note regional alternatives when a product differs between the ticked stores.'],
@@ -828,12 +828,12 @@ var CODE=[
 var MEDIA=[
  ['M','<strong>Internal links:</strong> SEO URL only, never <code>index.php?route=eblog/epost…</code>. Always link the Getting Started prerequisite.'],
  ['M','<strong>External links:</strong> official docs only, New Window. Datasheets as a <code>static.cytron.io</code> PDF or a Google Docs <code>/preview</code> link, never <code>/edit</code>.'],
- ['M','<strong>A graphic per step</strong> wherever a step needs one: screen capture, schematic or assembly photo.'],
- ['M','<strong>Pictures through Browse Server only</strong>, as PNG or JPEG, uploaded into the SEO URL folder. Never paste a picture from Google Docs, Word or a website.','It keeps an outside link and breaks into a red X. See How-tos for the video.'],
+ ['M','<strong>A graphic per step</strong> wherever a step needs one: screen capture, schematic or assembly photo.','A Protip only needs pictures where they help, e.g. a diagram.'],
+ ['M','<strong>Pictures through Browse Server only</strong>, as PNG or JPEG, uploaded into the SEO URL folder. A picture already uploaded to another Cytron tutorial can be reused as it is. Never paste a picture from Google Docs, Word or a website.','It keeps an outside link and breaks into a red X. See How-tos for the video.'],
  ['M','<strong>800 px wide at most</strong> with the ratio lock on; leave a narrower picture at its own size. About 300 KB, 1 MB at most.'],
  ['M','Diagrams and assembly photos show every connection, labelled where needed.'],
  ['M','File names lowercase, hyphenated, starting with the project name.','<code>esp32-water-tank-dashboard.png</code>, not <code>screenshot-2025-06-04-164317.png</code>'],
- ['M','Alt text on every picture, 5 to 15 words saying what it shows.','"Water tank web dashboard showing 75% level on a phone"'],
+ ['O','Alt text is optional. If you add it, use 5 to 15 words saying what the picture shows.','"Water tank web dashboard showing 75% level on a phone"'],
  ['M','YouTube: Share > Embed, paste with the Embedded YouTube Video button.']
 ];
 var SAFETY=[
@@ -869,11 +869,11 @@ var TG=[
  ['General maker projects, none of the above','Maker Gathering','http://qr.io/r/n7EwBk','']
 ];
 var CHECK=[
- ['Structure',['Every Must section present, in the structure\'s order (close equivalent names and extra H2s are fine)','Disclaimer / Safety Notes, Troubleshooting & Extra Tips and Downloads & Assets included where useful','Labelled system diagram at native ratio, plus a pin-to-pin wiring table','A graphic wherever a step needs one','Demo / Results has photos, a YouTube embed or screen captures','Conclusion at the end','One Telegram banner at the end, linked to the matching community','No empty headings or leftover placeholders']],
+ ['Structure',['Every Must section present, in the structure\'s order (close equivalent names and extra H2s are fine)','Disclaimer / Safety Notes, Troubleshooting & Extra Tips and Downloads & Assets included where useful','Labelled system diagram at native ratio, plus a pin-to-pin wiring table','A graphic wherever a step needs one (Protip: where it helps)','Demo / Results has photos, a YouTube embed or screen captures','Conclusion at the end','One Telegram banner at the end, linked to the matching community','No empty headings or leftover placeholders']],
  ['Formatting and layout',['Every paragraph justified; default font and size; copied text pasted as plain text','Section titles Heading 2, sub-titles Heading 3; no bold on headings; no headings in capitals','Body starts with the Introduction heading: no title, line or picture before it','One empty line between paragraphs, pictures, code and tables (the Note under a table included) and before every heading; none right under a heading; nothing overlaps','Computer Code only for whole command lines, never for a word inside a sentence','Every picture inserted through Browse Server, 800 px wide at most, not enlarged, stretched or blurred','No picture of code that is already on the page as text','Telegram banner centred, 900 px wide, New Window','Video tutorial (if any) right after the Introduction','Read back as a beginner; split into parts if too long']],
  ['Title and intro',['Post Name short and clear, 60 characters or fewer, no numbers unless required','Kept short where it can be: Introduction, Safety Notes, wiring text and Conclusion without padding','Thumbnail 16:9, about 300 KB, title in the image, minimalist, product pictures only','Proofread for grammar and spelling']],
- ['Products',['Every item linked by its product name (quantity only when more than one), clearly the right product, no product pictures','cytron.io links use the SEO URL only, protocol <other>','Every link opens in a New Window','Product links work on every ticked store; regional alternatives noted','Main board linked at its first mention; every product linked where it is named','No prices or discounts in the body','Related Product holds exactly the items in List of Components','No discontinued products']],
- ['Admin, SEO and media',['Every WebAdmin field filled: General, Data, Links and Image','Project Level matches Beginner, Intermediate or Advanced','Pitch is one "Build a…" sentence (a Protip can start with the outcome, e.g. "Fix…"), 160 characters or fewer','Meta Tag Keywords holds 3 to 8 keywords','No index.php URLs; every link opened and working','Pictures in the SEO URL folder, with alt text and hyphenated names','Gist and YouTube embeds render correctly']],
+ ['Products',['Every item linked by its product name (quantity only when more than one), clearly the right product, no product pictures','cytron.io links use the SEO URL only, protocol <other>','Every link opens in a New Window','Product links work on every ticked store; regional alternatives noted','Main board linked at its first mention; every product linked where it is named','No prices or discounts in the body','Related Product holds exactly the items in List of Components (a Protip can hold only the main board)','No discontinued products']],
+ ['Admin, SEO and media',['Every WebAdmin field filled: General, Data, Links and Image','Project Level matches Beginner, Intermediate or Advanced','Pitch is one "Build a…" sentence (a Protip can start with the outcome, e.g. "Fix…"), 160 characters or fewer','Meta Tag Keywords holds 3 to 8 keywords','No index.php URLs; every link opened and working','New pictures in the SEO URL folder with hyphenated names (reusing a picture from another Cytron tutorial is fine)','Gist and YouTube embeds render correctly']],
  ['Code and safety',['Long code in a public Gist (staff: own account; interns: intern account)','IDE or toolchain version stated','Safety notes, if included, name the concrete risk and precaution','Tested by following the published steps','Peer review completed (recommended)']],
  ['Credentials',['Every credential in the body, Gists, downloads and repos is a placeholder','Body, Gists and downloads searched for password, ssid, token, auth, key, secret, api, bot','No credential visible in any screenshot, GIF or video','No Gist or repo revision ever held a real value, or it has been revoked','Tokens used for screenshots and video revoked or regenerated']],
  ['After publishing',['Within 7 days: every link, embed and the browser-tab title checked on the live page']]
@@ -938,7 +938,7 @@ function seg(id,fn){var b=$$('#'+id+' button');b.forEach(function(x,i){x.addEven
 var LVL=['A microcontroller with 1 or 2 sensors, or basic Raspberry Pi functions.','2 or more sensors, or Raspberry Pi software projects.','AI or Industry projects. There are only these three levels.'];
 seg('seg-lvl',function(i){$('#lvl-d').textContent=LVL[i]});$('#lvl-d').textContent=LVL[0];
 seg('seg-ctx');
-var TYPE={'Tutorial':'A step-by-step build or how-to. Most posts.','Project':'A finished build shown as a showcase.','Protip':'A short explainer, troubleshooting guide or how-to. Lighter structure: Introduction, What You Need, numbered steps, Conclusion and the banner. Add code, wiring or testing sections only when it has them.','News':'News, announcements, events and stories.','Uncategorised':'Avoid unless your supervisor asks.'};
+var TYPE={'Tutorial':'A step-by-step build or how-to. Most posts.','Project':'A finished build shown as a showcase.','Protip':'A short explainer, troubleshooting guide or how-to. Lighter structure: Introduction, What You Need, numbered steps, Conclusion and the banner. Add code, wiring or testing sections only when it has them. Related Product can be just the main board, and pictures go where they help: no need for hardware photos or screenshots when the text already shows the result.','News':'News, announcements, events and stories.','Uncategorised':'Avoid unless your supervisor asks.'};
 var STATUS={'Enabled':'Public and listed.','Disabled':'Hidden from everyone.','Enabled but hide in catalog':'Unlisted: reachable by its SEO URL only.'};
 function sel(id,map,out){var e=$(id),f=function(){$(out).textContent=map[e.value]};e.addEventListener('change',f);f()}
 sel('#f-type',TYPE,'#type-d');sel('#f-status',STATUS,'#status-d');
