@@ -12,14 +12,7 @@
   --f-mono:"Geist Mono", ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
   --top:56px;
 }
-@media (prefers-color-scheme: dark){
-  :root:not([data-theme="light"]){
-    --bg:#0E1113; --panel:#151A1D; --ink:#ECEFF1; --ink-2:#A8B0B6; --ink-3:#6C757C;
-    --line:#242A2F; --line-2:#323A40; --accent:#FF4B59; --accent-ink:#1A0508; --accent-wash:#2A1417;
-    --ok:#3CCB8C; --ok-wash:#11291F; --code-bg:#0A0D0F; --code-ink:#E4E8EB; --shade:rgba(0,0,0,.6);
-    color-scheme:dark;
-  }
-}
+/* Light by default; dark only when the reader switches it on with the theme button. */
 :root[data-theme="dark"]{
   --bg:#0E1113; --panel:#151A1D; --ink:#ECEFF1; --ink-2:#A8B0B6; --ink-3:#6C757C;
   --line:#242A2F; --line-2:#323A40; --accent:#FF4B59; --accent-ink:#1A0508; --accent-wash:#2A1417;
@@ -1049,7 +1042,7 @@ route();
 
 /* ---------- theme ---------- */
 var root=document.documentElement,saved=store('ctg-theme');if(saved)root.setAttribute('data-theme',saved);
-$('#theme').addEventListener('click',function(){var dark=root.getAttribute('data-theme')?root.getAttribute('data-theme')==='dark':matchMedia('(prefers-color-scheme: dark)').matches;var n=dark?'light':'dark';root.setAttribute('data-theme',n);store('ctg-theme',n)});
+$('#theme').addEventListener('click',function(){var dark=root.getAttribute('data-theme')==='dark';var n=dark?'light':'dark';root.setAttribute('data-theme',n);store('ctg-theme',n)});
 
 /* ---------- search ---------- */
 function labelOf(el){if(el.tagName==='TR')return $$('td',el).map(function(t){return t.textContent}).join(': ');
