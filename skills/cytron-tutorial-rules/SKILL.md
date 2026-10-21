@@ -1,5 +1,5 @@
 ---
-name: "cytron-tutorial-rules"
+name: cytron-tutorial-rules
 description: "Apply Cytron's Tutorial Writing Rules when drafting, revamping or reviewing any tutorial for my.cytron.io/tutorial: credentials, structure, formatting, product links, SEO, safety, pre-publish checklist."
 ---
 
@@ -36,7 +36,8 @@ MakeCode, etc.), Getting Started guide and Telegram community.
   Conclusion and the Telegram banner are enough. Objectives, System Diagram & Wiring, Sample Code + Key Code Explanation,
   Testing & Validation and Demo / Results apply only where the Protip includes a build or code; a decision table
   ("what you see → what it means → go to step") can replace Testing & Validation. Credentials (§0), formatting (§1b),
-  product links (§3) and WebAdmin fields (§5) apply, with two Protip exceptions: Related Product may hold only the main board (or the one or two products
+  product links (§3) and WebAdmin fields (§5) apply, with three Protip exceptions: the Pitch may start with the outcome
+  ("Fix …", "Choose …") instead of "Build a …"; Related Product may hold only the main board (or the one or two products
   the tip is about), not every item in What You Need; and pictures are added where they help (a diagram, a reused
   picture), with no need for real hardware photos or screenshots when the text or a code block already shows the result.
 - **Review**: check §0 first, then the checklist (§8). Report failures as a table (Rule · MUST/SHOULD · What's wrong · Fix),
@@ -45,24 +46,6 @@ MakeCode, etc.), Getting Started guide and Telegram community.
   whole tutorial unless asked. Don't be strict about wording or optional sections: flag real misses, not close equivalents. Section lengths (sentence
   counts) are guidance, not a MUST: flag length only when padding makes the page hard to read, never a section that is
   longer because the topic needs it.
-
-### Team decisions: accepted, don't flag (15 Oct 2026)
-
-These override anything stricter below. In reviews, never raise them as misses.
-
-- **Post Name length:** ≤60 characters is the target; up to 70 is acceptable. Flag only above 70.
-- **Pitch:** the writer's choice. Any wording or format is fine; the "Build a … using … to …" sentence is only a suggestion. Only check that it is filled in.
-- **Highlighted sections:** a section the writer styles on purpose to make it stand out (e.g. a coloured Prerequisites box with a larger title, a download box, a styled summary table) is the writer's creativity. Don't flag its heading level or font size.
-- **Video position:** right after the Introduction, or at the end under Demo / Results / Expected Output to show the result. Both are fine.
-- **3D and download files:** Cytron storage is not required. An outside site (Thingiverse, Printables, GitHub, etc.) is fine, as long as the owner or designer is credited on the page.
-- **Alt text:** optional. Don't flag missing alt text.
-- **Series thumbnails (16 Oct 2026):** a series part may use the hub's thumbnail. A separate thumbnail per part is optional; don't flag a shared one.
-- **High-impact only (writer messages and re-checks):** report only the obvious issues that hurt the tutorial:
-  a real credential or personal detail (token, password, real person's name or face) in text, code or screenshots;
-  anything that breaks the build or misleads the reader (code bug, wrong wiring, unsafe voltage, text that doesn't match
-  the code); broken or placeholder links; products missing from Related Product (customers can't buy them); a missing
-  Telegram banner; a missing section the reader needs to finish the build (e.g. no code, no wiring). Skip cosmetic points
-  (justify, bold vs H3, image file names, keywords, minor grammar, versions) unless the user asks for the full review.
 
 ## 0. Credentials and secrets: zero tolerance (all MUST)
 
@@ -106,9 +89,9 @@ literal strings passed to `WiFi.begin()` or `.connect()`. Check rendered Gists a
 
 | # | Heading | Level | Required | Must contain |
 |---|---|---|---|---|
-| 1 | Introduction | H2 | MUST | Short by default (usually 2–3 sentences; longer when the topic needs more context): open with the reader's problem, then what the reader builds and why it matters. Right after the paragraph: the video tutorial if there is one (or put it under Demo / Results to show the result), or an optional hero image. |
+| 1 | Introduction | H2 | MUST | Short by default (usually 2–3 sentences; longer when the topic needs more context): open with the reader's problem, then what the reader builds and why it matters. Right after the paragraph: the video tutorial if there is one, or an optional hero image. |
 | 2 | Disclaimer / Safety Notes | H2 | Optional (§6) | Recommended when a safety trigger applies. Short by default (usually 1–2 sentences): the concrete risk and its precaution (electrical, battery or heat, warranty, classroom supervision). |
-| 3 | Prerequisites | H2 (or a highlighted box) | MUST | Link Getting Started guides/basics; name software, accounts, firmware or SDKs to install. |
+| 3 | Prerequisites | H2 | MUST | Link Getting Started guides/basics; name software, accounts, firmware or SDKs to install. |
 | 4 | Objectives (or Overview) | H2 | MUST | What the reader will learn or build. No length limit. |
 | 5 | List of Components (or Hardware Components / Hardware Required) | H2 | MUST | Numbered list, product name linked, new window; quantity only when more than one unit (e.g. x2); name and link only, no product pictures (§3). |
 | 6 | System Diagram & Wiring | H2 | MUST | Labelled block/circuit diagram (Canva, Fritzing) at native aspect ratio + pin-to-pin wiring table ([Main board] · [Module] · Function). Keep the text short: 1–2 sentences before the table and a 1–2 sentence **Note:** for mounting tips or other ways to connect, with one empty line before and after the table. A hardware assembly photo with every connection visible where it helps. |
@@ -121,7 +104,7 @@ literal strings passed to `WiFi.begin()` or `.connect()`. Check rendered Gists a
 | 10 | Demo / Results | H2 | MUST | Photos or a YouTube embed of the working project; screen captures of dashboards, the Serial Monitor or the terminal. |
 | 11 | Troubleshooting & Extra Tips | H2 | Optional | If included: H3s, each a symptom as the reader sees it, bullet fixes (power, baud rate, library conflicts, sensor orientation, calibration). |
 | 12 | Conclusion | H2 | MUST | Short by default (usually 2 sentences): what the reader built, and what to try next (link a related tutorial). |
-| 13 | Downloads & Assets | H2 | Optional | ZIP of diagrams/configs, repos, datasets, example flows, STL/3D files (Cytron storage or an outside site with the owner credited). |
+| 13 | Downloads & Assets | H2 | Optional | ZIP of diagrams/configs, repos, datasets, example flows, STL/3D files. |
 | 14 | Telegram community banner | no heading | MUST | One banner at the end, centred, 900 px wide, image linked (new window) to the matching community. |
 
 The Hardware Components block and Related Posts below the body come from the Links tab, not the body. No empty headings.
@@ -129,7 +112,7 @@ Older pages use "List of Components / BOM"; new tutorials use "List of Component
 
 Telegram banners: download the named file from the Community Banner folder
 (https://drive.google.com/drive/folders/186p2woTflBfHwUBpQwDWdBDOdYqAaUaE); all channels: https://my.cytron.io/cytrons-telegram-channel.
-Pick by the main board, not the sensor. In drafts, name the banner file
+Pick by the main board, not the sensor. Maker Gathering only when no product community fits. In drafts, name the banner file
 and link in the `<!-- TELEGRAM BANNER: … -->` placeholder.
 
 | Use for | Community | Link | Banner file |
@@ -142,23 +125,27 @@ and link in the `<!-- TELEGRAM BANNER: … -->` placeholder.
 | NVIDIA Jetson | NVIDIA Jetson | http://qr.codes/b2TBX5 | NVIDIA Jetson Telegram.png |
 | RDK boards (RDK X5 etc.) | RDK Series Community | http://qr.codes/0H84mK | RDK-telegram-footer.png |
 | micro:bit | micro:bit | https://qr.link/owmYeg | microbit Telegram.png |
+| EDU:BIT | EDU:BIT Support Group | https://t.me/edubit_trainers | none yet |
 | ZOOM:BIT | ZOOM:BIT Support Group | https://t.me/zoombit_support | Zoombit Support.png |
 | SUMO:BIT | SUMO:BIT Support Group | https://t.me/sumobit_support | Sumobit Banner.png |
 | SUMO Drone, school robotics, STEM | STEM Robotik | http://qr.codes/YO63x0 | SUMO_Drone_STEM Robotik.png |
+| CircuitPython projects | CircuitPython Malaysia | https://t.me/CircuitPythonMY | none yet |
 | 3D printing | 3D Printing | http://qr.io/r/pgVcQB | 3D Printing Telegram.png |
 | Robomania competition tutorials | Robomania 2025 | https://t.me/robomania_my | Robomania_Telegram_Banner.png |
+| Only tutorials related to RAC (a Cytron event) | RAC Helpdesk | https://t.me/RAC_helpdesk | none yet |
 | Cytron Learning Hub content | Cytron Learning Hub | http://qr.link/G7fcUA | Cytron Learning Hub.png |
+| General maker projects, none of the above | Maker Gathering | http://qr.io/r/n7EwBk | none yet |
 
-Only communities with a banner in the folder are listed; a group without a banner is not used. If none fits, the writer asks the supervisor. Never invent a Telegram link.
+"none yet" = no banner in the folder; flag it so the writer asks for one. Never invent a Telegram link.
 
 ## 1b. Formatting and layout (all MUST; the most common review comments)
 
 | Area | Rule |
 |---|---|
 | Alignment | Justify every paragraph, the Introduction included (`style="text-align: justify;"`). |
-| Font | Editor default font and size only; never other fonts or sizes such as 16 or 20. Text copied from Word, Google Docs, ChatGPT or a website is pasted with Paste as plain text. Exception: a section the writer styles on purpose to highlight it (coloured box, download box, styled summary table) is the writer's choice; flag only stray sizes in ordinary paragraphs (usually from pasted text). |
+| Font | Editor default font and size only; never other fonts or sizes such as 16 or 20. Text copied from Word, Google Docs, ChatGPT or a website is pasted with Paste as plain text. |
 | Headings | Section titles Heading 2, sub-titles Heading 3. No bold text used as a heading, no bold on headings (Troubleshooting H3s included). Title case, not capitals ("Introduction", not "INTRODUCTION"). |
-| Start of the body | Straight into the Introduction heading: no title, horizontal line or picture before it. Prerequisites is its own H2 or a highlighted box. |
+| Start of the body | Straight into the Introduction heading: no title, horizontal line or picture before it. Prerequisites is its own H2. |
 | Spacing | One empty line between paragraphs, text and pictures, two pictures, code and pictures, and before and after every table (e.g. a wiring table and the **Note:** under it). Nothing touches or overlaps. In HTML the empty line is `<p>&nbsp;</p>` (see Editor HTML below). |
 | Code in text | Never Computer Code style (`<code>`) inside a sentence: the site turns it into a full-width code box. Values and names in sentences are plain text or bold. |
 | Pictures | Through Browse Server only (PNG or JPEG, uploaded into the SEO URL folder); never hotlinked or pasted from Google Docs, Word or a website (they keep an outside link such as googleusercontent.com and break into a red X; a common cause of missing pictures). Steps: Image button > Browse Server > S3 Image Manager opens on tutorial/<seo-url> > blue Upload > click the file to insert. 800 px wide at most: wider ones resized with the ratio lock on, narrower ones never enlarged. No stretched or blurred pictures; no picture of code already shown as text. A picture already on `static.cytron.io` (e.g. in another tutorial's folder) may be reused as it is; no need to upload it again. |
@@ -184,13 +171,13 @@ Only communities with a banner in the folder are listed; a group without a banne
   (`-v2`, `-v3`) so an old copy is never pasted by mistake.
 
 In reviews of a live or saved page, check: `text-align: justify` on body paragraphs; missing `<p>&nbsp;</p>` between
-blocks; `<code>` inside a sentence (renders as a broken-up code box); `<h2>` for sections (not `<p><strong>`); `<strong>`/`<b>` inside headings; inline `font-family`/`font-size` styles; `<hr>` or content before the first `<h2>`; consecutive blocks with no spacing (a `<table>` directly after or before a paragraph or Note included); `<img>` with `src` outside the tutorial's image folder (e.g. googleusercontent.com); image widths over 800 px or enlarged/stretched; banner width ≠ 900 px or not centred; `<a>` without `target="_blank"`.
+blocks; `<code>` inside a sentence (renders as a broken-up code box); `<h2>` for sections (not `<p><strong>`); `<strong>`/`<b>` inside headings; inline `font-family`/`font-size` styles; `<hr>` or content before the first `<h2>`; consecutive blocks with no spacing (a `<table>` directly after or before a paragraph or Note included); `<img>` with `src` outside `static.cytron.io` (e.g. googleusercontent.com; another tutorial's folder on `static.cytron.io` is fine); image widths over 800 px or enlarged/stretched; banner width ≠ 900 px or not centred; `<a>` without `target="_blank"`.
 
 ## 2. Title, intro, writing quality
 
-- Post Name (MUST): short, clear tutorial title, ≤60 characters as the target; up to 70 is acceptable (flag only above 70); avoid numbers (e.g. version numbers) unless required; not repeated in the body.
+- Post Name (MUST): short, clear tutorial title, ≤60 characters; avoid numbers (e.g. version numbers) unless required; not repeated in the body.
 - Intro (MUST): what and why, short by default (usually 2–3 sentences; longer when the reader needs more context, e.g. a Protip that explains a common problem); name the main board (e.g. Maker ESP32, Raspberry Pi 5, micro:bit) and the main part, and link the board (first mention); link anything readers may want to learn more about (e.g. MediaPipe, ROS 2) to its official page. SHOULD open with the reader's problem, not "In this tutorial…".
-- Video tutorial (if any): directly after the Introduction paragraph, or at the end under Demo / Results to show the result. Both are fine.
+- Video tutorial (if any): directly after the Introduction paragraph.
 - Cover image / thumbnail (MUST): minimalist; clear pictures of the products used only, on a plain background (no photo of the real build needed); landscape 16:9; file named after the SEO URL.
 - Writing (MUST): complete-beginner language, active voice, short sentences; full product names ("Raspberry Pi 5", not "Pi 5"); grammar and spelling checked across the whole tutorial (e.g. Grammarly). Read it back as a beginner: hard to read → simplify; too long → split into a series.
 
@@ -207,7 +194,7 @@ blocks; `<code>` inside a sentence (renders as a broken-up code box); `<h2>` for
 - MUST: non-Cytron parts get a generic name, no link to another store.
 - MUST: no new tutorials on discontinued products; revamps name the replacement.
 - MUST: every product link opened on each ticked store before submitting.
-- MUST: 3D, PCB files and downloads linked on the page (e.g. under Downloads & Assets). Cytron storage is not required: an outside site (Thingiverse, Printables, GitHub) is fine, but the owner or designer MUST be credited.
+- MUST: 3D, PCB files and downloads on Cytron-owned storage, linked under Downloads & Assets.
 - MUST: name and link only in the list, no product pictures (the Hardware Components block shows them).
 - MUST: a training-kit tutorial lists the kit, not each part; Related Product and thumbnail show the kit.
 - MUST: list every item the build uses (cameras, cables included) and nothing else; List of Components and Related Product match exactly (Tutorial and Project; a Protip may attach only the main board).
@@ -235,12 +222,12 @@ Forgot Password); Tutorial > Tutorials > +; set the SEO URL first.
 
 | Tab | Field | Rule |
 |---|---|---|
-| General | Post Name | §2, ≤60 chars target, up to 70 acceptable. |
-| General | Pitch (Meta Tag Description) | Not shown on the page. Must be filled in; the wording and format are the writer's choice (don't flag them). Suggestion only: one sentence such as "Build a/an [project] using [main board] and [main part] to [outcome].", about 160 chars or fewer. |
+| General | Post Name | §2, ≤60 chars. |
+| General | Pitch (Meta Tag Description) | Not shown on the page: one complete sentence, "Build a/an [project] using [main board] and [main part] to [outcome]." (Protip: may start with the outcome, e.g. "Fix …"), ≤160 chars, unique. Count with code. |
 | General | Description | The body (§1). |
 | General | Post Tags | Board family and main board first (e.g. ESP32, Maker ESP32), then main modules, protocols, topic. |
 | General | Meta Tag Keywords | 3–8 keywords, comma-separated; never the Pitch. |
-| General | Meta Tag Title | Search results and browser tab: Post Name, optionally + key technology, ≤60 chars target (up to 70 acceptable, as for Post Name). |
+| General | Meta Tag Title | Search results and browser tab: Post Name, optionally + key technology, ≤60 chars. |
 | Data | Context Menu | Choose one: Education or Industry. |
 | Data | SEO URL | Title in lowercase, hyphens, no special characters. Set it first. Never change after publishing; if forced, redirect keeping `/tutorial/`. |
 | Data | Image Folder Name | Filled by WebAdmin and locked; images upload here; does not follow later SEO URL changes. |
@@ -255,10 +242,10 @@ Forgot Password); Tutorial > Tutorials > +; set the SEO URL first.
 | Links | Parent | Series only: the main post (e.g. series hub). Empty for standalone tutorials. |
 | Links | Related Post | Existing posts on the same topic (e.g. Getting Started with Maker ESP32). |
 | Links | Related Product | Exactly the items in List of Components (the kit for a kit tutorial); use the variation product code (parent product with options) where one exists. Protip: the main board alone is enough (or the one or two products the tip is about). |
-| Image | Image (thumbnail) | 16:9, preferably 1280×720, ~300 KB (max 1 MB), title in the image. Minimalist: clear pictures of the products used only (no photo of the real build needed), plain background, few colours, Cytron logo; nothing cut off by background removal; kit tutorials show the kit. Series parts may reuse the hub's thumbnail (their own is optional). |
+| Image | Image (thumbnail) | 16:9, preferably 1280×720, ~300 KB (max 1 MB), title in the image. Minimalist: clear pictures of the products used only (no photo of the real build needed), plain background, few colours, Cytron logo; nothing cut off by background removal; kit tutorials show the kit. Every series part has its own thumbnail. |
 
 Other SEO and media rules (MUST):
-- Series hub lists every part; prev/next works both ways.
+- Series hub Pitch describes the whole series. Hub lists every part; prev/next works both ways.
 - Headings: H2 sections, H3 inside, no empty headings, no H1 in the body.
 - Internal links: SEO URL only; never `index.php?route=eblog/epost…`. Always link the Getting Started prerequisite.
 - External links: official docs, new window; datasheets as `static.cytron.io` PDF or Google Docs `/preview`, never `/edit`.
@@ -316,11 +303,11 @@ Formatting and layout
 - [ ] Every picture via Browse Server (PNG/JPEG), ≤800 px wide, not enlarged, stretched or blurred
 - [ ] No picture of code already shown as text
 - [ ] Telegram banner centred, 900 px, linked to the right group, New Window (_blank)
-- [ ] Conclusion at the end; video tutorial (if any) right after the Introduction or under Demo / Results
+- [ ] Conclusion at the end; video tutorial (if any) right after the Introduction
 - [ ] Read back as a beginner; split into parts if too long
 
 Title and intro
-- [ ] Post Name short and clear, ≤60 chars (up to 70 acceptable), no numbers unless required, not repeated in the body
+- [ ] Post Name short and clear, ≤60 chars, no numbers unless required, not repeated in the body
 - [ ] Kept short where it can be: Introduction, Safety Notes, wiring text and Conclusion without padding (sentence counts in §1 are a guide, not a limit)
 - [ ] Thumbnail 16:9, ~300 KB (max 1 MB), title in image, minimalist, product pictures only
 - [ ] Proofread (Grammarly)
@@ -338,7 +325,7 @@ Products
 Admin, SEO and media
 - [ ] Every WebAdmin field filled (General, Data, Links, Image)
 - [ ] Project Level matches the §5 definitions
-- [ ] Pitch filled in (wording is the writer's choice)
+- [ ] Pitch one complete "Build a…" sentence (Protip: may start with the outcome, e.g. "Fix…"), ≤160 chars, unique
 - [ ] Meta Tag Keywords 3–8 keywords only
 - [ ] No `index.php` URLs; every link opened and working, incl. hub and prev/next
 - [ ] Inline images ≤800 px wide (wider resized, ratio locked; narrower not enlarged), ~300 KB, new ones in the SEO URL folder (reused `static.cytron.io` pictures are fine), hyphenated names
@@ -361,13 +348,5 @@ After publishing
 - my.cytron.io pages usually return 403 to fetching. Say so and work from what the user pastes or uploads (saved .html pages work well); never guess what a live page says.
 - Don't invent product slugs. If unknown, leave `/p-[slug]` as a visible placeholder and list it for the writer.
 - Count characters for Post Name, Meta Tag Title and Pitch with code, don't estimate.
-- Before reviewing, read "Team decisions" under Modes and leave those points out of the review. When the user overrules a
-  review point, add it to that list with the date so later reviews don't repeat it.
-- Writer messages: when the user asks for comments to send to a writer, write one message per tutorial in plain point form,
-  friendly, addressed to the writer by first name, no tables, no rule numbers. Keep it short: only the obvious issues that
-  hurt the tutorial (see "High-impact only" under Team decisions), usually 3–6 points, each one line saying what's wrong,
-  why it matters to the reader and the fix. Leave out cosmetic points unless the user asks for the full list.
-- Re-checks: when the writer has edited after a review, check the high-impact items first and list only what is still
-  open or newly broken. Start the message with a short thank-you; don't repeat what was already fixed.
 - Never repeat a credential value found in a tutorial, Gist, file or the old WI PDF (it holds shared-account passwords) in drafts, docs, reports or chat. Mask it.
 - Reference tutorials (for the team, not for writers to copy): ESP32 Smart Home Dashboard with Real-Time Sensor Data, ESP32 High Temperature Alert System, ESP32 Water Tank Monitoring with Web Dashboard, ESP32 Digital Clock (older layout). Several still break a rule or two.
