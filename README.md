@@ -13,4 +13,4 @@ Any change made here is overwritten on the next publish.
 | `index.html` + `videos/` | The Cytron Tutorial Guide page for staff and trainees |
 | `skills/cytron-tutorial-rules/SKILL.md` | The `cytron-tutorial-rules` Claude skill: the same rules, for drafting and reviewing tutorials with Claude. To use it, add it as a skill in Claude (Customize → Skills → upload, or copy the folder into your skills directory). |
 
-Last published from hub commit `6b4876c`.
+Last published from hub commit `9708846`.
