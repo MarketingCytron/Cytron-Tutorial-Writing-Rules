@@ -56,7 +56,6 @@ These override anything stricter below. In reviews, never raise them as misses.
 - **Video position:** right after the Introduction, or at the end under Demo / Results / Expected Output to show the result. Both are fine.
 - **3D and download files:** Cytron storage is not required. An outside site (Thingiverse, Printables, GitHub, etc.) is fine, as long as the owner or designer is credited on the page.
 - **Alt text:** optional. Don't flag missing alt text.
-- **Reused banner (21 Oct 2026):** a Telegram banner linked from another tutorial's folder on `static.cytron.io` (e.g. the shared Maker ESP32 banner) is fine; don't flag it.
 - **Series thumbnails (16 Oct 2026):** a series part may use the hub's thumbnail. A separate thumbnail per part is optional; don't flag a shared one.
 - **High-impact only (writer messages and re-checks):** report only the obvious issues that hurt the tutorial:
   a real credential or personal detail (token, password, real person's name or face) in text, code or screenshots;
@@ -130,12 +129,12 @@ Older pages use "List of Components / BOM"; new tutorials use "List of Component
 
 Telegram banners: download the named file from the Community Banner folder
 (https://drive.google.com/drive/folders/186p2woTflBfHwUBpQwDWdBDOdYqAaUaE); all channels: https://my.cytron.io/cytrons-telegram-channel.
-Pick by the main board, not the sensor. A banner already on `static.cytron.io` may be reused by its link instead of uploading it again (team decision, 21 Oct 2026); in drafts, put that link straight into the banner `<img src>`. For any other banner, name the banner file
+Pick by the main board, not the sensor. In drafts, name the banner file
 and link in the `<!-- TELEGRAM BANNER: … -->` placeholder.
 
 | Use for | Community | Link | Banner file |
 |---|---|---|---|
-| Maker ESP32, ESP32 projects | ESP Makers Malaysia (Official) | https://t.me/ESPmakersMY | Maker ESP32 Telegram Banner.png; already uploaded, reuse https://static.cytron.io/image/tutorial/how-to-start-up-and-get-auth-token-from-blynk/maker-esp32-footer-banner.png (2700×600, no upload needed) |
+| Maker ESP32, ESP32 projects | ESP Makers Malaysia (Official) | https://t.me/ESPmakersMY | Maker ESP32 Telegram Banner.png |
 | Maker UNO, Maker Drive, other Cytron Maker boards | Cytron Maker Board MY | http://qr.codes/0P3Lai (same as Arduino) | Cytron Maker Board Telegram.png |
 | Arduino boards | Arduino | http://qr.codes/0P3Lai | Arduino Telegram.png |
 | Raspberry Pi | Raspberry Pi | http://qr.link/aX8uQ7 | Raspberry Pi Telegram.png |
