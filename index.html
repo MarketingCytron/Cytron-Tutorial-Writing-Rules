@@ -394,7 +394,7 @@ figure.badvid figcaption b{color:var(--accent)}
     <!-- 01 -->
     <section class="step" data-step="1">
       <div class="sh"><span class="sn">01</span><h1>Get access and create the post</h1>
-        <p>Every Cytron tutorial is written and published in WebAdmin. A tutorial page shows how a product works before a customer orders, and it is where customers and customer support staff come back to. Write every step for a complete beginner.</p></div>
+        <p>Every Cytron tutorial is written and published in WebAdmin. A tutorial page shows how a product works before a customer orders, and it is where customers and customer support staff come back to. Write every step for a complete beginner.</p><p>Using an AI tool (Claude, ChatGPT, Gemini, Codex and others)? Add the <a href="https://github.com/MarketingCytron/Cytron-Tutorial-Writing-Rules#add-the-skill-to-your-ai-tool" target="_blank" rel="noopener">cytron-tutorial-rules skill</a> so it drafts and checks your tutorial with these rules.</p></div>
       <ol class="run" id="run"></ol>
       <p class="note">Tick the steps as you go. Your ticks stay in this browser only.</p>
     </section>
@@ -416,21 +416,21 @@ figure.badvid figcaption b{color:var(--accent)}
         <div class="sheet">
           <div class="fr" data-find="Post Name title 60 characters numbers"><div class="fl">Post Name</div><div>
             <input class="ctl" id="f-name" type="text" value="ESP32 High Temperature Alert System">
-            <div class="meter"><span>Short and clear. No numbers unless required. Not repeated in the body.</span><span class="cnt" data-max="60" data-for="f-name"></span></div></div></div>
+            <div class="meter"><span>Short and clear, about 60 characters (up to 70 is fine). No numbers unless required. Not repeated in the body.</span><span class="cnt" data-max="70" data-for="f-name"></span></div></div></div>
           <div class="fr" data-find="Pitch Meta Tag Description 160 characters Build a"><div class="fl">Pitch<small>Meta Tag Description</small></div><div>
             <textarea class="ctl" id="f-pitch">Build a high temperature alert system using Maker ESP32 and a DHT11 sensor to sound a buzzer when a room gets too hot.</textarea>
             <div class="meter"><span id="pitch-hint"></span><span class="cnt" data-max="160" data-for="f-pitch"></span></div>
-            <p class="rule">Not shown on the page. One complete, unique sentence: <code>Build a/an [project] using [main board] and [main part] to [outcome].</code> A Protip can start with the outcome instead, e.g. <code>Fix …</code>.</p></div></div>
+            <p class="rule">Not shown on the page. Must be filled in; the wording is your choice. A suggestion: <code>Build a/an [project] using [main board] and [main part] to [outcome].</code></p></div></div>
           <div class="fr" data-find="Description body"><div class="fl">Description</div><div><p class="rule">The tutorial body. Write it by following <a href="#s3-structure">step 03</a>.</p></div></div>
           <div class="fr" data-find="Post Tags"><div class="fl">Post Tags</div><div>
             <input class="ctl" id="f-tags" type="text" value="ESP32, Maker ESP32, DHT11, Buzzer, Temperature">
-            <p class="rule">The board family and main board first (e.g. ESP32, Maker ESP32), then the main modules, protocols and topic.</p></div></div>
+            <p class="rule">Must be filled in. Suggested order: the board family and main board first (e.g. ESP32, Maker ESP32), then the main modules, protocols and topic.</p></div></div>
           <div class="fr" data-find="Meta Tag Keywords 3 to 8"><div class="fl">Meta Tag Keywords</div><div>
             <input class="ctl" id="f-kw" type="text" value="ESP32, Maker ESP32, DHT11, Temperature Alert, Buzzer">
-            <div class="meter"><span>3 to 8 keywords, comma-separated. Never paste the Pitch here.</span><span class="cnt" id="kw-n"></span></div></div></div>
+            <div class="meter"><span>Must be filled in. About 3 to 8 keywords, comma-separated. Never paste the Pitch here.</span><span class="cnt" id="kw-n"></span></div></div></div>
           <div class="fr" data-find="Meta Tag Title search results browser tab 60"><div class="fl">Meta Tag Title</div><div>
             <input class="ctl" id="f-title" type="text" value="ESP32 High Temperature Alert System with DHT11">
-            <div class="meter"><span>Shown in search results and browser tabs: Post Name plus the key technology. <button class="linkbtn" id="use-name" type="button">Use Post Name</button></span><span class="cnt" data-max="60" data-for="f-title"></span></div></div></div>
+            <div class="meter"><span>Shown in search results and browser tabs: Post Name plus the key technology. <button class="linkbtn" id="use-name" type="button">Use Post Name</button></span><span class="cnt" data-max="70" data-for="f-title"></span></div></div></div>
         </div>
       </div>
 
@@ -749,27 +749,27 @@ var AFTER=[
  ['M','Within 7 days, open the live page and check every link, embed and the browser-tab title.']
 ];
 var STRUCT=[
- ['1','Introduction','H2','M','Short by default, usually 2 to 3 sentences (longer when the topic needs more context): open with the reader\'s problem, then say what the reader builds and why it matters. Right after the paragraph, put the video tutorial if there is one, or an optional hero image.'],
+ ['1','Introduction','H2','M','Short by default, usually 2 to 3 sentences (longer when the topic needs more context): open with the reader\'s problem, then say what the reader builds and why it matters. Right after the paragraph, put the video tutorial if there is one (or put it under Demo / Results to show the result), or an optional hero image.'],
  ['2','Disclaimer / Safety Notes','H2','O','Optional. Recommended when a safety trigger applies; use the Safety tab to build it. Short by default, usually 1 to 2 sentences: the concrete risk and its precaution.'],
- ['3','Prerequisites','H2','M','Link the Getting Started guides or basics to finish first. Name the software, accounts, firmware or SDKs to install. Its own heading, separate from the Introduction.'],
+ ['3','Prerequisites','H2','M','Link the Getting Started guides or basics to finish first. Name the software, accounts, firmware or SDKs to install. Its own heading or a highlighted box, separate from the Introduction.'],
  ['4','Objectives (or Overview)','H2','M','What the reader will learn or build. No length limit.'],
- ['5','List of Components (or Hardware Required)','H2','M','Numbered list, each product name linked, New Window. Add the quantity only when more than one unit is used (e.g. x2). Name and link only, no product pictures.'],
+ ['5','List of Components (or Hardware Required)','H2','M','Show every part the build uses. A numbered list is best (each product name linked, New Window, quantity only when more than one, e.g. x2, no product pictures), but any format is fine. You can also leave the heading empty: the site then shows the Related Product grid under it.'],
  ['6','System Diagram & Wiring','H2','M','A labelled block or circuit diagram (Canva, Fritzing) at its native ratio, plus a pin-to-pin wiring table: [Board], [Module], Function. Keep the text short: 1 to 2 sentences before the table, and a 1 to 2 sentence <strong>Note:</strong> for mounting tips. Leave one empty line before and after the table.'],
- ['7','Software Setup','H2','M','IDE or toolchain version, libraries with install steps, board and port selection. Link the official download page. If Prerequisites already links a board setup guide, don\'t repeat the board setup unless this tutorial needs a new one.'],
+ ['7','Software Setup','H2','M','IDE or toolchain (version optional), libraries with install steps, board and port selection. Link the official download page. If Prerequisites already links a board setup guide, don\'t repeat the board setup unless this tutorial needs a new one.'],
  ['7a','Install [Library name] Library','H3','O','When a library is installed: numbered Library Manager steps, including the "Install All" prompt.'],
  ['8','Sample Code','H2','M','A line such as "Upload the following code to your [board]:", then a public GitHub Gist embed.'],
- ['8a','Key Code Explanation','H3','M','One bullet per key line: the name in bold (not Computer Code), then what it does, e.g. <strong>Wire.begin()</strong>: starts I2C.'],
+ ['8a','Key Code Explanation','H3','O','Optional, nice to have. One bullet per key line: the name in bold (not Computer Code), then what it does, e.g. <strong>Wire.begin()</strong>: starts I2C.'],
  ['9','Testing & Validation','H2','M','Numbered steps to run and verify, with a short troubleshooting note where a step often fails.'],
  ['9a','Expected Results','H3','M','Serial Monitor lines, LEDs, sounds, browser view.'],
- ['10','Demo / Results','H2','M','Photos or a YouTube embed of the working project, and screenshots of dashboards or the Serial Monitor.'],
+ ['10','Demo / Results','H2','M','Photos or a YouTube embed of the working project (the video can sit here to show the result), and screenshots of dashboards or the Serial Monitor.'],
  ['11','Troubleshooting & Extra Tips','H2','O','Optional. If included: H3s, each a symptom as the reader sees it, with bullet fixes. H3s are not bold.'],
  ['12','Conclusion','H2','M','Short by default, usually 2 sentences: what the reader built, and what to try next (link a related tutorial).'],
- ['13','Downloads & Assets','H2','O','ZIP of diagrams or configs, repo links, datasets, STL or 3D files, on Cytron-owned storage.'],
+ ['13','Downloads & Assets','H2','O','ZIP of diagrams or configs, repo links, datasets, STL or 3D files: Cytron storage, or an outside site (Thingiverse, Printables, GitHub) with the owner or designer credited.'],
  ['14','Telegram banner','none','M','One banner at the very end, centred, 900 px wide, linked to the matching community in a New Window. No heading.']
 ];
 var FMT=[
  ['Alignment','Justify every paragraph, the Introduction included.'],
- ['Font','The editor\'s default font and size only. Never set another font or sizes such as 16 or 20. Copying from Word, Google Docs, ChatGPT or a website? Use Paste as plain text.'],
+ ['Font','The editor\'s default font and size only. Never set another font or sizes such as 16 or 20. Copying from Word, Google Docs, ChatGPT or a website? Use Paste as plain text. A section you style on purpose to make it stand out (e.g. a coloured Prerequisites box or a download box) is your choice.'],
  ['Headings','Section titles are Heading 2, sub-titles Heading 3. Never bold text as a heading, never bold a heading. "Introduction", not "INTRODUCTION".'],
  ['Start','Start with the Introduction heading. No page title, line or picture before it.'],
  ['Spacing','Leave one empty line (press Enter once) between paragraphs, text and a picture, two pictures, code and a picture, before and after every table (e.g. a wiring table and the Note under it), and before every heading. No empty line right under a heading. Nothing touches: check it in Preview.'],
@@ -784,14 +784,14 @@ var INTRO=[
  ['S','Open with the reader\'s problem, not "In this tutorial…".','"Overheating equipment in server cabinets… can lead to permanent hardware damage."'],
  ['M','Name the main board (e.g. Maker ESP32, Raspberry Pi 5, micro:bit) and the main part, and link the board at its first mention.'],
  ['M','Link anything the reader may want to learn more about, such as MediaPipe or ROS 2, to its official page.'],
- ['M','Put the video tutorial, if there is one, right after the paragraph.'],
+ ['M','Put the video tutorial, if there is one, right after the paragraph, or under Demo / Results to show the result.'],
  ['M','<strong>Cover image (thumbnail):</strong> minimalist, with clear pictures of the products used only, on a plain background. No photo of the real build needed. Landscape 16:9, named after the SEO URL.','e.g. <code>esp32-digital-clock.png</code>'],
  ['M','Blur any tokens, passwords or personal details on screen.'],
  ['M','Full product names: "Raspberry Pi 5", not "Pi 5". Check grammar and spelling across the whole tutorial (Grammarly).'],
  ['M','Read it back as a beginner. Hard to read? Simplify. Too long? Split it into a series.']
 ];
 var PARTS=[
- ['M','One numbered list, one line per item. Add the quantity only when more than one unit is used.','"Maker ESP32" for one board; "Female-to-female jumper wires x10" for ten.'],
+ ['M','List every part the build uses, one line per item. A numbered list is best, but any format is fine, and so is an empty heading that the site fills with the Related Product grid. Add the quantity only when more than one unit is used.','"Maker ESP32" for one board; "Female-to-female jumper wires x10" for ten.'],
  ['M','<strong>Name and link only</strong>, no product pictures.','The Hardware Components block already shows them.'],
  ['M','The link sits inside the name. The name must clearly mean the same product as its product page; the exact page title is not required.','"DHT11 Temperature and Humidity Sensor" is fine for the Crowtail DHT11 module; a name pointing to a different product is not.'],
  ['M','cytron.io links use the <strong>SEO URL only</strong>: protocol <code>&lt;other&gt;</code>, path such as <code>/p-maker-esp32</code>.','So a reader on another Cytron store stays in their own store.'],
@@ -805,12 +805,12 @@ var PARTS=[
  ['M','Items Cytron does not sell get a generic name and no link to another store.','"Female-to-female jumper wires"'],
  ['M','No new tutorials on discontinued products. A revamp names the replacement.'],
  ['M','Open every product link, on each ticked store, before submitting.'],
- ['M','3D files, PCB files and downloads live on Cytron-owned storage, linked under Downloads & Assets.']
+ ['M','3D files, PCB files and downloads are linked under Downloads & Assets: Cytron storage, or an outside site (Thingiverse, Printables, GitHub) with the owner or designer credited.']
 ];
 var CODE=[
  ['M','<strong>Long code: a public GitHub Gist.</strong> Staff use their own GitHub account; interns use the intern account (ask your supervisor for access, and Mat Liven for the authentication code). Never an account outside Cytron.'],
  ['M','<strong>Short command lines:</strong> the Computer Code style, on their own line (Shift+Enter for a new line). Never use it for a word inside a sentence.'],
- ['M','State the IDE or toolchain version and the board package, e.g. "esp32 by Espressif Systems 3.3.12". Library versions should be named too.','An unpinned core caused ledcAttach compile errors for readers on core 2.x.'],
+ ['O','Optional: state the IDE or toolchain version, the board package (e.g. "esp32 by Espressif Systems 3.3.12") and library versions.','An unpinned core caused ledcAttach compile errors for readers on core 2.x.'],
  ['S','Open the code with a header comment: project, board (e.g. Cytron Maker ESP32) and main module.'],
  ['M','Placeholders, never real credentials. See <a href="#s5">05 Credentials</a>.'],
  ['M','Code is text, never a screenshot. Serial Monitor output can be a screen capture.'],
@@ -858,12 +858,12 @@ var TG=[
  ['Cytron Learning Hub content','Cytron Learning Hub','http://qr.link/G7fcUA','Cytron Learning Hub.png']
 ];
 var CHECK=[
- ['Structure',['Every Must section present, in the structure\'s order (close equivalent names and extra H2s are fine)','Disclaimer / Safety Notes, Troubleshooting & Extra Tips and Downloads & Assets included where useful','Labelled system diagram at native ratio, plus a pin-to-pin wiring table','A graphic wherever a step needs one (Protip: where it helps)','Demo / Results has photos, a YouTube embed or screen captures','Conclusion at the end','One Telegram banner at the end, linked to the matching community','No empty headings or leftover placeholders']],
- ['Formatting and layout',['Every paragraph justified; default font and size; copied text pasted as plain text','Section titles Heading 2, sub-titles Heading 3; no bold on headings; no headings in capitals','Body starts with the Introduction heading: no title, line or picture before it','One empty line between paragraphs, pictures, code and tables (the Note under a table included) and before every heading; none right under a heading; nothing overlaps','Computer Code only for whole command lines, never for a word inside a sentence','Every picture inserted through Browse Server, 800 px wide at most, not enlarged, stretched or blurred','No picture of code that is already on the page as text','Telegram banner centred, 900 px wide, New Window','Video tutorial (if any) right after the Introduction','Read back as a beginner; split into parts if too long']],
- ['Title and intro',['Post Name short and clear, 60 characters or fewer, no numbers unless required','Kept short where it can be: Introduction, Safety Notes, wiring text and Conclusion without padding','Thumbnail 16:9, about 300 KB, title in the image, minimalist, product pictures only','Proofread for grammar and spelling']],
+ ['Structure',['Every Must section present, in the structure\'s order (close equivalent names and extra H2s are fine)','Disclaimer / Safety Notes, Troubleshooting & Extra Tips and Downloads & Assets included where useful','Labelled system diagram at native ratio, plus a pin-to-pin wiring table','A graphic wherever a step needs one (Protip: where it helps)','Demo / Results has photos, a YouTube embed or screen captures','Conclusion at the end','One Telegram banner at the end, linked to the matching community','No leftover placeholders']],
+ ['Formatting and layout',['Every paragraph justified; default font and size; copied text pasted as plain text','Section titles Heading 2, sub-titles Heading 3; no bold on headings; no headings in capitals','Body starts with the Introduction heading: no title, line or picture before it','One empty line between paragraphs, pictures, code and tables (the Note under a table included) and before every heading; none right under a heading; nothing overlaps','Computer Code only for whole command lines, never for a word inside a sentence','Every picture inserted through Browse Server, 800 px wide at most, not enlarged, stretched or blurred','No picture of code that is already on the page as text','Telegram banner centred, 900 px wide, New Window','Video tutorial (if any) right after the Introduction or under Demo / Results','Read back as a beginner; split into parts if too long']],
+ ['Title and intro',['Post Name short and clear, about 60 characters (up to 70 is fine), no numbers unless required','Kept short where it can be: Introduction, Safety Notes, wiring text and Conclusion without padding','Thumbnail 16:9, about 300 KB, title in the image, minimalist, product pictures only','Proofread for grammar and spelling']],
  ['Products',['Every item linked by its product name (quantity only when more than one), clearly the right product, no product pictures','cytron.io links use the SEO URL only, protocol <other>','Every link opens in a New Window','Product links work on every ticked store; regional alternatives noted','Main board linked at its first mention; every product linked where it is named','No prices or discounts in the body','Related Product holds exactly the items in List of Components (a Protip can hold only the main board)','No discontinued products']],
- ['Admin, SEO and media',['Every WebAdmin field filled: General, Data, Links and Image','Project Level matches Beginner, Intermediate or Advanced','Pitch is one "Build a…" sentence (a Protip can start with the outcome, e.g. "Fix…"), 160 characters or fewer','Meta Tag Keywords holds 3 to 8 keywords','No index.php URLs; every link opened and working','New pictures in the SEO URL folder with hyphenated names (reusing a picture from another Cytron tutorial is fine)','Gist and YouTube embeds render correctly']],
- ['Code and safety',['Long code in a public Gist (staff: own account; interns: intern account)','IDE or toolchain version stated','Safety notes, if included, name the concrete risk and precaution','Tested by following the published steps','Peer review completed (recommended)']],
+ ['Admin, SEO and media',['Every WebAdmin field filled: General, Data, Links and Image','Project Level matches Beginner, Intermediate or Advanced','Meta Tag Title, Meta Tag Keywords, Post Tags and Pitch all filled in (the Pitch wording is your choice)','No index.php URLs; every link opened and working','New pictures in the SEO URL folder with hyphenated names (reusing a picture from another Cytron tutorial is fine)','Gist and YouTube embeds render correctly']],
+ ['Code and safety',['Long code in a public Gist (staff: own account; interns: intern account)','Safety notes, if included, name the concrete risk and precaution','Tested by following the published steps','Peer review completed (recommended)']],
  ['Credentials',['Every credential in the body, Gists, downloads and repos is a placeholder','Body, Gists and downloads searched for password, ssid, token, auth, key, secret, api, bot','No credential visible in any screenshot, GIF or video','No Gist or repo revision ever held a real value, or it has been revoked','Tokens used for screenshots and video revoked or regenerated']],
  ['After publishing',['Within 7 days: every link, embed and the browser-tab title checked on the live page']]
 ];
@@ -904,8 +904,7 @@ function meters(){
   $$('.cnt[data-for]').forEach(function(c){var n=$('#'+c.dataset.for).value.trim().length,m=+c.dataset.max;c.textContent=n+' / '+m;c.classList.toggle('bad',n>m);c.classList.toggle('good',n>0&&n<=m)});
   var v=$('#f-pitch').value.trim(),h=$('#pitch-hint'),s=(v.match(/[.!?](\s|$)/g)||[]).length;
   var pt=$('#f-type')&&$('#f-type').value==='Protip';
-  if(!v){h.textContent=pt?'One sentence. A Protip can start with the outcome, e.g. "Fix …".':'One sentence starting "Build a" or "Build an".';h.className=''}
-  else if(!pt&&!/^Build an?\s/.test(v)){h.textContent='Start with "Build a" or "Build an" (a Protip can start with the outcome).';h.className='bad'}
+  if(!v){h.textContent='Must be filled in. Any wording, e.g. "Build a … using … to …".';h.className=''}
   else if(s>1){h.textContent='Keep it to one sentence.';h.className='bad'}
   else if(!/[.!?]$/.test(v)){h.textContent='End the sentence with a full stop.';h.className=''}
   else{h.textContent='One complete sentence.';h.className='good'}
