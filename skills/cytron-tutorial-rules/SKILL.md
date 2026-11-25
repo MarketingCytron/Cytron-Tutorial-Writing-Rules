@@ -5,11 +5,11 @@ description: "Apply Cytron's Tutorial Writing Rules when drafting, revamping or 
 
 # Cytron Tutorial Writing Rules
 
-Single source of truth: the "Cytron Tutorial Writing Rules" doc (https://claude.ai/code/artifact/93882066-b198-4390-963a-2f6b205969e2).
-Writers (Cytron staff and interns) use the live **Cytron Tutorial Guide** page, https://marketingcytron.github.io/Cytron-Tutorial-Writing-Rules/
-(published from the claude.ai artifact "Cytron Tutorial Guide"), or the doc itself. Point writers to the guide page, never to
-the old WI or template. If this skill and the doc disagree, the doc wins; tell the user about the mismatch.
-The doc also holds the WebAdmin setup steps and the editor how-tos (links, images, code, YouTube, Telegram banner), with
+Writer edition (25 Nov 2026), for Cytron staff and interns using any AI tool that supports skills or uploaded instructions.
+The live **Cytron Tutorial Guide** page, https://marketingcytron.github.io/Cytron-Tutorial-Writing-Rules/, is the reference
+for writers. Point writers to the guide page, never to the old WI or template. If this skill and the guide page disagree,
+the guide page wins; tell the user about the mismatch so they can ask the Marketing team.
+The guide page also holds the WebAdmin setup steps and the editor how-tos (links, images, code, YouTube, Telegram banner), with
 short videos for uploading a picture through Browse Server, inserting the Telegram banner, and what a pasted outside picture does.
 
 MUST = compulsory for every tutorial; a miss sends the draft back. SHOULD = follow where it applies; skip if it doesn't fit.
@@ -57,12 +57,29 @@ These override anything stricter below. In reviews, never raise them as misses.
 - **3D and download files:** Cytron storage is not required. An outside site (Thingiverse, Printables, GitHub, etc.) is fine, as long as the owner or designer is credited on the page.
 - **Alt text:** optional. Don't flag missing alt text.
 - **Series thumbnails (16 Oct 2026):** a series part may use the hub's thumbnail. A separate thumbnail per part is optional; don't flag a shared one.
+- **Arduino AVR Boards version not needed (10 Nov 2026):** for boards that use the built-in Arduino AVR Boards package
+  (Arduino Uno, Maker UNO, Maker Nano and other AVR boards), state the Arduino IDE version only. Don't ask for or flag a
+  missing Arduino AVR Boards version. (Since 25 Nov 2026 all versions are optional; see below.)
+- **SEO fields: filled or not only (25 Nov 2026; replaces the 27 Oct rule):** every review, writer message and re-check
+  ends with a short **SEO fields** block that only says whether each field is **filled** or **not filled**: Meta Tag
+  Title, Meta Tag Keywords, Post Tags, Pitch. Don't judge the wording, count, order or match with the Post Name, and don't
+  suggest values unless the user asks.
+- **Optional, not compulsory (25 Nov 2026):** don't flag these as misses:
+  - **Key Code Explanation** under Sample Code (nice to have).
+  - **Versions:** Arduino IDE / toolchain, board package and library versions.
+  - **Empty headings** (e.g. a leftover empty H3).
+  - **Hardware list format:** the "Hardware Components" / "List of Components" section must show the parts, in any
+    form: a written list (numbered, bullets, plain lines or a table) or the site's Related Product grid filling an
+    empty heading. Both are fine; don't comment on either. Flag it only when the section shows no parts at all (no
+    written list and nothing in Related Product). Related Product must still hold the right items and quantities.
+  - **Images linked to themselves** (clicking opens the full image).
 - **High-impact only (writer messages and re-checks):** report only the obvious issues that hurt the tutorial:
   a real credential or personal detail (token, password, real person's name or face) in text, code or screenshots;
   anything that breaks the build or misleads the reader (code bug, wrong wiring, unsafe voltage, text that doesn't match
   the code); broken or placeholder links; products missing from Related Product (customers can't buy them); a missing
   Telegram banner; a missing section the reader needs to finish the build (e.g. no code, no wiring). Skip cosmetic points
-  (justify, bold vs H3, image file names, keywords, minor grammar, versions) unless the user asks for the full review.
+  (justify, bold vs H3, image file names, minor grammar) unless the user asks for the full review. The SEO fields block
+  (filled / not filled) is always included.
 
 ## 0. Credentials and secrets: zero tolerance (all MUST)
 
@@ -110,12 +127,12 @@ literal strings passed to `WiFi.begin()` or `.connect()`. Check rendered Gists a
 | 2 | Disclaimer / Safety Notes | H2 | Optional (§6) | Recommended when a safety trigger applies. Short by default (usually 1–2 sentences): the concrete risk and its precaution (electrical, battery or heat, warranty, classroom supervision). |
 | 3 | Prerequisites | H2 (or a highlighted box) | MUST | Link Getting Started guides/basics; name software, accounts, firmware or SDKs to install. |
 | 4 | Objectives (or Overview) | H2 | MUST | What the reader will learn or build. No length limit. |
-| 5 | List of Components (or Hardware Components / Hardware Required) | H2 | MUST | Numbered list, product name linked, new window; quantity only when more than one unit (e.g. x2); name and link only, no product pictures (§3). |
+| 5 | List of Components (or Hardware Components / Hardware Required) | H2 | MUST | Shows the parts used, any form: a written list or the site's Related Product grid under an empty heading (25 Nov 2026; flag only when no parts show). Preferred for written lists: numbered list, product name linked, new window; quantity only when more than one unit (e.g. x2); name and link only, no product pictures (§3). |
 | 6 | System Diagram & Wiring | H2 | MUST | Labelled block/circuit diagram (Canva, Fritzing) at native aspect ratio + pin-to-pin wiring table ([Main board] · [Module] · Function). Keep the text short: 1–2 sentences before the table and a 1–2 sentence **Note:** for mounting tips or other ways to connect, with one empty line before and after the table. A hardware assembly photo with every connection visible where it helps. |
-| 7 | Software Setup | H2 | MUST | IDE/toolchain version, library names + install steps, board and port selection; link the official download/docs page of every software; screenshots encouraged. If Prerequisites already links a board setup guide, don't repeat the board setup unless the tutorial needs a new setup. |
+| 7 | Software Setup | H2 | MUST | IDE/toolchain (version optional), library names + install steps, board and port selection; link the official download/docs page of every software; screenshots encouraged. If Prerequisites already links a board setup guide, don't repeat the board setup unless the tutorial needs a new setup. |
 | 7a | Install [Library name] Library | H3 | When a library is installed | Numbered install steps in the board's own tool, with a screen capture per step. Arduino IDE: Library Manager incl. the "Install All" dependency prompt; others: Thonny's package manager, MakeCode Extensions, pip/apt on Raspberry Pi OS. |
 | 8 | Sample Code | H2 | MUST | A line such as "Upload the following code to your [board]:" + public GitHub Gist embed. |
-| 8a | Key Code Explanation | H3 | MUST | One bullet per key line/block: **name in bold**: what it does (bold, not `<code>`: see §1b Editor HTML). |
+| 8a | Key Code Explanation | H3 | Optional (25 Nov 2026) | One bullet per key line/block: **name in bold**: what it does (bold, not `<code>`: see §1b Editor HTML). |
 | 9 | Testing & Validation | H2 | MUST | Numbered steps to run and verify; inline troubleshooting note where a step often fails. |
 | 9a | Expected Results | H3 | MUST | Expected outputs: Serial Monitor or terminal lines, LEDs, sounds, browser view. |
 | 10 | Demo / Results | H2 | MUST | Photos or a YouTube embed of the working project; screen captures of dashboards, the Serial Monitor or the terminal. |
@@ -124,7 +141,7 @@ literal strings passed to `WiFi.begin()` or `.connect()`. Check rendered Gists a
 | 13 | Downloads & Assets | H2 | Optional | ZIP of diagrams/configs, repos, datasets, example flows, STL/3D files (Cytron storage or an outside site with the owner credited). |
 | 14 | Telegram community banner | no heading | MUST | One banner at the end, centred, 900 px wide, image linked (new window) to the matching community. |
 
-The Hardware Components block and Related Posts below the body come from the Links tab, not the body. No empty headings.
+The Hardware Components block and Related Posts below the body come from the Links tab, not the body. Empty headings are tidied when seen but not flagged (25 Nov 2026); an empty Hardware Components heading filled by the product grid is fine.
 Older pages use "List of Components / BOM"; new tutorials use "List of Components".
 
 Telegram banners: download the named file from the Community Banner folder
@@ -196,7 +213,7 @@ blocks; `<code>` inside a sentence (renders as a broken-up code box); `<h2>` for
 
 ## 3. Hardware list and product links
 
-- MUST: numbered list, product name linked; add the quantity only when more than one unit is used (e.g. "Jumper wires x10"). The name must clearly mean the same product as its product page (exact page title not required; a name pointing to a different product is a miss).
+- MUST: the parts shown on the page, as a written list (numbered preferred, any format) or the Related Product grid (25 Nov 2026); in a written list, product name linked; add the quantity only when more than one unit is used (e.g. "Jumper wires x10"). The name must clearly mean the same product as its product page (exact page title not required; a name pointing to a different product is a miss).
 - MUST: cytron.io links use the SEO URL only, no domain: protocol `<other>`, path such as `/p-maker-esp32`, so readers stay in their own store.
 - MUST: every link's target = New Window (_blank).
 - MUST: main board linked at its first mention in the Introduction; later links allowed.
@@ -220,7 +237,7 @@ blocks; `<code>` inside a sentence (renders as a broken-up code box); `<h2>` for
   use the intern GitHub account** (access from their supervisor; authentication code from Mat Liven). Never the account of someone outside Cytron. Accounts of
   ex-staff: suggest copying the Gist to a current Cytron account in a revamp.
 - MUST: short command lines in the editor's Computer Code style, Shift+Enter for new lines, each block in its own paragraph; never Computer Code inside a sentence (§1b).
-- MUST: state the IDE/toolchain version and board package (e.g. "esp32 by Espressif Systems 3.3.12"); SHOULD: library versions.
+- Optional (team decision, 25 Nov 2026): state the IDE/toolchain version, board package (e.g. "esp32 by Espressif Systems 3.3.12") and library versions. Nice to have, never flagged.
 - SHOULD: header comment (Project, Board e.g. Cytron Maker ESP32, main module).
 - MUST: credentials as placeholders per §0, replaced by the reader in a Testing & Validation step.
 - MUST: code as text, never a screenshot; terminal/Serial Monitor output may be a screen capture under Demo / Results.
@@ -259,7 +276,7 @@ Forgot Password); Tutorial > Tutorials > +; set the SEO URL first.
 
 Other SEO and media rules (MUST):
 - Series hub lists every part; prev/next works both ways.
-- Headings: H2 sections, H3 inside, no empty headings, no H1 in the body.
+- Headings: H2 sections, H3 inside, no H1 in the body (empty headings: not flagged, 25 Nov 2026).
 - Internal links: SEO URL only; never `index.php?route=eblog/epost…`. Always link the Getting Started prerequisite.
 - External links: official docs, new window; datasheets as `static.cytron.io` PDF or Google Docs `/preview`, never `/edit`.
 - A graphic (screen capture, schematic, assembly photo) wherever a step needs one. Protip: optional; a diagram or a reused picture is enough, and a code block can stand in for an output screenshot.
@@ -305,7 +322,7 @@ Structure
 - [ ] A graphic wherever a step needs one (Protip: where it helps)
 - [ ] Demo / Results has photos, a YouTube embed or screen captures
 - [ ] One Telegram banner at the end, linked to the matching community
-- [ ] No empty headings or leftover placeholders
+- [ ] No leftover placeholders (links, text)
 
 Formatting and layout
 - [ ] Every paragraph justified; default font and size; copied text pasted as plain text
@@ -338,15 +355,14 @@ Products
 Admin, SEO and media
 - [ ] Every WebAdmin field filled (General, Data, Links, Image)
 - [ ] Project Level matches the §5 definitions
-- [ ] Pitch filled in (wording is the writer's choice)
-- [ ] Meta Tag Keywords 3–8 keywords only
+- [ ] Meta Tag Title, Meta Tag Keywords, Post Tags and Pitch filled in
 - [ ] No `index.php` URLs; every link opened and working, incl. hub and prev/next
 - [ ] Inline images ≤800 px wide (wider resized, ratio locked; narrower not enlarged), ~300 KB, new ones in the SEO URL folder (reused `static.cytron.io` pictures are fine), hyphenated names
 - [ ] Gist and YouTube embeds render correctly
 
 Code and safety
 - [ ] Long code in a public Gist (staff: own GitHub account; interns: the intern account); short commands in Computer Code style
-- [ ] IDE/toolchain version stated
+- [ ] IDE/toolchain version stated (optional)
 - [ ] Safety notes, if included, name the concrete risk and precaution
 - [ ] Writer proofread and tested by following the published steps
 - [ ] Peer review completed (recommended)
@@ -354,11 +370,15 @@ Code and safety
 After publishing
 - [ ] Live-page check within 7 days (links, embeds, browser-tab title), fixes applied
 
-## Notes for Claude
+## Notes for the AI assistant
 
-- Keep this skill in step with the live guide page. Its hub copy is `projects/tutorial-writing-guide/cytron-tutorial-rules-SKILL.md`
-  in the private Cytron-Build-Tutorial repo; the guide page source is `index.html` in the same folder.
-- my.cytron.io pages usually return 403 to fetching. Say so and work from what the user pastes or uploads (saved .html pages work well); never guess what a live page says.
+- The Marketing team updates this skill when the rules change. The latest copy is always at
+  https://github.com/MarketingCytron/Cytron-Tutorial-Writing-Rules (skills/cytron-tutorial-rules/SKILL.md). If the user's copy
+  looks older than the guide page, say so.
+- Writers can ask you to: draft or revamp a tutorial (Draft / revamp mode), self-check a draft before submitting (Review mode,
+  with the Team decisions applied), or explain any rule.
+- my.cytron.io pages usually block AI tools from opening them. Say so and work from what the user pastes or uploads (the WebAdmin Source view HTML or a saved .html page works well); never guess what a live page says.
+- Never ask the user for real passwords, tokens or keys; if they paste one, warn them, don't repeat it, and remind them to revoke it (§0).
 - Don't invent product slugs. If unknown, leave `/p-[slug]` as a visible placeholder and list it for the writer.
 - Count characters for Post Name, Meta Tag Title and Pitch with code, don't estimate.
 - Before reviewing, read "Team decisions" under Modes and leave those points out of the review. When the user overrules a
@@ -366,7 +386,8 @@ After publishing
 - Writer messages: when the user asks for comments to send to a writer, write one message per tutorial in plain point form,
   friendly, addressed to the writer by first name, no tables, no rule numbers. Keep it short: only the obvious issues that
   hurt the tutorial (see "High-impact only" under Team decisions), usually 3–6 points, each one line saying what's wrong,
-  why it matters to the reader and the fix. Leave out cosmetic points unless the user asks for the full list.
+  why it matters to the reader and the fix. Leave out cosmetic points unless the user asks for the full list. End every
+  writer message with the SEO fields block (Meta Tag Title, Meta Tag Keywords, Post Tags, Pitch: filled or not filled).
 - Re-checks: when the writer has edited after a review, check the high-impact items first and list only what is still
   open or newly broken. Start the message with a short thank-you; don't repeat what was already fixed.
 - Never repeat a credential value found in a tutorial, Gist, file or the old WI PDF (it holds shared-account passwords) in drafts, docs, reports or chat. Mask it.
